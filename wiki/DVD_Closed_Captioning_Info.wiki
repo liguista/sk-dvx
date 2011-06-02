@@ -1,6 +1,5 @@
-#summary One-sentence summary of this page.
+#summary Tools for extracting Closed Caption Information from a DVD
 #labels DVD,ClosedCaption,Extraction
-
 = Introduction =
 
 Tools for extracting Closed Caption Information from a DVD
