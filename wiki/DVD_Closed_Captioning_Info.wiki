@@ -8,4 +8,5 @@ Tools for extracting Closed Caption Information from a DVD
 
 = Details =
 
+WikiWordLink
 [http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/SCC_TOOLS.HTML#capture_DVD]SCC Tools Download
