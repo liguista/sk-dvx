@@ -1,0 +1,11 @@
+#summary One-sentence summary of this page.
+#labels DVD,ClosedCaption,Extraction
+
+= Introduction =
+
+Tools for extracting Closed Caption Information from a DVD
+
+
+= Details =
+
+[http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/SCC_TOOLS.HTML#capture_DVD]SCC Tools Download
