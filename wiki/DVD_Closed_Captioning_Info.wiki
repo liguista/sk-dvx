@@ -28,6 +28,9 @@ A file VIDEO_TS.srt will be created. It will contain Captions with Time-Code inf
 
 = Example CC Text =
 
+This is from an HBO Series about John Adams, Disk 3
+
+
 1
 00:04:08,455 --> 00:04:10,256
         BED, JOHN.              
