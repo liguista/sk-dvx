@@ -1,0 +1,43 @@
+Hello. My name is Greg Ames. I work for Smith-Kettlewell. Smith-Kettlewell is an eye research organization that has been providing research and assistive technology for more than 50 year. It is a non-profit organization located in San Francisco.
+
+I have been tasked to develop a prototype of an application to assist visually impaired people to have more accessible access to DVDs. This project is the DVX project.
+
+The intent of the project is to allow sight impaired people to navigate DVD menu with recorded voice prompts, and then to have additional descriptive tracks that let them know what is happening on the screen.
+
+About 8 weeks ago, I started working on a prototype using DSJ. It is a really nice tool for use Java heads. Thank you. 
+
+I have run into a number of stumbling blocks, and have posted on the forum, and you have been kind enough to respond. Thank you for that.
+
+Unfortunately, I have been unable to resolve some of the issues, and I am reaching out to see if there is some way to engage your assistance.
+
+As DVDs are the content of choice, I am still having issues identifying which menu page is being displayed. I get a EC_DVD_BUTTON_CHANGE event and get the menu_page and menu_id from the event, but menu_page does not seem to be unique for most DVDs. Is there another call I may need to use to identify whick page is the source of these menus? Is there a way to 'read' all of the menus into a java stricture that would help me really identify the page? We are recording audio clips and triggering  these from the menu events, and what is happening is that the duplicate page menus/ids are causing the incorrect prompts.
+
+We are also having an issue reading time information from DSJ while playing the DVD.
+
+As I mentioned, DVDs are the source of content of this project, but we are working on another project that is streaming content. We hope to use DSJ for that project also.
+
+
+
+
+http://www.ski.org/
+
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073741824:-40000000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -771751936:-2e000000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -469762048:-1c000000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -973012992:-39ff0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -671023104:-27ff0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1023279104:-3cfe0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073545216:-3ffd0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -721223680:-2afd0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073479680:-3ffc0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -721158144:-2afc0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073414144:-3ffb0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -721092608:-2afb0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073348608:-3ffa0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -721027072:-2afa0000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073283072:-3ff90000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -720961536:-2af90000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073217536:-3ff80000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -720896000:-2af80000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -1073152000:-3ff70000, param_2 = 1:1
+Graph Event : 267 - EC_DVD_CURRENT_TIME, param_1 = -720830464:-2af70000, param_2 = 1:1

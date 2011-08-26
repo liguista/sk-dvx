@@ -1,0 +1,24 @@
+1_Start.wav
+2_Sonora_Desert.wav
+3-Barry.wav
+4-The_Nearly_Family.wav
+5-Close_Encounter.wav
+6-In_Persuit.wav
+7-Gobi_Dessert.wav
+8-Dharma.wav
+Close_Encounters.wav
+English-DTS.wav
+English_DD.wav
+English_DS.wav
+French.wav
+list.txt
+Main_Menu 1.wav
+More.wav
+Next.wav
+Play_Movie.wav
+Previous.wav
+Return.wav
+Setup.wav
+Spanish 1.wav
+Subtitles.wav
+THX.wav
