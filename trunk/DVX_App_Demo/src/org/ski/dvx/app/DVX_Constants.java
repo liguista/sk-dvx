@@ -62,6 +62,10 @@ public class DVX_Constants {
 
 	public final static int MS_PER_SEC =  1000;
 
+	public final static int SECONDS_PER_MINUTE =  60;
+	public final static int SECONDS_PER_HOUR =  (SECONDS_PER_MINUTE * 60);
+
+
 //  transaction log type enums
 	
 	public final static String	TRANSACTION_TYPE_LOG 					= "Log";

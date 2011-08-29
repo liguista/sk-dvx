@@ -13,6 +13,26 @@ import com.cloudgarden.speech.userinterface.Mouth;
 public class DVX_Speak {
     SynthesizerModeDesc desc = null;
 	Synthesizer synth = null;
+
+	float speakingRate = 160.0f;
+	float volume = 1.0f;
+
+	public float getVolume() {
+		return volume;
+	}
+
+	public void setVolume(float volume) {
+		this.volume = volume;
+	}
+
+	public float getSpeakingRate() {
+		return speakingRate;
+	}
+
+	public void setSpeakingRate(float speakingRate) {
+		this.speakingRate = speakingRate;
+	}
+
 	
 	DVX_Speak()
 	{
@@ -57,13 +77,15 @@ public class DVX_Speak {
 		    System.out.println("Using voice "+v);
 		    SynthesizerProperties props = synth.getSynthesizerProperties();
 		    props.setVoice(v);
-		    props.setVolume(1.0f);
-		    props.setSpeakingRate(200.0f);
+		    props.setVolume(volume);
+//		    System.out.println("Speaking at volume = " + volume);
+		    props.setSpeakingRate(speakingRate);
 		    
-		    synth.speak("",null);
-		    synth.waitEngineState(synth.QUEUE_EMPTY);
+		    
+//		    synth.speak("",null);
+//		    synth.waitEngineState(synth.QUEUE_EMPTY);
 		    synth.speak(message ,spList);
-		    synth.waitEngineState(synth.QUEUE_EMPTY);
+//		    synth.waitEngineState(synth.QUEUE_EMPTY);
 	
 		    
 		} catch(Exception e) {

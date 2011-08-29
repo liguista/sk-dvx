@@ -137,27 +137,65 @@ public class DVX_RecordButton extends JButton{
 		this.menuId = menuId;
 	}
 	
+	boolean isKeyRecording = false;
+	
 	class MyKeyListener implements KeyListener
 	{
 		@Override
 		public void keyTyped(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
-			System.out.println("MyKeyListener - keyTyped = " + e.toString());
-			
+			char keyPressed = e.getKeyChar();
+			if ((!isKeyRecording)&&(keyPressed=='r'))
+			{
+				System.out.println("Key Recording started... ");
+				isKeyRecording = true;
+				dispatchStartRecord();
+			}
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("MyKeyListener - keyPressed = " + e.toString());
+//			System.out.println("MyKeyListener - keyPressed = " + e.toString());
+//			char keyPressed = e.getKeyChar();
+//			if (keyPressed=='r')
+//				System.out.println("MyKeyListener - keyTyped = " + e.toString());
 			
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			char keyPressed = e.getKeyChar();
+			if ((isKeyRecording)&&(keyPressed=='r'))
 			// TODO Auto-generated method stub
-			System.out.println("MyKeyListener - keyReleased = " + e.toString());
+//			System.out.println("MyKeyListener - keyReleased = " + e.toString());
+			
+//			if (keyPressed=='r')
+				System.out.println("Key Recording ended.");
+			rs.stopRecording();
+			
+			isKeyRecording= false;
+		}
+		void dispatchStartRecord()
+		{
+			if(waitingForFirstMenu)
+			{
+				startRecordMovieNameClip();
+				return;
+			}
+			
+			if(menuMode)
+			{
+				startRecordMenuClip();
+				return;
+			}
+			
+			if(playingMode)
+			{
+				startRecordTimeClip();
+				return;
+			}			
 		}
 	}
 
@@ -191,7 +229,12 @@ public class DVX_RecordButton extends JButton{
 			System.out.println("menuMode = " + menuMode);
 			System.out.println("playingMode = " + playingMode);
 
-			
+			dispatchStartRecord();
+
+		}
+		
+		void dispatchStartRecord()
+		{
 			if(waitingForFirstMenu)
 			{
 				startRecordMovieNameClip();
@@ -208,8 +251,7 @@ public class DVX_RecordButton extends JButton{
 			{
 				startRecordTimeClip();
 				return;
-			}
-
+			}			
 		}
 
 		@Override

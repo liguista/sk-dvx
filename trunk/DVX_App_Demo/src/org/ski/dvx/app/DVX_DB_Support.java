@@ -282,7 +282,6 @@ public class DVX_DB_Support {
 // look to timed event and fire it if it exists
 	void checkTimeEvent(Movie movie, Author author, Language language, int chapter, int offset, int startFrame)
 	{
-		
 		System.out.println("Looking for " + movie.getMovieSbnNumber() + "-" +
 				author.getUser().getUserId() + "-" + 
 				language.getLanguageId() + "-" + 
@@ -313,7 +312,20 @@ public class DVX_DB_Support {
 		System.out.println(" checkTimeEvent list size = " + descriptionList.size());
 		for (Description mmDescription : descriptionList)
 		{
-//			if (mmDescription.getMovie().equals(movie) && mmDescription.getAuthor().equals(author))
+/*			if (chapter==2)
+				if (offset == 49)
+					System.out.print("!!!");
+			if (language.getLanguageId()!=0)
+			{
+				if (language.getLanguageId()!=mmDescription.getLanguage().getLanguageId())
+					break;
+			}
+			if (author.getAuthorId()!=0)
+			{
+				if (author.getAuthorId()!=mmDescription.getAuthor().getAuthorId())
+					break;
+			} */
+			if (mmDescription.getMovie().equals(movie) ) //&& mmDescription.getAuthor().equals(author)
 			{
 				System.out.println("Found Clip : " + description.getDescriptionUri());
 				
@@ -321,6 +333,8 @@ public class DVX_DB_Support {
 							movie.getMovieSbnNumber() + 
 							DVX_Constants.MOVIE_DESCRIPTIONS_PATH + 
 							mmDescription.getDescriptionUri(), false);
+//				if (chapter==2)
+//					System.out.println("Chapter 2 Event : " + mmDescription.getLanguage().getLanguageName());
 			}
 		}
 	}

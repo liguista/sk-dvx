@@ -20,6 +20,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.ski.dvx.hibernate.Author;
 import org.ski.dvx.hibernate.AuthorDAO;
@@ -40,13 +43,15 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 
 	private javax.swing.JFrame mainFrame = null;
 	
-	DVX_RecordButton recordButton = null;
+	DVX_RecordButton dvxRecordButton = null;
 	
 	DVX_File_Support dvxFileSupport = null;
 	
 	Language language = null;
 	
-	boolean wasFBI = false;
+	boolean newGui = true;
+	
+//	boolean wasFBI = false;
 // gca menus...	
 	private JMenuBar mb = new JMenuBar(); // Menubar
 	private JMenu mnuFile = new JMenu("File"); // File Entry on Menu bar
@@ -55,7 +60,6 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 	private JMenuItem mnuItemAbout = new JMenuItem("About"); // About Entry
 	
 	JMenu mnuGreg = new JMenu("Greg"); // Help Menu entry
-	
 	
 	JMenuItem mnuItemGreg1 = new JMenuItem("Greg 1",  KeyEvent.VK_T); // About Entry	
 	JMenuItem mnuItemGreg2 = new JMenuItem("Greg 2", KeyEvent.VK_T); // About Entry
@@ -107,14 +111,14 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 	
 	void setPlayingMode()
 	{
-		recordButton.setMenuMode(false);
-		recordButton.setPlayingMode(true);
+		dvxRecordButton.setMenuMode(false);
+		dvxRecordButton.setPlayingMode(true);
 	}
 
 	void setMenuMode()
 	{
-		recordButton.setMenuMode(true);
-		recordButton.setPlayingMode(false);
+		dvxRecordButton.setMenuMode(true);
+		dvxRecordButton.setPlayingMode(false);
 	}
 
 	// *************************************************************************************************************************************
@@ -144,6 +148,8 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 //			while ((!dvdOK)&&(System.in.available()==0)) {	// need to add an escape in here...
 			while (!dvdOK) {	// need to add an escape in here...
 				try {
+//					splash.setVisible(false);
+//					splash.dispose();
 
 					dvd = new DSDvd(/* path_to_ifo_directory, */0, flags,
 							videoDecoders[1], audioDecoders[1], this);
@@ -174,12 +180,6 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 			mainFrame.getContentPane().add(java.awt.BorderLayout.NORTH,
 					new SwingMovieController(dvd));
 			System.out.println("Icon = " + DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Record-Normal-icon.png");
-			recordButton = new DVX_RecordButton("Record", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Record-Normal-icon.png"));
-			//			recordButton = new RecordButton("Record");
-			recordButton.setAuthor(dvxDBSupport.getAuthor());
-			recordButton.setMovie(movie);
-			recordButton.setLanguage(language);
-			recordButton.setMnemonic('r');
 			
 /*			BorderLayout dvxButtons = new BorderLayout();
 			dvxButtons.addLayoutComponent(new JButton("Hello"), JButton.LEFT);
@@ -187,27 +187,23 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 			dvxButtons.addLayoutComponent(new JButton("Tool"), JButton.RIGHT);*/
 			
 //			f.getContentPane().add(java.awt.BorderLayout.SOUTH,
-//					recordButton);
+//					dvxRecordButton);
 			
-			JButton btnChapterPlus 	= new JButton("C+",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Add-icon.png"));
-			JButton btnChapterMinus = new JButton("C-",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Minus-icon.png"));
+			btnChapterPlus 	= new JButton("C+",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Add-icon.png"));
+			btnChapterMinus = new JButton("C-",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Minus-icon.png"));
 
-			JButton btnTitlePlus 	= new JButton("T+",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Add-icon.png"));
-			JButton btnTitleMinus 	= new JButton("T-",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Minus-icon.png"));
+			btnTitlePlus 	= new JButton("T+",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Add-icon.png"));
+			btnTitleMinus 	= new JButton("T-",	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Minus-icon.png"));
 
-			JButton btnShutUp = new JButton("Shut Up",new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "sound-off-icon.png"));
-			JButton btnTime = new JButton("Time", 	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Time-Machine-icon.png"));
-			JButton btnPlay = new JButton("Play", 	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Button-Play-icon_002.png"));
-			JButton btnPause = new JButton("Pause", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Pause-icon.png"));
-			JButton btnStop = new JButton("Stop", 	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Stop-Pressed-Blue-icon.png"));
-			JButton btnEject = new JButton("Eject", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "cd-eject-icon.png"));
-			JButton btnMount = new JButton("Mount", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Device-cd-rom-mount-icon.png"));
-			btnPlay.disable();
-			btnPause.disable();
-			btnStop.disable();
-			btnEject.disable(); 
+//			jButtonPlay.disable();
+//			jButtonPause.disable();
+//			jButtonStop.disable();
+//			jButtonEject.disable(); 
 			JPanel myPanel = new JPanel();
-			
+			if (newGui)
+				initComponents(myPanel);
+			else	
+{
 	        //Create the combo box, select the item at index 4.
 	        //Indices start at 0, so 4 specifies the pig.
 	        JComboBox authorList = new JComboBox(dvxDBSupport.getAuthorList());
@@ -237,42 +233,40 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 //			btnTitlePlus.addActionListener(new MyButtonListener());
 //
 
-			myPanel.add(btnEject);
-			btnEject.addActionListener(new MyButtonListener());
-			char c = 'e';
-			c = DVX_Messages.getChar("PlayDVD.Keyboard.Eject");
-//			btnEject.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Eject"));
-			btnEject.setMnemonic(c);
+			myPanel.add(jButtonEject);
+			jButtonEject.addActionListener(new MyButtonListener());
+			jButtonEject.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Eject"));
 			
-			myPanel.add(btnMount);
-			btnMount.addActionListener(new MyButtonListener());
-			btnMount.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Mount"));
+			myPanel.add(jButtonMount);
+			jButtonMount.addActionListener(new MyButtonListener());
+			jButtonMount.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Mount"));
        
-			myPanel.add(btnShutUp);
-			btnShutUp.addActionListener(new MyButtonListener());
-			btnShutUp.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ShutUp"));
+			myPanel.add(jButtonShutUp);
+			jButtonShutUp.addActionListener(new MyButtonListener());
+			jButtonShutUp.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ShutUp"));
 			
-			myPanel.add(btnTime);
-			btnTime.addActionListener(new MyButtonListener());
-			btnTime.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Time"));
+			myPanel.add(jButtonTime);
+			jButtonTime.addActionListener(new MyButtonListener());
+			jButtonTime.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Time"));
 
-			myPanel.add(btnPlay);
-			btnPlay.addActionListener(new MyButtonListener());
-			btnPlay.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Play"));
+			myPanel.add(jButtonPlay);
+			jButtonPlay.addActionListener(new MyButtonListener());
+			jButtonPlay.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Play"));
 			
-			myPanel.add(btnPause);
-			btnPause.addActionListener(new MyButtonListener());
-			btnPause.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Pause"));
+			myPanel.add(jButtonPause);
+			jButtonPause.addActionListener(new MyButtonListener());
+			jButtonPause.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Pause"));
 
-			myPanel.add(btnStop);
-			btnStop.addActionListener(new MyButtonListener());
-			btnStop.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Stop"));
+			myPanel.add(jButtonStop);
+			jButtonStop.addActionListener(new MyButtonListener());
+			jButtonStop.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Stop"));
 			
-//			recordButton.setSize(40, 12);
-			myPanel.add(recordButton);
+//			dvxRecordButton.setSize(40, 12);
+			myPanel.add(dvxRecordButton);
+}		
 //			JLayout buttonLayout = new JLayout();
 			mainFrame.add(myPanel,java.awt.BorderLayout.SOUTH);
-//			f.add(recordButton,java.awt.BorderLayout.SOUTH);
+//			f.add(dvxRecordButton,java.awt.BorderLayout.SOUTH);
 //			JPanel panel = new JPanel(new BorderLayout());
 			
 //			panel.add(new JButton("Record 1"), JPanel.LEFT_ALIGNMENT);
@@ -283,13 +277,13 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 //					panel);
 
 /*			f.getContentPane().add(java.awt.BorderLayout.SOUTH,
-					new RecordButton("Click to Record"));
+					new dvxRecordButton("Click to Record"));
 			f.getContentPane().add(java.awt.BorderLayout.SOUTH,
-					new RecordButton("Click to Record"));
+					new dvxRecordButton("Click to Record"));
 */
 			mainFrame.pack();
 
-			mainFrame.setSize(1200, 800);
+			mainFrame.setSize(1024, 768);
 
 			DSJUtils.centerFrame(mainFrame, null);
 
@@ -452,6 +446,9 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 			 */
 
 			// z splash.close();
+// VERY IMPORTANT!!! This makes DVD time codes work!!!
+			mainFrame.setJMenuBar(mb);
+		dvd.setDVDControlOption(DSDvd.DVD_HMSF_TimeCodeEvents, 1 );
 
 		} catch (Exception e) {
 			System.out.println("Exception create Graph: " + e);} 
@@ -499,12 +496,15 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 				long v = ge[i];
 				if (verbose)
 					System.out
-							.print(", param_" + i + " = " + ge[i] + ":"+Long.toString(v, 16) );  //$NON-NLS-2$
+							.print("\t, param_" + i + " = " + ge[i] + "\t:\t"+Long.toString(v, 16) );  //$NON-NLS-2$
 			}
 
 			if (verbose)
 				// if (ge.length>0)
-				System.out.println(DVX_Messages.getString("PlayDVD.30")); 
+				System.out.println("\t" + DVX_Messages.getString("PlayDVD.30")); 
+			
+			System.out.println("Get Ops is - " + dvd.getUOPs() + " : " + Long.toString(dvd.getUOPs(), 16));
+			System.out.println("UOP_ShowMenu_Title is - " +(dvd.getUOPs() & DSDvd.UOP_ShowMenu_Title));
 // *************************************************************************************************************************************
 // 
 // EC_DVD_VALID_UOPS_CHANGE
@@ -529,7 +529,7 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 							DVX_Constants.MOVIE_MENUS_PATH +
 							DVX_Constants.MOVIE_NAME_WAV,result); */
 
-					System.out.println("Was fbi = " + wasFBI);
+//					System.out.println("Was fbi = " + wasFBI);
 					System.out.println("Disk Id = " + result);
 					
 
@@ -607,11 +607,9 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 						{
 							dvxSpeak.speak("DVD Title lookup failed.");	// nope... speak the truth...
 						}
-						
-	
 						// dvd.play();
 						// dvd.playChapter(5) ;
-						recordButton.setMovie(movie);
+						dvxRecordButton.setMovie(movie);
 						
 						setMenuMode();
 						
@@ -628,7 +626,20 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 
 				}
 			}
-// *************************************************************************************************************************************
+			
+			if (de.humatic.dsj.DSConstants.EC_DVD_SUBPICTURE_STREAM_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
+				dvxSpeak.speak("DVD Sub Picture Stream Change" );
+			}
+			if (de.humatic.dsj.DSConstants.EC_DVD_AUDIO_STREAM_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
+				dvxSpeak.speak("DVD Audio Stream Change" );
+			}
+			if (de.humatic.dsj.DSConstants.EC_DVD_VALID_UOPS_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
+				dvxSpeak.speak("DVD Domain Change" );
+			}
+			if (de.humatic.dsj.DSConstants.EC_DVD_VALID_UOPS_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
+				dvxSpeak.speak("DVD Operations Change" );
+			}
+	// *************************************************************************************************************************************
 // 
 // EC_DVD_CURRENT_TIME
 //
@@ -643,22 +654,61 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 			if (de.humatic.dsj.DSConstants.EC_DVD_CURRENT_TIME == DSJUtils.getEventValue_int(pe)  ) {
 				int[] ge1 = (int[]) (pe.getOldValue());
 
-				// System.out.println("Time event = " + Math.abs(ge[1]) + " - "
-				// + Long.toString(Math.abs(ge[1]), 16));
+				 System.out.println("Time event = " + Math.abs(ge[1]) + " - "
+				 + Long.toString(Math.abs(ge[1]), 16));
 
 				System.out
 						.println(DVX_Messages.getString("PlayDVD.36") + chapter + DVX_Messages.getString("PlayDVD.37") + (dvd.getTime() - baseTime) / 1000);  //$NON-NLS-2$
 				// System.out.println("Time event 3 = " + ge1[1] / 1000);
 				// System.out.println("Time event 3 = " +
 				// Integer.toString(ge1[1], 16));
-				if (recordButton!=null)
-					recordButton.setTimeOffset((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
+				if (dvxRecordButton!=null)
+					dvxRecordButton.setTimeOffset((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
 				if (dvxDBSupport!=null)
-				dvxDBSupport.checkTimeEvent(movie, dvxDBSupport.getAuthor(), language, chapter,
+					dvxDBSupport.checkTimeEvent(movie, dvxDBSupport.getAuthor(), language, chapter,
 						((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
 				setPlayingMode();	// set the status for record to time mode...
+				
+				int theTime = ((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
+				jTextMinutes.setText("" + theTime / 60);
+				jTextSeconds.setText("" + theTime % 60);
+				jTextFrame.setText("" + 0);
 
 			}
+// *************************************************************************************************************************************			
+//
+// EC_DVD_CURRENT_HMSF_TIME : Correct DVD time...
+//
+// *************************************************************************************************************************************			
+			
+			if (de.humatic.dsj.DSConstants.EC_DVD_CURRENT_HMSF_TIME == DSJUtils.getEventValue_int(pe)  ) {
+				
+				int[] ge1 = (int[]) (pe.getOldValue());
+				
+				int hours = ge1[1] & 0xff;
+				int minutes = (ge1[1] & 0xff00 )/0x100;
+				int remainder = ge1[1] / 0x10000;
+				int seconds = remainder & 0xff;;
+				int frame = (remainder  & 0xff00 )/0x100;
+				
+				int  realTime = seconds + (minutes * DVX_Constants.SECONDS_PER_MINUTE) + (hours *DVX_Constants.SECONDS_PER_HOUR);
+				if (dvxRecordButton!=null)
+					dvxRecordButton.setTimeOffset(realTime);
+				if (dvxDBSupport!=null)
+					dvxDBSupport.checkTimeEvent(movie, dvxDBSupport.getAuthor(), language, chapter,
+						((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
+				setPlayingMode();	// set the status for record to time mode...
+				
+				int theTime = ((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
+				jLabelHour.setText(num2StringFmt(hours));
+				jTextMinutes.setText(num2StringFmt(minutes));
+				jTextSeconds.setText(num2StringFmt(seconds));
+				jTextFrame.setText(num2StringFmt( frame));
+				
+//				System.out.println("The current time is - " + num2StringFmt(hours) + ":" + num2StringFmt(minutes) + ":" +  num2StringFmt(seconds) + ":" +  num2StringFmt(frame));
+				
+			}
+			
 // *************************************************************************************************************************************			
 //
 // EC_DVD_CHAPTER_START
@@ -673,8 +723,12 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 				System.out.println(DVX_Messages.getString(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")); 
 				baseTime = dvd.getTime();	// resets the baseTime offset... to whatever random number the DSJ has currently
 				
-				recordButton.setMenuMode(false);				
-				recordButton.setChapter(chapter);
+				dvxRecordButton.setMenuMode(false);				
+				dvxRecordButton.setChapter(chapter);
+				
+				jComboBoxChapter.setSelectedIndex(chapter);
+				jTextChapter.setText("" + chapter);
+				
 				setPlayingMode();
 			}
 // *************************************************************************************************************************************			
@@ -691,10 +745,10 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 				// (int) ge[2]);
 				int menuPage = ge[1];
 				int menuID = ge[2];
-				recordButton.setMenuPage(menuPage);
-				recordButton.setMenuId(menuID);
-				recordButton.setMenuMode(true);
-				recordButton.setPlayingMode(false);
+				dvxRecordButton.setMenuPage(menuPage);
+				dvxRecordButton.setMenuId(menuID);
+				dvxRecordButton.setMenuMode(true);
+				dvxRecordButton.setPlayingMode(false);
 				String soundFile = dvxDBSupport.getMenuURI(null /* author */, language, movie,
 						menuPage, menuID);
 					System.out.println(
@@ -714,34 +768,44 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 					} else {
 						System.out
 								.print(DVX_Messages.getString("PlayDVD.44") + DVX_Constants.MOVIE_PATH + movie.getMovieId() + DVX_Constants.MOVIE_MENUS_PATH + soundFile); 
+						dvxSpeak.speak("Menu Page " + menuPage + ". Id " + menuID);
 					}
+				}
+				else // is null
+				{
+					dvxSpeak.speak("Menu Page " + menuPage + ". Id " + menuID);					
 				}
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_STILL_ON == DSJUtils.getEventValue_int(pe) ) 
 			{
-				DVX_PlaySound.playWav(DVX_Constants.FBI_LOVE, false);
-				System.out.println("The FBI Loves you...");
-				wasFBI = true;
+//				DVX_PlaySound.playWav(DVX_Constants.FBI_LOVE, false);
+//				System.out.println("The FBI Loves you...");
+//				wasFBI = true;
+				dvxSpeak.speak("DVX DVD Still Mode is On");
 				break;
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_STILL_OFF == DSJUtils.getEventValue_int(pe) ) 
 			{
-				System.out.println("The FBI No Longer Loves you...");
+				dvxSpeak.speak("DVX DVD Still Mode is Off");
+
+//				System.out.println("The FBI No Longer Loves you...");
 //				if (wasFBI == true)
 //				{
-					DVX_PlaySound.playWav(DVX_Constants.FBI_NO_LOVE, false);
+//					DVX_PlaySound.playWav(DVX_Constants.FBI_NO_LOVE, false);
 //					wasFBI = false;
 //				}
-				wasFBI = false;
+//				wasFBI = false;
 				break;
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_DISC_EJECTED == DSJUtils.getEventValue_int(pe) )
 				{
-					DVX_PlaySound.playWav(DVX_Constants.DVD_EJECTED, false);
+//					DVX_PlaySound.playWav(DVX_Constants.DVD_EJECTED, false);
+					dvxSpeak.speak("DVX Disk Ejected");
 				}
 			if (de.humatic.dsj.DSConstants.EC_DVD_DISC_INSERTED == DSJUtils.getEventValue_int(pe) ) 
 				{
 					DVX_PlaySound.playWav(DVX_Constants.DVD_MOUNTED, false);
+					dvxSpeak.speak("DVX DVD Mounted");
 				}
 			
 			break;
@@ -815,14 +879,14 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 				language = dvxDBSupport.getLanguage (menuItem);
 				dvxDBSupport.setLanguage(language);
 				
-				recordButton.setLanguage(language);
+				dvxRecordButton.setLanguage(language);
 			}
 			if (menuName.equals("Author"))
 			{
 				System.out.println("Was Author...");
 				Author newAuthor = dvxDBSupport.getAuthor(menuItem);
 				dvxDBSupport.setAuthor(newAuthor);
-				recordButton.setAuthor(newAuthor);				
+				dvxRecordButton.setAuthor(newAuthor);				
 			}
 		}
 	}
@@ -888,7 +952,571 @@ public class DVX_Player implements java.beans.PropertyChangeListener {
 			
 			}
 		}
+	// gca 8-28-11
+	
+    // Variables declaration - do not modify                     
+//    private javax.swing.JButton jButtonAdd;
+ //   private javax.swing.JButton jButtonPlay;
+    private javax.swing.JButton jButtonRecord;
+    private javax.swing.JButton jButtonChapterMinus;
+    private javax.swing.JButton jButtonChapterPlus;
+    private javax.swing.JComboBox jComboBoxAuthor;
+    private javax.swing.JComboBox jComboBoxChapter;
+    private javax.swing.JComboBox jComboBoxTitle;
+    private javax.swing.JComboBox jComboBoxLanguage;
+    private javax.swing.JLabel jLabelAuthor;
+    private javax.swing.JLabel jLabelHour;
+    private javax.swing.JLabel jLabelDVDvolume;
+    private javax.swing.JLabel jLabelDVXVolume;
+    private javax.swing.JLabel jLabelFrame;
+    private javax.swing.JLabel jLabelLanguage;
+    private javax.swing.JLabel jLabelMin;
+    private javax.swing.JLabel jLabelSec;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelRoot;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSlider jSliderDVXVolume;
+    private javax.swing.JSlider jSliderDVDVolume;
+    private javax.swing.JTextField jTextChapter;
+    private javax.swing.JTextField jTextFrame;
+    private javax.swing.JTextField jTextMinutes;
+    private javax.swing.JTextField jTextSeconds;
+    private javax.swing.JLabel labelChapter;
+    private javax.swing.JLabel labelLanguage;
+    private javax.swing.JLabel labelLanguage1;
+    private javax.swing.JLabel labelLanguage2;
+    private javax.swing.JLabel labelTitle;
+    // End of variables declaration    
+
+    private javax.swing.JButton btnChapterPlus;
+    private javax.swing.JButton btnChapterMinus;
+
+    private javax.swing.JButton btnTitlePlus ;
+    private javax.swing.JButton btnTitleMinus;
+
+    private javax.swing.JButton jButtonShutUp;
+    private javax.swing.JButton jButtonTime ;
+    private javax.swing.JButton jButtonPlay;
+    private javax.swing.JButton jButtonPause ;
+    private javax.swing.JButton jButtonStop ;
+    private javax.swing.JButton jButtonEject;
+    private javax.swing.JButton jButtonMount;
+
+
+	
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents(JPanel thePanel) {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanelRoot = new javax.swing.JPanel();
+        jSliderDVDVolume = new javax.swing.JSlider();
+        jSliderDVXVolume = new javax.swing.JSlider();
+//        jButtonRecord = new javax.swing.JButton();
+//        jButtonAdd = new javax.swing.JButton();
+        jButtonPlay = new javax.swing.JButton();
+        jComboBoxAuthor = new javax.swing.JComboBox();
+        jLabelAuthor = new javax.swing.JLabel();
+        jComboBoxLanguage = new javax.swing.JComboBox();
+        jLabelLanguage = new javax.swing.JLabel();
+        jLabelDVDvolume = new javax.swing.JLabel();
+        jLabelDVXVolume = new javax.swing.JLabel();
+        labelChapter = new javax.swing.JLabel();
+        jComboBoxChapter = new javax.swing.JComboBox();
+        labelTitle = new javax.swing.JLabel();
+        jComboBoxTitle = new javax.swing.JComboBox();
+        jButtonChapterPlus = new javax.swing.JButton();
+        jButtonChapterMinus = new javax.swing.JButton();
+        labelLanguage1 = new javax.swing.JLabel();
+        labelLanguage2 = new javax.swing.JLabel();
+        jTextSeconds = new javax.swing.JTextField();
+        jTextFrame = new javax.swing.JTextField();
+        labelLanguage = new javax.swing.JLabel();
+        jTextChapter = new javax.swing.JTextField();
+        jTextMinutes = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabelTitle = new javax.swing.JLabel();
+        jLabelHour = new javax.swing.JLabel();
+        jLabelMin = new javax.swing.JLabel();
+        jLabelSec = new javax.swing.JLabel();
+        jLabelFrame = new javax.swing.JLabel();
+        
+		jButtonEject = new JButton("Eject", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "cd-eject-icon.png"));
+		jButtonEject.addActionListener(new MyButtonListener());
+		jButtonEject.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Eject"));
+
+		jButtonMount = new JButton("Mount", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Device-cd-rom-mount-icon.png"));
+		jButtonMount.addActionListener(new MyButtonListener());
+		jButtonMount.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Mount"));
+
+		jButtonShutUp = new JButton("Shut Up",new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "sound-off-icon.png"));
+		jButtonShutUp.addActionListener(new MyButtonListener());
+		jButtonShutUp.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ShutUp"));
 		
+		jButtonTime = new JButton("Time", 	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Time-Machine-icon.png"));
+		jButtonTime.addActionListener(new MyButtonListener());
+		jButtonTime.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Time"));
+
+		jButtonPlay = new JButton("Play", 	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Button-Play-icon_002.png"));
+		jButtonPlay.addActionListener(new MyButtonListener());
+		jButtonPlay.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Play"));
+
+		jButtonPause = new JButton("Pause", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Pause-icon.png"));
+		jButtonPause.addActionListener(new MyButtonListener());
+		jButtonPause.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Pause"));
+
+		jButtonStop = new JButton("Stop", 	new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Stop-Pressed-Blue-icon.png"));
+		jButtonStop.addActionListener(new MyButtonListener());
+		jButtonStop.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Stop"));
+
+		dvxRecordButton = new DVX_RecordButton("Record", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Record-Normal-icon.png"));
+		//			dvxRecordButton = new dvxRecordButton("Record");
+		dvxRecordButton.setAuthor(dvxDBSupport.getAuthor());
+		dvxRecordButton.setMovie(movie);
+		dvxRecordButton.setLanguage(language);
+		dvxRecordButton.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Record"));
+
+//
+//
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 244, Short.MAX_VALUE)
+        );
+
+ //       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+ //       setTitle("Root Panel");
+
+        jSliderDVDVolume.setValue(100);
+         jSliderDVDVolume.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
+            	sliderDVDVolumeActionPerformed(evt);
+            }
+        });
+
+        jSliderDVXVolume.setValue(100);
+        
+        jSliderDVXVolume.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
+            	sliderDVXVolumeActionPerformed(evt);
+               
+            }
+        });
+
+/*
+        jButtonRecord.setText("Record");
+        jButtonRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecordActionPerformed(evt);
+            }
+        }); */
+/*
+        jButtonAdd.setText("Add");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
+*/
+        jButtonPlay.setText("Play");
+
+        jComboBoxAuthor.setModel(new javax.swing.DefaultComboBoxModel(dvxDBSupport.getAuthorList()));
+        jComboBoxAuthor.setToolTipText("User");
+        jComboBoxAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAuthorActionPerformed(evt);
+            }
+        });
+
+        jLabelAuthor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelAuthor.setText("Author:");
+
+        jComboBoxLanguage.setModel(new javax.swing.DefaultComboBoxModel(dvxDBSupport.getLanguageList()));
+        jComboBoxLanguage.setToolTipText("Language");
+        jComboBoxLanguage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxLanguageActionPerformed(evt);
+            }
+        });
+
+        jLabelLanguage.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelLanguage.setText("Language:");
+
+        jLabelDVDvolume.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelDVDvolume.setText("DVD Volume");
+
+        jLabelDVXVolume.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelDVXVolume.setText("DVX Volume");
+
+        labelChapter.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        labelChapter.setText("Chapter:");
+
+     // added gca
+       String [] chapterList  = new String[dvd.getNumChapters()+1];
+       chapterList[0] = "Chapter:";
+        for (int i = 0; i < dvd.getNumChapters(); i++) 
+        	chapterList[i+1] = "Chapter "+ (i + 1);
+        jComboBoxChapter.setModel(new javax.swing.DefaultComboBoxModel(chapterList));
+        jComboBoxChapter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jComboBoxChapterActionPerformed(evt);
+            }
+        });     // end added       	   
+
+        
+        labelTitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        labelTitle.setText("Title:");
+// added gca
+        String [] titleList  = new String[dvd.getNumTitles()+1];
+        titleList[0] = "Title:";
+        for (int  i = 0; i < dvd.getNumTitles(); i++) 
+        	titleList[i+1] = "Title "+ (i + 1);
+// end added       	   
+        jComboBoxTitle.setModel(new javax.swing.DefaultComboBoxModel(titleList));
+        jComboBoxTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jComboBoxTitleActionPerformed(evt);
+            }
+        });     // end added       	   
+
+        jButtonChapterPlus.setText("+");
+        jButtonChapterPlus.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ChapterPlus"));
+
+        jButtonChapterPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChapterPlusActionPerformed(evt);
+            }
+        });
+
+        jButtonChapterMinus.setText("-");
+        jButtonChapterMinus.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ChapterMinus"));
+        jButtonChapterMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChapterMinusActionPerformed(evt);
+            }
+        });
+
+        labelLanguage1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        labelLanguage1.setText(":");
+
+        labelLanguage2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        jTextSeconds.setText("00");
+        jTextSeconds.setToolTipText("Seconds");
+        jTextSeconds.setMargin(new java.awt.Insets(2, 4, 2, 4));
+
+        jTextFrame.setText("00");
+        jTextFrame.setToolTipText("Frame");
+        jTextFrame.setMargin(new java.awt.Insets(2, 4, 2, 4));
+/*        jTextFrame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFrameActionPerformed(evt);
+            }
+        }); */
+
+        labelLanguage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        labelLanguage.setText("-");
+
+        jTextChapter.setText("00");
+        jTextChapter.setToolTipText("Chapter");
+        jTextChapter.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        jTextChapter.setMinimumSize(new java.awt.Dimension(60, 20));
+ /*       jTextChapter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextChapterActionPerformed(evt);
+            }
+        });*/
+
+        jTextMinutes.setText("00");
+        jTextMinutes.setToolTipText("Minutes");
+        jTextMinutes.setMargin(new java.awt.Insets(2, 4, 2, 4));
+ /*       jTextMinutes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextMinutesActionPerformed(evt);
+            }
+        });*/
+
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTitle.setForeground(new java.awt.Color(51, 0, 255));
+        jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitle.setText("DVX- The New Media Player");
+
+        jLabelHour.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelHour.setText("Hour");
+
+        jLabelMin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelMin.setText("Min.");
+
+        jLabelSec.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelSec.setText("Sec.");
+
+        jLabelFrame.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelFrame.setText("Frame");
+
+        javax.swing.GroupLayout jPanelRootLayout = new javax.swing.GroupLayout(jPanelRoot);
+        jPanelRoot.setLayout(jPanelRootLayout);
+        jPanelRootLayout.setHorizontalGroup(
+            jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRootLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                    .addGroup(jPanelRootLayout.createSequentialGroup()
+                        .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelRootLayout.createSequentialGroup()
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelAuthor)
+                                    .addComponent(jLabelLanguage))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelRootLayout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(labelChapter))
+                                    .addGroup(jPanelRootLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelTitle)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxChapter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelRootLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonChapterMinus)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jButtonChapterPlus)
+                                        .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanelRootLayout.createSequentialGroup()
+                                                .addGap(139, 139, 139)
+                                                .addComponent(labelLanguage2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanelRootLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabelHour)
+                                                .addGap(3, 3, 3)
+                                                .addComponent(jLabelMin)
+                                                .addGap(7, 7, 7)
+                                                .addComponent(jLabelSec)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabelFrame)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRootLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextChapter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(labelLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelLanguage1)
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jTextSeconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(jTextFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)))
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelDVDvolume)
+                                    .addComponent(jLabelDVXVolume))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSliderDVDVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSliderDVXVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelRootLayout.createSequentialGroup()
+                                .addComponent(jButtonEject)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonMount)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonShutUp)
+                                 .addGap(18, 18, 18)
+                                .addComponent(jButtonTime)
+                                 .addGap(18, 18, 18)
+                                .addComponent(jButtonPlay)
+                                 .addGap(18, 18, 18)
+                                .addComponent(jButtonPause)
+                                 .addGap(18, 18, 18)
+                                .addComponent(jButtonStop)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dvxRecordButton)))
+                        .addContainerGap())))
+        );
+        jPanelRootLayout.setVerticalGroup(
+            jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRootLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelAuthor)
+                        .addComponent(jComboBoxAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelChapter)
+                        .addComponent(jComboBoxChapter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonChapterPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonChapterMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelDVDvolume)
+                        .addComponent(labelLanguage2)
+                        .addComponent(jLabelHour)
+                        .addComponent(jLabelMin)
+                        .addComponent(jLabelSec)
+                        .addComponent(jLabelFrame))
+                    .addComponent(jSliderDVDVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelLanguage)
+                        .addComponent(jComboBoxLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelTitle))
+                    .addComponent(jSliderDVXVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelDVXVolume)
+                        .addComponent(jTextSeconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextChapter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelLanguage)
+                        .addComponent(labelLanguage1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEject)
+                    .addComponent(jButtonMount)
+                    .addComponent(jButtonShutUp)
+                    .addComponent(jButtonTime)
+                    .addComponent(jButtonPlay)
+                    .addComponent(jButtonPause)
+                    .addComponent(jButtonStop)
+                    .addComponent(dvxRecordButton))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+//        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+//        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(thePanel);
+        thePanel.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+ //       pack();
+    }// </editor-fold>                        
+
+/*
+private void buttonRecordActionPerformed(java.awt.event.ActionEvent evt) {                                             
+// TODO add your handling code here:
+	System.out.println("buttonRecordActionPerformed - ");
+}      */                                       
+
+private void jComboBoxAuthorActionPerformed(java.awt.event.ActionEvent evt) {                                                
+	String selected = jComboBoxAuthor.getSelectedItem().toString();
+	System.out.println("jComboBoxAuthorActionPerformed - " + jComboBoxAuthor.getSelectedItem());
+	Author newAuthor = dvxDBSupport.getAuthor(jComboBoxAuthor.getSelectedItem().toString());
+	dvxDBSupport.setAuthor(newAuthor);
+	dvxRecordButton.setAuthor(newAuthor);	
+	dvxSpeak.speak("Author " + selected );
+}                                               
+
+private void jComboBoxLanguageActionPerformed(java.awt.event.ActionEvent evt) {                                                
+	String selected = jComboBoxLanguage.getSelectedItem().toString();
+		System.out.println("jComboBoxLanguageActionPerformed - " + selected);
+		language = dvxDBSupport.getLanguage (selected);
+		dvxDBSupport.setLanguage(language);
+		
+		dvxRecordButton.setLanguage(language);
+		dvxSpeak.speak("Language " + selected );
+	}                                               
+/*
+private void jTextChapterActionPerformed(java.awt.event.ActionEvent evt) {                                             
+// TODO add your handling code here:
+	System.out.println("jTextChapterActionPerformed - ");
+}   */                                         
+
+private void jComboBoxChapterActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+		int chapter = + jComboBoxChapter.getSelectedIndex();
+		dvd.chapterStep(chapter + 1);
+		dvxSpeak.speak("Chapter " + chapter );
+		System.out.println("jComboBoxChapterActionPerformed - " + chapter);
+	}                                                  
+
+private void jComboBoxTitleActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+	// TODO add your handling code here:
+		System.out.println("jComboBoxTitleActionPerformed - "+ jComboBoxTitle.getSelectedIndex());
+	dvd.gotoTitle(jComboBoxTitle.getSelectedIndex());
+	dvxSpeak.speak("Title " + jComboBoxTitle.getSelectedIndex());
+		
+	}                                                  
+
+private void jButtonChapterPlusActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+	System.out.println("jButtonChapterPlusActionPerformed - ");
+	dvd.chapterStep(1);
+	dvxSpeak.speak("Chapter Plus");
+}                                                  
+
+private void jButtonChapterMinusActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+	System.out.println("jButtonChapterMinusActionPerformed - ");
+	dvd.chapterStep(-1);
+	dvxSpeak.speak("Chapter Minus");
+}                                                   
+/*
+private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {                                          
+// 
+	System.out.println("buttonAddActionPerformed - ");
+}                                         
+*/
+private void sliderDVDVolumeActionPerformed(ChangeEvent evt) {                                          
+		System.out.println("sliderDVDVolumeActionPerformed - " + jSliderDVDVolume.getValue());
+		System.out.println("old volume = " + dvd.getVolume());
+		float f = (jSliderDVDVolume.getValue()/ 100f);
+		System.out.println("setting to = " + f );
+		dvd.setVolume( f);
+		
+	}                                         
+
+private void sliderDVXVolumeActionPerformed(ChangeEvent evt) {                                          
+		System.out.println("sliderDVXVolumeActionPerformed - " + jSliderDVXVolume.getValue());		
+		float f = jSliderDVXVolume.getValue();
+		float vol = f / 100;
+		dvxSpeak.setVolume(vol);
+//		System.out.println("New voume =  " + vol);		
+		
+	}            
+
+String num2StringFmt(int i)
+{
+	if (i<10)
+		return "0" + i;
+	return "" + i;
+	
+}
+
+// gca 8-28-11
+	
 	
 //
 //

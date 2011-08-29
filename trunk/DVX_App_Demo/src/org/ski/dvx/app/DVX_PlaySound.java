@@ -56,13 +56,13 @@ public class DVX_PlaySound {
 
 			File soundFile = new File(filePath);
 			AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
-
+			
 			// load the sound into memory (a Clip)
 			DataLine.Info info = new DataLine.Info(Clip.class,
 					sound.getFormat());
 			soundClip = (Clip) AudioSystem.getLine(info);
 			soundClip.open(sound);
-
+						
 			// due to bug in Java Sound, explicitly exit the VM when
 			// the sound has stopped.
 			soundClip.addLineListener(new LineListener() {
@@ -77,6 +77,7 @@ public class DVX_PlaySound {
 
 			// play the sound clip
 			soundClip.start();
+
 			while (waiting)
 			{
 				try{
