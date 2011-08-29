@@ -8,11 +8,13 @@
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="org.ski.dvx.app.DVX_Player"/>
                 <attribute name="Class-Path" value="."/>
-                <attribute name="Rsrc-Class-Path" value="./ antlr-2.7.6.jar cglib-2.2.jar commons-collections-3.1.jar dom4j-1.6.1.jar dsj.jar ehcache-1.2.3.jar ejb3-persistence.jar hibernate-annotations.jar hibernate-commons-annotations.jar hibernate-entitymanager.jar hibernate-validator.jar hibernate3.jar javassist-3.9.0.GA.jar jta-1.1.jar log4j-1.2.14.jar mysql-connector-java-5.1.17-bin.jar slf4j-api-1.5.8.jar slf4j-log4j12-1.5.8.jar"/>
+                <attribute name="Rsrc-Class-Path" value="./ antlr-2.7.6.jar cgjsapi.jar cglib-2.2.jar commons-collections-3.1.jar dom4j-1.6.1.jar dsj.jar ehcache-1.2.3.jar ejb3-persistence.jar hibernate-annotations.jar hibernate-commons-annotations.jar hibernate-entitymanager.jar hibernate-validator.jar hibernate3.jar javassist-3.9.0.GA.jar jta-1.1.jar log4j-1.2.14.jar mysql-connector-java-5.1.17-bin.jar slf4j-api-1.5.8.jar slf4j-log4j12-1.5.8.jar"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
             <fileset dir="C:/Users/Greg/Workspaces/MyEclipse for Spring 9/DVX_App_Demo/bin"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="antlr-2.7.6.jar"/>
+        	
+        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="antlr-2.7.6.jar"/>
+        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="cgjsapi.jar"/>
             <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="cglib-2.2.jar"/>
             <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="commons-collections-3.1.jar"/>
             <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="dom4j-1.6.1.jar"/>
