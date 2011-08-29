@@ -143,7 +143,6 @@ public class DVX_RecordButton extends JButton{
 	{
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
 			
 			char keyPressed = e.getKeyChar();
 			if ((!isKeyRecording)&&(keyPressed=='r'))
@@ -156,7 +155,6 @@ public class DVX_RecordButton extends JButton{
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
 //			System.out.println("MyKeyListener - keyPressed = " + e.toString());
 //			char keyPressed = e.getKeyChar();
 //			if (keyPressed=='r')
@@ -168,7 +166,6 @@ public class DVX_RecordButton extends JButton{
 		public void keyReleased(KeyEvent e) {
 			char keyPressed = e.getKeyChar();
 			if ((isKeyRecording)&&(keyPressed=='r'))
-			// TODO Auto-generated method stub
 //			System.out.println("MyKeyListener - keyReleased = " + e.toString());
 			
 //			if (keyPressed=='r')
@@ -212,12 +209,11 @@ public class DVX_RecordButton extends JButton{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("MyMouseListener - mouseClicked" + e.toString());
+//			System.out.println("MyMouseListener - mouseClicked" + e.toString());
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 			System.out.println();
 			System.out.println("mousePressed");
@@ -256,7 +252,6 @@ public class DVX_RecordButton extends JButton{
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			System.out.println("MyMouseListener - mouseReleased" + e.toString());
 			rs.stopRecording();
 		}
@@ -264,20 +259,19 @@ public class DVX_RecordButton extends JButton{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("MyMouseListener - mouseEntered = " + e.toString());
+//			System.out.println("MyMouseListener - mouseEntered = " + e.toString());
 			
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("MyMouseListener - mouseExited = "  + e.toString());
+//			System.out.println("MyMouseListener - mouseExited = "  + e.toString());
 			
 		}
 	}
 	void startRecordMenuClip()
 	{
-		// TODO Auto-generated method stub
 
 		System.out.println("startRecordMenuClip()");
 		
