@@ -74,7 +74,7 @@ public class DVX_Speak {
 		    //Get a female voice if the chooser was not created or no voice was selected
 		    if(v == null) new Voice(null,Voice.GENDER_FEMALE, Voice.AGE_DONT_CARE, null);
 		    
-		    System.out.println("Using voice "+v);
+//		    System.out.println("Using voice "+v);
 		    SynthesizerProperties props = synth.getSynthesizerProperties();
 		    props.setVoice(v);
 		    props.setVolume(volume);
