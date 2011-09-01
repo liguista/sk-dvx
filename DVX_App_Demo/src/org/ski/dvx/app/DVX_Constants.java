@@ -11,7 +11,7 @@ public class DVX_Constants {
 
 	public final static String GLOBAL_PATH = MEDIA_PATH + "globals/";
 	public final static String GLOBAL_IMAGES_PATH = GLOBAL_PATH + "images/";
-	public final static String GLOBAL_IMAGES_PATH_24_X_24 = GLOBAL_PATH + "images/24x24/";
+	public final static String GLOBAL_IMAGES_PATH_24_X_24 = /* GLOBAL_PATH + */ "resources/images/";
 	public final static String GLOBAL_MOVIE_PATH = GLOBAL_PATH  + "movies/";
 	
 	public final static String GLOBAL_SPLASH_IMAGE = GLOBAL_IMAGES_PATH  + "sksplash.gif";

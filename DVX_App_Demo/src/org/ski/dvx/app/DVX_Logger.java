@@ -12,11 +12,18 @@ import org.ski.dvx.hibernate.TransactionLog;
 import org.ski.dvx.hibernate.TransactionLogDAO;
 import org.ski.dvx.hibernate.User;
 
+/**
+ * @author Greg
+ *
+ */
 public class DVX_Logger {
 
 	SessionFactory sessionFactory = null;
 //	TransactionLogDAO transLogDao;
 	
+	/**
+	 * 
+	 */
 	DVX_Logger()
 	{
 		try{
@@ -31,6 +38,13 @@ public class DVX_Logger {
 //		log((Movie)null,"Greg","","","");
 	}
 	
+	/**
+	 * @param movie
+	 * @param user
+	 * @param transactionType
+	 * @param transactionLevel
+	 * @param transactionDetails
+	 */
 	void dvx_log(Movie movie, User user, String transactionType,
 			String transactionLevel, String transactionDetails)
 	{
