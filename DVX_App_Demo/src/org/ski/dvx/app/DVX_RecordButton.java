@@ -20,9 +20,12 @@ import org.ski.dvx.hibernate.Path;
 
 public class DVX_RecordButton extends JButton{
 
-	public Movie movie;
-	public Author author;
-	public Language language;
+//	public Movie movie;
+//	public Author author;
+//	public Language language;
+	
+	DVX_GUI dvx_player; 
+	
 	public int menuPage;
 	public int menuId;
 	
@@ -30,7 +33,7 @@ public class DVX_RecordButton extends JButton{
 	public int timeOffset;
 	public int frameOffset;
 
-	DVX_DB_Support dvx_db_support = null; 
+//	DVX_DB_Support dvx_db_support = null; 
 
 	boolean playingMode = false;
 	boolean menuMode = false;
@@ -46,6 +49,7 @@ public class DVX_RecordButton extends JButton{
 	public void setFrameOffset(int frameOffset) {
 		this.frameOffset = frameOffset;
 	}
+	
 	public boolean isWaitingForFirstMenu() {
 		return waitingForFirstMenu;
 	}
@@ -96,29 +100,6 @@ public class DVX_RecordButton extends JButton{
 		this.menuMode = menuMode;
 		if (menuMode== true)
 			waitingForFirstMenu = false;
-	}
-
-	public Language getLanguage() {
-		return language;
-	}
-	
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
-	
-	public Movie getMovie() {
-		return movie;
-	}
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
-	
-	public Author getAuthor() {
-		return author;
-	}
-	
-	public void setAuthor(Author author) {
-		this.author = author;
 	}
 	
 	public int getMenuPage() {
@@ -270,20 +251,21 @@ public class DVX_RecordButton extends JButton{
 			
 		}
 	}
+	
 	void startRecordMenuClip()
 	{
 
 		System.out.println("startRecordMenuClip()");
 		
 		String filePrefix = DVX_Constants.MOVIE_PATH + 
-							movie.getMovieSbnNumber() + 
+							dvx_player.getMovie().getMovieSbnNumber() + 
 							DVX_Constants.MOVIE_MENUS_PATH;
-		Path path = dvx_db_support.getInsertPath(author, filePrefix);
+		Path path = dvx_player.getDvxDBSupport().getInsertPath(dvx_player.getAuthor(), filePrefix);
 
 		String filePath = 	filePrefix + 
-							movie.getMovieSbnNumber() + 
+							dvx_player.getMovie().getMovieSbnNumber() + 
 							DVX_Constants.HYPHEN  +
-							author.getAuthorId() + 
+							dvx_player.getAuthor().getAuthorId() + 
 							DVX_Constants.HYPHEN  + 
 							menuPage + 
 							DVX_Constants.HYPHEN + 
@@ -291,9 +273,9 @@ public class DVX_RecordButton extends JButton{
 							DVX_Constants.GLOBAL_AUDIO_FILE_TYPE_WAV  
 							;
 		startRecording(filePath);
-		dvx_db_support.insertUpdateMovieMenu(getAuthor(), getLanguage(), getMovie(),  getMenuPage(), getMenuId(), path, "");
-		dvx_db_support.log(movie, 
-				author.getUser(), 
+		dvx_player.getDvxDBSupport().insertUpdateMovieMenu(dvx_player.getAuthor(), dvx_player.getLanguage(), dvx_player.getMovie(),  getMenuPage(), getMenuId(), path, "");
+		dvx_player.getDvxDBSupport().log(dvx_player.getMovie(), 
+				dvx_player.getAuthor().getUser(), 
 				DVX_Constants.TRANSACTION_TYPE_ADD_MOVIE_MENU, 
 				DVX_Constants.TRANSACTION_LEVEL_INFO, 
 				"Adding Movie Menu Clip. " + filePath);	
@@ -307,18 +289,18 @@ public class DVX_RecordButton extends JButton{
 		int frameOffsetNow = getFrameOffset();
 		
 		String filePrefix = DVX_Constants.MOVIE_PATH + 
-		movie.getMovieSbnNumber() + 
+		dvx_player.getMovie().getMovieSbnNumber() + 
 		DVX_Constants.MOVIE_DESCRIPTIONS_PATH;
-		Path path = dvx_db_support.getInsertPath(author, filePrefix);
+		Path path = dvx_player.getDvxDBSupport().getInsertPath(dvx_player.getAuthor(), filePrefix);
 		
 
 		String filePath = 	
 							filePrefix + 
-							movie.getMovieSbnNumber() + 
+							dvx_player.getMovie().getMovieSbnNumber() + 
 							DVX_Constants.HYPHEN +
-							author.getAuthorId() + 
+							dvx_player.getAuthor().getAuthorId() + 
 							DVX_Constants.HYPHEN  + 
-							getLanguage().getLanguageId() + 
+							dvx_player.getLanguage().getLanguageId() + 
 							DVX_Constants.HYPHEN  + 
 							chapterNow + 
 							DVX_Constants.HYPHEN  + 
@@ -328,30 +310,30 @@ public class DVX_RecordButton extends JButton{
 							DVX_Constants.GLOBAL_AUDIO_FILE_TYPE_WAV  
 							;
 		startRecording(filePath);
-		dvx_db_support.log(movie, 
-				author.getUser(), 
+		dvx_player.getDvxDBSupport().log(dvx_player.getMovie(), 
+				dvx_player.getAuthor().getUser(), 
 				DVX_Constants.TRANSACTION_TYPE_ADD_MOVIE_EVENT, 
 				DVX_Constants.TRANSACTION_LEVEL_INFO, 
 				"Adding Movie Time Clip. " + filePath);	
-		dvx_db_support.insertUpdateTimeClip(getAuthor(), getLanguage(), getMovie(),  chapterNow, timeOffset, frameOffsetNow, path, "");
+		dvx_player.getDvxDBSupport().insertUpdateTimeClip(dvx_player.getAuthor(), dvx_player.getLanguage(), dvx_player.getMovie(),  chapterNow, timeOffset, frameOffsetNow, path, "");
 	}
 	
 	void startRecordMovieNameClip()
 	{
 		System.out.println("startRecordMovieNameClip");
 		String filePrefix = DVX_Constants.MOVIE_PATH + 
-		movie.getMovieSbnNumber() + 
+		dvx_player.getMovie().getMovieSbnNumber() + 
 		DVX_Constants.MOVIE_MENUS_PATH;
-		Path path = dvx_db_support.getInsertPath(author, filePrefix);
+		Path path = dvx_player.getDvxDBSupport().getInsertPath(dvx_player.getAuthor(), filePrefix);
 
 		String filePath = 	filePrefix + 
 				DVX_Constants.MOVIE_NAME_WAV  
 				;
 		startRecording(filePath);
 		
-		dvx_db_support.insertUpdateMovieNameClip(author, language, movie,  menuPage, menuId, path, "");
-		dvx_db_support.log(movie, 
-				author.getUser(), 
+		dvx_player.getDvxDBSupport().insertUpdateMovieNameClip(dvx_player.getAuthor(), dvx_player.getLanguage(), dvx_player.getMovie(),  menuPage, menuId, path, "");
+		dvx_player.getDvxDBSupport().log(dvx_player.getMovie(), 
+				dvx_player.getAuthor().getUser(), 
 				DVX_Constants.TRANSACTION_TYPE_ADD_MOVIE_NAME, 
 				DVX_Constants.TRANSACTION_LEVEL_INFO, 
 				"Adding Movie Name Clip. " + filePath);	
@@ -382,8 +364,8 @@ public class DVX_RecordButton extends JButton{
 		{
 			System.out.println("Unable to get a recording line" + ex.toString());
 			ex.printStackTrace();
-			dvx_db_support.log(movie, 
-								author.getUser(), 
+			dvx_player.getDvxDBSupport().log(dvx_player.getMovie(), 
+								dvx_player.getAuthor().getUser(), 
 								DVX_Constants.TRANSACTION_TYPE_OTHER, 
 								DVX_Constants.TRANSACTION_LEVEL_ERROR, 
 								"Unable to get a recording line. " + ex.toString());
@@ -409,17 +391,20 @@ public class DVX_RecordButton extends JButton{
 
 	}
 	
-	DVX_RecordButton(String label,ImageIcon icon)
+	DVX_RecordButton(DVX_GUI dvx_player, String label,ImageIcon icon)
 //	RecordButton(String label)
 	{
 		super(label, icon);
+		this.dvx_player =  dvx_player;
 //		super(label);
 		mouseListener = new MyMouseListener();
 		this.addMouseListener( mouseListener);
 		// this.setLabel(label);
 		this.addKeyListener(new MyKeyListener());
 		
-		dvx_db_support = new DVX_DB_Support();
+//		dvx_db_support = new DVX_DB_Support();
 
 	}
+
+
 }

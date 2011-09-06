@@ -589,18 +589,23 @@ public class DVX_Menus extends DVX_Base_Class{
  */    
      jMenuHelp = new javax.swing.JMenu();
      jMenuItemHelpContents = new javax.swing.JMenuItem();
+     jMenuItemHelpContents.setText("DVX Help");
      jMenuItemHelpContents.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
         	 handleMenuEvent(evt);
          }
      });
+     
+     jMenuHelp.add(jMenuItemHelpContents);
 
      jMenuItemAboutDVX = new javax.swing.JMenuItem();
+     jMenuItemAboutDVX.setText("About DVX");
      jMenuItemAboutDVX.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
         	handleMenuEvent(evt);
         }
     });
+     jMenuHelp.add(jMenuItemAboutDVX);
     
      jMenuItemDescriptionList = new javax.swing.JMenuItem();
      
@@ -664,7 +669,7 @@ public class DVX_Menus extends DVX_Base_Class{
 		if (command.equalsIgnoreCase("Set Bookmark 1"))
 		{
 			try {
-				dvd.saveBookmark("bookmark 1");
+				dvd.saveBookmark(DVX_Constants.DVX_BOOKMARK_FILE + "1");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("Exception setting bookmark 1" + e);
@@ -674,7 +679,7 @@ public class DVX_Menus extends DVX_Base_Class{
 		if (command.equalsIgnoreCase("Set Bookmark 2"))
 		{
 			try {
-				dvd.saveBookmark("Bookmark 2");
+				dvd.saveBookmark(DVX_Constants.DVX_BOOKMARK_FILE + "2");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("Exception setting bookmark 1" + e);
@@ -684,7 +689,7 @@ public class DVX_Menus extends DVX_Base_Class{
 		if (command.equalsIgnoreCase("Set Bookmark 3"))
 		{
 			try {
-				dvd.saveBookmark("Bookmark 3");
+				dvd.saveBookmark(DVX_Constants.DVX_BOOKMARK_FILE + "3");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("Exception setting bookmark 1" + e);
@@ -694,7 +699,7 @@ public class DVX_Menus extends DVX_Base_Class{
 		if (command.equalsIgnoreCase("Bookmark 1"))
 		{
 			try {
-				dvd.restoreBookmark("Bookmark 1");
+				dvd.restoreBookmark( DVX_Constants.DVX_BOOKMARK_FILE + "1");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("Exception getting bookmark 1" + e);
@@ -703,19 +708,25 @@ public class DVX_Menus extends DVX_Base_Class{
 		if (command.equalsIgnoreCase("Bookmark 2"))
 		{
 			try {
-				dvd.restoreBookmark("Bookmark 2");
+				dvd.restoreBookmark(DVX_Constants.DVX_BOOKMARK_FILE + "2");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("Exception getting bookmark 1" + e);
 			}
-		}		if (command.equalsIgnoreCase("Bookmark 2"))
+		}		
+		if (command.equalsIgnoreCase("Bookmark 3"))
 		{
 			try {
-				dvd.restoreBookmark("Bookmark 3");
+				dvd.restoreBookmark(DVX_Constants.DVX_BOOKMARK_FILE + "3");
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("Bxception getting bookmark 3" + e);
+				System.out.println("Exception getting bookmark 3" + e);
 			}
+		}
+		if (command.equalsIgnoreCase("DVX Help"))
+		{
+			System.out.println("DVX Help" );
+			
 		}
 	}
 	

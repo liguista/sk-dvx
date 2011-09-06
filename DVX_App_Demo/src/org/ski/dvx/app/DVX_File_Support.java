@@ -37,7 +37,5 @@ public class DVX_File_Support {
 			boolean result = path.mkdir();
 			System.out.println("Create path " + path.toString() + " was " + result);
 		}
-
-		
 	}
 }

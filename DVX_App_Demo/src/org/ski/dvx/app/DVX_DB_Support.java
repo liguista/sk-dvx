@@ -3,6 +3,7 @@ package org.ski.dvx.app;
 //import java.io.File;
 //import java.util.Iterator;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -21,6 +22,7 @@ import org.ski.dvx.hibernate.Description;
 import org.ski.dvx.hibernate.DescriptionDAO;
 import org.ski.dvx.hibernate.Path;
 import org.ski.dvx.hibernate.PathDAO;
+import org.ski.dvx.hibernate.TransactionLog;
 import org.ski.dvx.hibernate.User;
 import org.ski.dvx.hibernate.UserDAO;
 
@@ -33,98 +35,40 @@ public class DVX_DB_Support {
 	/**
 	 * @param args
 	 */
-	private DVX_PlaySound playSound = null;
-	private DVX_Network_Support dvx_network = null;
-	private DVX_Logger dvx_logger;
-	
-	private DVX_Speak dvx_speak = null;
+	DVX_Player dvx_player;
 	
 	private SessionFactory sessionFactory = null;
 
-	private User user = null;
-	private Author author = null;
-	private Language language = null;
-
-	
-	public DVX_Speak getDvx_speak() {
-		return dvx_speak;
-	}
-
-	public void setDvx_speak(DVX_Speak dvx_speak) {
-		this.dvx_speak = dvx_speak;
-	}
-
-	public DVX_Logger getLogger() {
-		return dvx_logger;
-	}
-
-	public void setLogger(DVX_Logger logger) {
-		this.dvx_logger = logger;
-	}
-
-	// *****************************************	
-	public Language getLanguage() {
-		return language;
-	}
-	
-	// *****************************************	
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
-	
-	// *****************************************	
-
-	public User getUser() {
-		return user;
-	}
-	
-	// *****************************************	
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	// *****************************************	
-
-	public Author getAuthor() {
-		return author;
-	}
-	
-	// *****************************************	
-
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
-	
-	// *****************************************	
 
 	
 // ------------------------------------------------------------------------------------
 	
-	DVX_DB_Support()
+	DVX_DB_Support(DVX_Player dvx_player, String defaultAuthor)
 	{
+		this.dvx_player = dvx_player;
 		sessionFactory = new Configuration().configure().buildSessionFactory();
-		dvx_logger = new DVX_Logger();
-		dvx_network = new DVX_Network_Support();
-		playSound = new DVX_PlaySound();
-		setUser(getInsertUser(dvx_network.getIpAddress()));
-		dvx_logger.dvx_log(	null, 
-							getUser(), 
-							DVX_Constants.TRANSACTION_TYPE_LOGIN, 
-							DVX_Constants.TRANSACTION_LEVEL_INFO, 
-							"Login user : " + 
-							getUser().getUserName());
-		setAuthor(getInsertAuthor(user));
-		setLanguage(getLanguage ("English"));
+//		dvx_logger = new DVX_Logger();
+//		dvx_network = new DVX_Network_Support();
+//		playSound = new DVX_PlaySound();
+//		setUser(getInsertUser(dvx_network.getIpAddress()));
+/*		dvx_log(	dvx_player.getMovie(), 
+					dvx_player.getUser(), 
+					DVX_Constants.TRANSACTION_TYPE_LOGIN, 
+					DVX_Constants.TRANSACTION_LEVEL_INFO, 
+					"Login user : " + 
+					dvx_player.getUser().getUserName()); */
+		
+		dvx_player.setAuthor(getInsertAuthor(getInsertUser(defaultAuthor)));
+//		setLanguage(getLanguage ("English"));
 //		logger.log(null, getUser(), "Language", "?what?", "Language : " + getLanguage());
-		dvx_logger = new DVX_Logger();
+//		dvx_logger = new DVX_Logger();
 
 	}
 	
 	public void log(Movie movie, User user, String transactionType,
 			String transactionLevel, String transactionDetails)
 	{
-		dvx_logger.dvx_log(movie, user, transactionType, transactionLevel, transactionDetails);
+		dvx_log(movie, user, transactionType, transactionLevel, transactionDetails);
 	}
 	
 	// ------------------------------------------------------------------------------------
@@ -148,6 +92,7 @@ public class DVX_DB_Support {
 		Transaction tx = session.beginTransaction();
 		session.saveOrUpdate(language);			
 		tx.commit();
+		session.close();
 		
 		return language;
 	}
@@ -211,8 +156,12 @@ public class DVX_DB_Support {
 		Session session = sessionFactory.openSession();
 
 		Transaction tx = session.beginTransaction();
+//		MovieDAO dao = new MovieDAO();
 		
+//		dao.save(transientInstance)
 		session.saveOrUpdate(movie);
+		session.flush();
+		session.refresh(movie);
 		tx.commit();
 
 		session.close();
@@ -282,6 +231,13 @@ public class DVX_DB_Support {
 // look to timed event and fire it if it exists
 	void checkTimeEvent(Movie movie, Author author, Language language, int chapter, int offset, int startFrame)
 	{
+		try
+		{
+		if (movie==null)
+		{
+			System.err.println("checkTimeEvent Movie is null");
+			return;
+		}
 		System.out.println("Looking for " + movie.getMovieSbnNumber() + "-" +
 				author.getUser().getUserId() + "-" + 
 				language.getLanguageId() + "-" + 
@@ -336,6 +292,11 @@ public class DVX_DB_Support {
 //				if (chapter==2)
 //					System.out.println("Chapter 2 Event : " + mmDescription.getLanguage().getLanguageName());
 			}
+		}
+		}
+		catch(Exception ex)
+		{
+			System.err.println("CheckTimeEvent Exception : " + ex);
 		}
 	}
 	
@@ -482,6 +443,7 @@ public class DVX_DB_Support {
 		
 		session.saveOrUpdate(movieMenu);
 		tx.commit();
+		session.close();
 //		
 	}
 	
@@ -553,8 +515,14 @@ public class DVX_DB_Support {
 		description.setPath(path);
 		
 		session.saveOrUpdate(description);
+		session.flush();
+		session.refresh(description);
+
 		tx.commit();
-		
+		session.close();
+
+		checkTimeEvent( movie,  author,  language,  chapter,  timeOffset,  descriptionStartFrame);
+
 //		
 	}
 	
@@ -577,6 +545,7 @@ public class DVX_DB_Support {
 		Transaction tx = session.beginTransaction();
 		session.saveOrUpdate(resultPath);			
 		tx.commit();
+		session.close();
 		
 		return resultPath;
 	}
@@ -649,7 +618,31 @@ public class DVX_DB_Support {
 	}
 	
 	// ------------------------------------------------------------------------------------
+	void dvx_log(Movie movie, User user, String transactionType,
+			String transactionLevel, String transactionDetails)
+	{
+		if (true)
+		return;
+		if (sessionFactory==null)
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+//		transLogDao = new TransactionLogDAO();
+		System.err.println("Kilroy was here!!!");
+		TransactionLog transactionLog = new TransactionLog(
+				 movie,  user,  transactionType,
+				 transactionLevel,  transactionDetails, 
+				 new Timestamp(System.currentTimeMillis()), 
+				 new Timestamp(System.currentTimeMillis())
+				);
 		
+		Session session = sessionFactory.openSession();
+
+		Transaction tx = session.beginTransaction();
+		session.saveOrUpdate(transactionLog);
+		tx.commit();
+
+		session.close();
+		
+	}
 }
 
 
