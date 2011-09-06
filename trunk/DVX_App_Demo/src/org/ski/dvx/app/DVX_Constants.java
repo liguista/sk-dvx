@@ -11,7 +11,7 @@ public class DVX_Constants {
 
 	public final static String GLOBAL_PATH = MEDIA_PATH + "globals/";
 	public final static String GLOBAL_IMAGES_PATH = GLOBAL_PATH + "images/";
-	public final static String GLOBAL_IMAGES_PATH_24_X_24 = /* GLOBAL_PATH + */ "resources/images/";
+	public final static String GLOBAL_IMAGES_PATH_24_X_24 = GLOBAL_IMAGES_PATH + "icons/";
 	public final static String GLOBAL_MOVIE_PATH = GLOBAL_PATH  + "movies/";
 	
 	public final static String GLOBAL_SPLASH_IMAGE = GLOBAL_IMAGES_PATH  + "sksplash.gif";
@@ -29,6 +29,9 @@ public class DVX_Constants {
 	
 	public final static String GLOBAL_AUDIO_FILE_TYPE_WAV = ".wav";
 	public final static String GLOBAL_AUDIO_FILE_TYPE_MP3 = ".mp3";
+	
+	public final static String DVX_BOOKMARK_FILE = "DVX_BOOKMARK_";
+	
 	
 	public final static String DVD_Identified_WAV			= GLOBAL_AUDIO_PATH  + "DVD_Identified" 		+ GLOBAL_AUDIO_FILE_TYPE_WAV ;
 	public final static String DVD_Not_In_Database_WAV		= GLOBAL_AUDIO_PATH  + "DVD_Not_In_Database" 	+ GLOBAL_AUDIO_FILE_TYPE_WAV ;

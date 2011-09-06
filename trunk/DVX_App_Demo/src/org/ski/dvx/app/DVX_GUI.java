@@ -152,11 +152,11 @@ public class DVX_GUI extends DVX_Menus{
 		jButtonStop.addActionListener(new MyButtonListener());
 		jButtonStop.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Stop"));
 
-		dvxRecordButton = new DVX_RecordButton("Record", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Record-Normal-icon.png"));
+		dvxRecordButton = new DVX_RecordButton(this, "Record", new ImageIcon(DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Record-Normal-icon.png"));
 		//			dvxRecordButton = new dvxRecordButton("Record");
-		dvxRecordButton.setAuthor(dvxDBSupport.getAuthor());
-		dvxRecordButton.setMovie(movie);
-		dvxRecordButton.setLanguage(language);
+//		dvxRecordButton.setAuthor(getAuthor());
+//		dvxRecordButton.setMovie(movie);
+//		dvxRecordButton.setLanguage(language);
 		dvxRecordButton.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Record"));
 
 //
@@ -350,32 +350,32 @@ public class DVX_GUI extends DVX_Menus{
 		btnChapterPlus.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ChapterPlus"));
 		
 		thePanel.add(jButtonEject);
-		jButtonEject.addActionListener(new MyButtonListener());
-		jButtonEject.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Eject"));
+//		jButtonEject.addActionListener(new MyButtonListener());
+//		jButtonEject.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Eject"));
 		
 		thePanel.add(jButtonMount);
-		jButtonMount.addActionListener(new MyButtonListener());
-		jButtonMount.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Mount"));
+//		jButtonMount.addActionListener(new MyButtonListener());
+//		jButtonMount.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Mount"));
    
 		thePanel.add(jButtonShutUp);
-		jButtonShutUp.addActionListener(new MyButtonListener());
-		jButtonShutUp.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ShutUp"));
+//		jButtonShutUp.addActionListener(new MyButtonListener());
+//		jButtonShutUp.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.ShutUp"));
 		
 		thePanel.add(jButtonTime);
-		jButtonTime.addActionListener(new MyButtonListener());
-		jButtonTime.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Time"));
+//		jButtonTime.addActionListener(new MyButtonListener());
+//		jButtonTime.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Time"));
 
 		thePanel.add(jButtonPlay);
-		jButtonPlay.addActionListener(new MyButtonListener());
-		jButtonPlay.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Play"));
+//		jButtonPlay.addActionListener(new MyButtonListener());
+//		jButtonPlay.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Play"));
 		
 		thePanel.add(jButtonPause);
-		jButtonPause.addActionListener(new MyButtonListener());
-		jButtonPause.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Pause"));
+//		jButtonPause.addActionListener(new MyButtonListener());
+//		jButtonPause.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Pause"));
 
 		thePanel.add(jButtonStop);
-		jButtonStop.addActionListener(new MyButtonListener());
-		jButtonStop.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Stop"));
+//		jButtonStop.addActionListener(new MyButtonListener());
+//		jButtonStop.setMnemonic(DVX_Messages.getChar("PlayDVD.Keyboard.Stop"));
 		
 //		dvxRecordButton.setSize(40, 12);
 		thePanel.add(dvxRecordButton);
@@ -558,7 +558,7 @@ public class DVX_GUI extends DVX_Menus{
     		float vol = jSliderDVDVolume.getValue();
     		if (vol!= 0)
     		{	// 20% of Volume + 80%
-    			vol = ((vol / 100f) *.2f) + .08f;
+    			vol = ((vol / 100f) *.2f) + .8f;
 //    			vol = vol *.2f;
 //    			vol = vol + .8f;
     		}
@@ -583,8 +583,8 @@ public class DVX_GUI extends DVX_Menus{
     	String selected = jComboBoxAuthor.getSelectedItem().toString();
     	System.out.println("jComboBoxAuthorActionPerformed - " + jComboBoxAuthor.getSelectedItem());
     	Author newAuthor = dvxDBSupport.getAuthor(jComboBoxAuthor.getSelectedItem().toString());
-    	dvxDBSupport.setAuthor(newAuthor);
-    	dvxRecordButton.setAuthor(newAuthor);	
+    	setAuthor(newAuthor);
+//    	dvxRecordButton.setAuthor(newAuthor);	
     	dvxSpeak.speak("Author " + selected );
     }                                               
 
@@ -592,8 +592,8 @@ public class DVX_GUI extends DVX_Menus{
     	String selected = jComboBoxLanguage.getSelectedItem().toString();
     		System.out.println("jComboBoxLanguageActionPerformed - " + selected);
     		language = dvxDBSupport.getLanguage (selected);
-    		dvxDBSupport.setLanguage(language);
-    		dvxRecordButton.setLanguage(language);
+    		setLanguage(language);
+//    		dvxRecordButton.setLanguage(language);
     		dvxSpeak.speak("Language " + selected );
     	}                                               
     /*

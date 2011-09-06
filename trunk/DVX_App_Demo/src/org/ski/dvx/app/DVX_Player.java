@@ -10,6 +10,15 @@ import java.io.PrintStream;
 
 import de.humatic.dsj.*;
 import javax.swing.JPanel;
+
+import org.apache.log4j.Appender;
+import org.apache.log4j.AsyncAppender;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Layout;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.PropertyConfigurator;
 import org.ski.dvx.hibernate.Movie;
 
 /*import java.awt.*;
@@ -30,9 +39,13 @@ import org.ski.dvx.hibernate.AuthorDAO;
 import org.ski.dvx.hibernate.Language;
 import org.ski.dvx.hibernate.User;*/
 
+
 public class DVX_Player extends DVX_GUI {
 
-	
+//	static Logger logger_getUOPs;
+	static Logger dvxPlayerLogger;
+
+
 
 	/**
 	 * Rendering mode flags. Some decoders, subtitles etc. will only work with
@@ -67,16 +80,22 @@ public class DVX_Player extends DVX_GUI {
 		// movie = dvdSupport.getMovie("A Beautiful Mind");
 		super();
 		dvxSpeak = new DVX_Speak();
-		dvxDBSupport = new DVX_DB_Support();
-		language = dvxDBSupport.getLanguage();
-		dvxDBSupport.setDvx_speak(dvxSpeak);		
+		dvxDBSupport = new DVX_DB_Support(this,"All");
+		language = dvxDBSupport.getLanguage("English");
+//		dvxDBSupport.setDvx_speak(dvxSpeak);	
+		
+		dvxPlayerLogger = Logger.getLogger(this.getClass());
+
 	}
 
 	
 	void setPlayingMode()
 	{
-		dvxRecordButton.setMenuMode(false);
-		dvxRecordButton.setPlayingMode(true);
+		if (dvxRecordButton!=null)
+		{
+			dvxRecordButton.setMenuMode(false);
+			dvxRecordButton.setPlayingMode(true);
+		}
 	}
 
 	void setMenuMode()
@@ -93,6 +112,7 @@ public class DVX_Player extends DVX_GUI {
 
 	public void createGraph() {
 
+		System.out.println("Root path = " + this.getClass().getProtectionDomain().getCodeSource().getLocation());
 		try {
 			if (mainDVXFrame == null) {
 				mainDVXFrame = new javax.swing.JFrame(DVX_Constants.DVX_APPLICATION_NAME); 
@@ -325,6 +345,8 @@ public class DVX_Player extends DVX_GUI {
 // VERY IMPORTANT!!! This makes DVD time codes work!!!
 //			mainDVXFrame.setJMenuBar(jMenuBar);
 		dvd.setDVDControlOption(DSDvd.DVD_HMSF_TimeCodeEvents, 1 );
+		
+		dvxPlayerLogger.warn(getOpsHeaders());
 
 		} catch (Exception e) {
 			System.out.println("Exception create Graph: " + e);} 
@@ -353,9 +375,9 @@ public class DVX_Player extends DVX_GUI {
 			 * refer to MSDN documentation for their parameters' meaning. You
 			 * should especially look for EC_DVD_ERROR events, as the dreaded
 			 * "Copy protection error resulting from the combination of
-			 * DVDNavigator, video decoder and graphics hardware occured.
+			 * DVDNavigator, video decoder and graphics hardware occurred.
 			 * Updating your graphics driver may help" (or the like), that you
-			 * might know from WMP is signalled here.
+			 * might know from WMP is signaled here.
 			 **/
 
 			if (verbose)
@@ -374,9 +396,15 @@ public class DVX_Player extends DVX_GUI {
 			if (verbose)
 				// if (ge.length>0)
 				System.out.println("\t" + DVX_Messages.getString("PlayDVD.30")); 
+			int ops = dvd.getUOPs();
 			
-			System.out.println("Get Ops is - " + dvd.getUOPs() + " : " + Long.toString(dvd.getUOPs(), 16));
-			System.out.println("UOP_ShowMenu_Title is - " +(dvd.getUOPs() & DSDvd.UOP_ShowMenu_Title));
+			dvxPlayerLogger.warn("\t" + DSJUtils.getEventValue_int(pe) + "\t" + 
+										DSConstants.eventToString(DSJUtils.getEventValue_int(pe)) +  "\t" + 
+										ops+ "\t" + 
+										Long.toString(ops, 16) + "\t\t" + 
+										numToBool(ops));
+//			System.out.println("Get Ops is - " + dvd.getUOPs() + " : " + Long.toString(dvd.getUOPs(), 16));
+//			System.out.println("UOP_ShowMenu_Title is - " +(dvd.getUOPs() & DSDvd.UOP_ShowMenu_Title));
 // *************************************************************************************************************************************
 // 
 // EC_DVD_VALID_UOPS_CHANGE
@@ -414,6 +442,7 @@ public class DVX_Player extends DVX_GUI {
 
 					System.out.println(DVX_Constants.ASTRIX_BAR); 
 					System.out.println(DVX_Constants.DVD_ID + result); 
+					
 					Movie movieID = dvxDBSupport.getInsertMovieHash(DVX_Constants.MOVIE_PATH + 
 																	result + 
 																	DVX_Constants.MOVIE_MENUS_PATH +
@@ -421,14 +450,19 @@ public class DVX_Player extends DVX_GUI {
 																	result);
 					if (movieID!=null)
 					{
-						dvxDBSupport.log(	movieID, 
-											dvxDBSupport.getUser(),  
+						movie = dvxDBSupport.getInsertMovieHash(DVX_Constants.MOVIE_PATH + 
+								result + 
+								DVX_Constants.MOVIE_MENUS_PATH +
+								DVX_Constants.MOVIE_NAME_MP3,
+								result);
+						dvxDBSupport.log(	movie, 
+											getUser(),  
 											DVX_Constants.TRANSACTION_TYPE_LOGIN, 
 											DVX_Constants.TRANSACTION_LEVEL_INFO, 
-											"Movie identified : " + movieID.getMovieName());
+											"Movie identified : " + movie.getMovieName());
 						
 //						String movieNameString = movieID.getMovieName();
-						System.out.println(movieID);
+						System.out.println(movie);
 						
 						DVX_File_Support.DVX_File_Support(result); // validate DVD path...
 	
@@ -443,11 +477,11 @@ public class DVX_Player extends DVX_GUI {
 						movieTemp.setMovieSbnNumber(result);
 	*/
 //						if (movieTemp != null)
-							movie = movieID;
+//							movie = movieID;
 						System.out.println(movie.getMovieName());
 						System.out.println(DVX_Constants.ASTRIX_BAR); 
 	
-						baseTime = dvd.getTime();
+//						baseTime = dvd.getTime();
 						
 						// this needs work... it will pay all movie data...
 					/*	DVX_Play_MP3.play(DVX_Constants.MOVIE_PATH + 
@@ -481,7 +515,7 @@ public class DVX_Player extends DVX_GUI {
 						}
 						// dvd.play();
 						// dvd.playChapter(5) ;
-						dvxRecordButton.setMovie(movie);
+						setMovie(movie);
 						
 						setMenuMode();
 						
@@ -491,8 +525,9 @@ public class DVX_Player extends DVX_GUI {
 						dvd.list(ps);
 						System.out.println(os.toString());	// this should be put in the movie info and updated...
 						dvd.list(System.err);
-						movieID.setMovieQuote(os.toString());  // should update the movie after this...
-						dvxDBSupport.updateMovie(movieID);
+						movie.setMovieQuote(os.toString());  // should update the movie after this...
+						setMovieInfo(os.toString());
+//						dvxDBSupport.updateMovie(movie);
 						
 					}
 
@@ -525,26 +560,32 @@ public class DVX_Player extends DVX_GUI {
 // *************************************************************************************************************************************			
 			if (de.humatic.dsj.DSConstants.EC_DVD_CURRENT_TIME == DSJUtils.getEventValue_int(pe)  ) {
 				int[] ge1 = (int[]) (pe.getOldValue());
-
-				 System.out.println("Time event = " + Math.abs(ge[1]) + " - "
-				 + Long.toString(Math.abs(ge[1]), 16));
-
-				System.out
-						.println(DVX_Messages.getString("PlayDVD.36") + chapter + DVX_Messages.getString("PlayDVD.37") + (dvd.getTime() - baseTime) / 1000);  //$NON-NLS-2$
-				// System.out.println("Time event 3 = " + ge1[1] / 1000);
-				// System.out.println("Time event 3 = " +
-				// Integer.toString(ge1[1], 16));
-				if (dvxRecordButton!=null)
-					dvxRecordButton.setTimeOffset((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
-				if (dvxDBSupport!=null)
-					dvxDBSupport.checkTimeEvent(movie, dvxDBSupport.getAuthor(), language, chapter,
-						((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
-				setPlayingMode();	// set the status for record to time mode...
-				
-				int theTime = ((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
-				jTextMinutes.setText("" + theTime / 60);
-				jTextSeconds.setText("" + theTime % 60);
-				jTextFrame.setText("" + 0);
+				if (movie!=null)
+				{
+	
+					 System.out.println("Time event = " + Math.abs(ge[1]) + " - "
+					 + Long.toString(Math.abs(ge[1]), 16));
+	
+					System.out
+							.println(DVX_Messages.getString("PlayDVD.36") + chapter + DVX_Messages.getString("PlayDVD.37") + (dvd.getTime() - baseTime) / 1000);  //$NON-NLS-2$
+					// System.out.println("Time event 3 = " + ge1[1] / 1000);
+					// System.out.println("Time event 3 = " +
+					// Integer.toString(ge1[1], 16));
+					if (dvxRecordButton!=null)
+						dvxRecordButton.setTimeOffset((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
+					if (dvxDBSupport!=null)
+						if (movie!=null)
+						{
+							dvxDBSupport.checkTimeEvent(movie, getAuthor(), language, chapter,
+								((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
+						}
+					setPlayingMode();	// set the status for record to time mode...
+					
+					int theTime = ((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
+					jTextMinutes.setText("" + theTime / 60);
+					jTextSeconds.setText("" + theTime % 60);
+					jTextFrame.setText("" + 0);
+				}
 
 			}
 // *************************************************************************************************************************************			
@@ -567,8 +608,11 @@ public class DVX_Player extends DVX_GUI {
 				if (dvxRecordButton!=null)
 					dvxRecordButton.setTimeOffset(realTime);
 				if (dvxDBSupport!=null)
-					dvxDBSupport.checkTimeEvent(movie, dvxDBSupport.getAuthor(), language, chapter,
-						((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
+					if (movie!=null)
+					{
+						dvxDBSupport.checkTimeEvent(movie, getAuthor(), language, chapter,
+							((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
+					}
 				setPlayingMode();	// set the status for record to time mode...
 				
 //				int theTime = ((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
@@ -722,9 +766,32 @@ public class DVX_Player extends DVX_GUI {
 			System.err.println();
 		}
 	}
-
+	
 	public static void main(String[] args) {
-		new DVX_Player().createGraph();
+		
+//		BasicConfigurator.configure();
+/*		try
+		{
+			BasicConfigurator.configure(new FileAppender(new PatternLayout("%d{HH:mm:ss,SSS}:%-5p [%t]: %m%n"), "This.log"));
+			logger_root = Logger.getLogger(DVX_Player.class);
+			logger_getUOPs = Logger.getLogger(DVX_Player.class);
+			logger_getUOPs.debug("Sample debug message");
+			logger_getUOPs.info("Sample info message");
+			logger_getUOPs.warn("Sample warn message");
+			logger_getUOPs.error("Sample error message");
+			logger_getUOPs.fatal("Sample fatal message");	
+		}
+		catch (Exception ex)
+		{
+			System.err.println("Logger exception..." + ex);
+		} */
+		
+		System.out.println(getOpsHeaders());
+		DVX_Player dvx_player = new DVX_Player();
+//		System.out.println("Path = " + dvx_player.getClass().getProtectionDomain().getCodeSource().getLocation());
+		dvx_player.createGraph();
+		
+
 
 	}
 //
