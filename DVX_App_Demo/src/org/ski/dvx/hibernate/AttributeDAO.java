@@ -1,5 +1,6 @@
 package org.ski.dvx.hibernate;
 
+import java.sql.Timestamp;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
@@ -22,8 +23,9 @@ import org.slf4j.LoggerFactory;
 public class AttributeDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory
 			.getLogger(AttributeDAO.class);
-
 	// property constants
+	public static final String ATTIBUTE_NAME = "attibuteName";
+	public static final String ATTRIBUTE_VALUE = "attributeValue";
 
 	public void save(Attribute transientInstance) {
 		log.debug("saving Attribute instance");
@@ -47,7 +49,7 @@ public class AttributeDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Attribute findById(org.ski.dvx.hibernate.AttributeId id) {
+	public Attribute findById(java.lang.Integer id) {
 		log.debug("getting Attribute instance with id: " + id);
 		try {
 			Attribute instance = (Attribute) getSession().get(
@@ -87,6 +89,14 @@ public class AttributeDAO extends BaseHibernateDAO {
 			log.error("find by property name failed", re);
 			throw re;
 		}
+	}
+
+	public List findByAttibuteName(Object attibuteName) {
+		return findByProperty(ATTIBUTE_NAME, attibuteName);
+	}
+
+	public List findByAttributeValue(Object attributeValue) {
+		return findByProperty(ATTRIBUTE_VALUE, attributeValue);
 	}
 
 	public List findAll() {

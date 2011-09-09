@@ -16,8 +16,10 @@ public class Language extends AbstractLanguage implements java.io.Serializable {
 
 	/** full constructor */
 	public Language(String languageName, String languageNameShort,
-			Timestamp created, Timestamp modified, Set movieMenus) {
-		super(languageName, languageNameShort, created, modified, movieMenus);
+			Timestamp created, Timestamp modified, Set movieMenus,
+			Set descriptions) {
+		super(languageName, languageNameShort, created, modified, movieMenus,
+				descriptions);
 	}
 
 }
