@@ -1,6 +1,8 @@
 package org.ski.dvx.app;
 
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
@@ -19,6 +21,7 @@ import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.PropertyConfigurator;
+import org.ski.dvx.app.dialogs.DVDStates;
 import org.ski.dvx.hibernate.Movie;
 
 /*import java.awt.*;
@@ -45,7 +48,7 @@ public class DVX_Player extends DVX_GUI {
 //	static Logger logger_getUOPs;
 	static Logger dvxPlayerLogger;
 
-
+	DVDStates dvdStates;
 
 	/**
 	 * Rendering mode flags. Some decoders, subtitles etc. will only work with
@@ -80,11 +83,15 @@ public class DVX_Player extends DVX_GUI {
 		// movie = dvdSupport.getMovie("A Beautiful Mind");
 		super();
 		dvxSpeak = new DVX_Speak();
-		dvxDBSupport = new DVX_DB_Support(this,"All");
+		dvxDBSupport = new DVX_DB_Support(this,"Greg");
 		language = dvxDBSupport.getLanguage("English");
 //		dvxDBSupport.setDvx_speak(dvxSpeak);	
 		
 		dvxPlayerLogger = Logger.getLogger(this.getClass());
+		
+		dvdStates = new DVDStates();
+		dvdStates.setVisible(true);
+		
 
 	}
 
@@ -119,6 +126,9 @@ public class DVX_Player extends DVX_GUI {
 
 				splash = new DVX_Splash(mainDVXFrame, DVX_Constants.GLOBAL_SPLASH_IMAGE); 
 				splash.showSplashScreen();
+				
+				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(DVX_Constants.GLOBAL_APPLICATION_ICON));
+				
 
 			}
 			/* jMenuFile.add(jMenuItemQuit);
@@ -398,6 +408,8 @@ public class DVX_Player extends DVX_GUI {
 				System.out.println("\t" + DVX_Messages.getString("PlayDVD.30")); 
 			int ops = dvd.getUOPs();
 			
+			dvdStates.updateState(ops);
+			
 			dvxPlayerLogger.warn("\t" + DSJUtils.getEventValue_int(pe) + "\t" + 
 										DSConstants.eventToString(DSJUtils.getEventValue_int(pe)) +  "\t" + 
 										ops+ "\t" + 
@@ -535,16 +547,20 @@ public class DVX_Player extends DVX_GUI {
 			}
 			
 			if (de.humatic.dsj.DSConstants.EC_DVD_SUBPICTURE_STREAM_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
-				dvxSpeak.speak("DVD Sub Picture Stream Change" );
+				if (isVerbose())
+					dvxSpeak.speak("DVD Sub Picture Stream Change" );
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_AUDIO_STREAM_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
-				dvxSpeak.speak("DVD Audio Stream Change" );
+				if (isVerbose())
+					dvxSpeak.speak("DVD Audio Stream Change" );
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_VALID_UOPS_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
-				dvxSpeak.speak("DVD Domain Change" );
+				if (isVerbose())
+					dvxSpeak.speak("DVD Domain Change" );
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_VALID_UOPS_CHANGE == DSJUtils.getEventValue_int(pe)  ) {
-				dvxSpeak.speak("DVD Operations Change" );
+				if (isVerbose())
+					dvxSpeak.speak("DVD Operations Change" );
 			}
 	// *************************************************************************************************************************************
 // 
@@ -638,12 +654,15 @@ public class DVX_Player extends DVX_GUI {
 				System.out.println(DVX_Messages.getString("Chapter Start : ") + chapter); 
 				System.out.println(DVX_Messages.getString(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")); 
 				baseTime = dvd.getTime();	// resets the baseTime offset... to whatever random number the DSJ has currently
-				
-				dvxRecordButton.setMenuMode(false);				
-				dvxRecordButton.setChapter(chapter);
-				
-				jComboBoxChapter.setSelectedIndex(chapter);
-				jTextChapter.setText("" + chapter);
+				if (dvxRecordButton!=null)
+				{
+					dvxRecordButton.setMenuMode(false);				
+					dvxRecordButton.setChapter(chapter);
+				}
+				if (jComboBoxChapter!=null)
+					jComboBoxChapter.setSelectedIndex(chapter);
+				if (jTextChapter!=null)
+					jTextChapter.setText("" + chapter);
 				
 				setPlayingMode();
 			}
@@ -684,12 +703,14 @@ public class DVX_Player extends DVX_GUI {
 					} else {
 						System.out
 								.print(DVX_Messages.getString("PlayDVD.44") + DVX_Constants.MOVIE_PATH + movie.getMovieId() + DVX_Constants.MOVIE_MENUS_PATH + soundFile); 
-						dvxSpeak.speak("Menu Page " + menuPage + ". Id " + menuID);
+						if (isVerbose())
+							dvxSpeak.speak("Menu Page " + menuPage + ". Id " + menuID);
 					}
 				}
 				else // is null
 				{
-					dvxSpeak.speak("Menu Page " + menuPage + ". Id " + menuID);					
+					if (isVerbose())
+						dvxSpeak.speak("Menu Page " + menuPage + ". Id " + menuID);					
 				}
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_STILL_ON == DSJUtils.getEventValue_int(pe) ) 
@@ -697,12 +718,14 @@ public class DVX_Player extends DVX_GUI {
 //				DVX_PlaySound.playWav(DVX_Constants.FBI_LOVE, false);
 //				System.out.println("The FBI Loves you...");
 //				wasFBI = true;
-				dvxSpeak.speak("DVX DVD Still Mode is On");
+				if (isVerbose())
+					dvxSpeak.speak("DVX DVD Still Mode is On");
 				break;
 			}
 			if (de.humatic.dsj.DSConstants.EC_DVD_STILL_OFF == DSJUtils.getEventValue_int(pe) ) 
 			{
-				dvxSpeak.speak("DVX DVD Still Mode is Off");
+				if (isVerbose())
+					dvxSpeak.speak("DVX DVD Still Mode is Off");
 
 //				System.out.println("The FBI No Longer Loves you...");
 //				if (wasFBI == true)
@@ -716,12 +739,14 @@ public class DVX_Player extends DVX_GUI {
 			if (de.humatic.dsj.DSConstants.EC_DVD_DISC_EJECTED == DSJUtils.getEventValue_int(pe) )
 				{
 //					DVX_PlaySound.playWav(DVX_Constants.DVD_EJECTED, false);
-					dvxSpeak.speak("DVX Disk Ejected");
+					if (isVerbose())
+						dvxSpeak.speak("DVX Disk Ejected");
 				}
 			if (de.humatic.dsj.DSConstants.EC_DVD_DISC_INSERTED == DSJUtils.getEventValue_int(pe) ) 
 				{
 					DVX_PlaySound.playWav(DVX_Constants.DVD_MOUNTED, false);
-					dvxSpeak.speak("DVX DVD Mounted");
+					if (isVerbose())
+						dvxSpeak.speak("DVX DVD Mounted");
 				}
 			
 			break;

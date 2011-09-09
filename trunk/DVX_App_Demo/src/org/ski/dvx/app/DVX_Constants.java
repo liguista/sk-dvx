@@ -15,6 +15,7 @@ public class DVX_Constants {
 	public final static String GLOBAL_MOVIE_PATH = GLOBAL_PATH  + "movies/";
 	
 	public final static String GLOBAL_SPLASH_IMAGE = GLOBAL_IMAGES_PATH  + "sksplash.gif";
+	public final static String GLOBAL_APPLICATION_ICON = GLOBAL_IMAGES_PATH  + "dvxicon.gif";
 	public final static String DVX_APPLICATION_NAME = "DVX - The New Media Player";
 
 	public final static String MOVIE_PATH = MEDIA_PATH  + "movies/";

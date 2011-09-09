@@ -3,6 +3,8 @@
  */
 package org.ski.dvx.app;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.beans.PropertyChangeEvent;
 
 /**
@@ -20,6 +22,8 @@ public class DVX_Menus extends DVX_Base_Class{
     private javax.swing.JMenu jMenuChapter;
     private javax.swing.JMenu jMenuEdit;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuDebug;
+   
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAll;
     private javax.swing.JMenuItem jMenuItemBookmark1;
@@ -61,11 +65,19 @@ public class DVX_Menus extends DVX_Base_Class{
     private javax.swing.JMenuItem jMenuItemTitle2;
     private javax.swing.JMenuItem jMenuItemTitle3;
     private javax.swing.JMenuItem jMenuItemUndo;
-    private javax.swing.JMenuItem jMenuItemookmark2;
+    private javax.swing.JMenuItem jMenuItemBookmark2;
     private javax.swing.JMenu jMenuLanguage;
     private javax.swing.JMenu  jMenuDescriptions;
     private javax.swing.JMenu jMenuTitle;
     private javax.swing.JMenu jMenuTransport;
+
+    private javax.swing.JMenuItem jMenuItemDebug1;
+    private javax.swing.JMenuItem jMenuItemDebug2;
+    private javax.swing.JMenuItem jMenuItemDebug3;
+    private javax.swing.JMenuItem jMenuItemDebug4;
+    private javax.swing.JMenuItem jMenuItemDebug5;
+
+    
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemMuteDVD;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemMuteDVX;
     
@@ -139,9 +151,10 @@ public class DVX_Menus extends DVX_Base_Class{
         jMenuItemSetBookmark3 = new javax.swing.JMenuItem();
 //        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItemBookmark1 = new javax.swing.JMenuItem();
-        jMenuItemookmark2 = new javax.swing.JMenuItem();
+        jMenuItemBookmark2 = new javax.swing.JMenuItem();
         jMenuItemBookmark3 = new javax.swing.JMenuItem();
 	 jMenuFile.setText("File");
+	 
 
      jMenuItemMovieInformation.setText("Movie Information...");
      jMenuItemMovieInformation.addActionListener(new java.awt.event.ActionListener() {
@@ -555,9 +568,9 @@ public class DVX_Menus extends DVX_Base_Class{
          }
      });
 
-     jMenuItemookmark2.setText("Bookmark 2");
-     jMenuBookmarks.add(jMenuItemookmark2);
-     jMenuItemookmark2.addActionListener(new java.awt.event.ActionListener() {
+     jMenuItemBookmark2.setText("Bookmark 2");
+     jMenuBookmarks.add(jMenuItemBookmark2);
+     jMenuItemBookmark2.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
         	 handleMenuEvent(evt);
          }
@@ -617,11 +630,61 @@ public class DVX_Menus extends DVX_Base_Class{
      });
      
       jMenuDescriptions.add(jMenuItemDescriptionList);
+      
+      jMenuHelp.setText("Help");
 
-     jMenuHelp.setText("Help");
+      jMenuBarDVX.add(jMenuHelp);
 
-     jMenuBarDVX.add(jMenuHelp);
-
+      
+ 	 jMenuDebug = new javax.swing.JMenu();
+	 jMenuDebug.setText("Debug");
+	 
+     jMenuItemDebug1 = new javax.swing.JMenuItem();
+     jMenuItemDebug1.setText("Toggle Verbose");
+     jMenuDebug.add(jMenuItemDebug1);
+     jMenuItemDebug1.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	 handleMenuEvent(evt);
+         }
+     });
+     
+     jMenuItemDebug2 = new javax.swing.JMenuItem();
+     jMenuItemDebug2.setText("Debug 2");
+     jMenuDebug.add(jMenuItemDebug2);
+     jMenuItemDebug2.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	 handleMenuEvent(evt);
+         }
+     });
+    
+     jMenuItemDebug3 = new javax.swing.JMenuItem();
+     jMenuItemDebug3.setText("Debug 3");
+     jMenuDebug.add(jMenuItemDebug3);
+     jMenuItemDebug3.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	 handleMenuEvent(evt);
+          }
+     });
+     
+     jMenuItemDebug4 = new javax.swing.JMenuItem();
+     jMenuItemDebug4.setText("Debug 4");
+     jMenuDebug.add(jMenuItemDebug4);
+     jMenuItemDebug4.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	 handleMenuEvent(evt);
+         }
+     });
+     
+     jMenuItemDebug5 = new javax.swing.JMenuItem();
+     jMenuItemDebug5.setText("Debug5");
+     jMenuDebug.add(jMenuItemDebug5);
+     jMenuItemDebug5.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	 handleMenuEvent(evt);     
+         }
+     });
+     
+     jMenuBarDVX.add(jMenuDebug);
 
      dvxFrame.setJMenuBar(jMenuBarDVX);    	
     }
@@ -632,10 +695,8 @@ public class DVX_Menus extends DVX_Base_Class{
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
-	
 		
 	}
-	
 
 	private void jMenuItemMovieInformatioActionPerformed(java.awt.event.ActionEvent evt) {
 	// TODO add your handling code here:
@@ -728,6 +789,30 @@ public class DVX_Menus extends DVX_Base_Class{
 			System.out.println("DVX Help" );
 			
 		}
+		if (command.equalsIgnoreCase("Toggle Verbose"))
+		{
+			setVerbose(!isVerbose());
+			System.out.println("Verbose set to " + isVerbose() );
+			getDvxSpeak().speak("Verbose set to " + isVerbose());
+		}
+		if (command.equalsIgnoreCase("Debug 2"))
+		{
+			System.out.println("gotoTitle*****************************" ) ;
+			System.out.println("DVD title count = " + dvd.gotoTitle(1) ) ;
+			System.out.println("gotoTitle*****************************" ) ;
+		}
+		if (command.equalsIgnoreCase("Debug 3"))
+		{
+//			dvd.goFullScreen(dvd.getGraphics(), 0);
+//			System.out.println("showMenu*****************************" ) ;
+//			dvd.showMenu(dvd.NAV_TITLE_MENU );
+//			System.out.println("showMenu*****************************" ) ;
+			 GraphicsEnvironment ge = GraphicsEnvironment.
+			   getLocalGraphicsEnvironment();
+			   GraphicsDevice[] gs = ge.getScreenDevices();		
+			   GraphicsDevice gd = gs[0];
+			   dvd.goFullScreen(gd, 0);
+			   }
 	}
 	
 	/**

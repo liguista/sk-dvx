@@ -5,6 +5,8 @@ package org.ski.dvx.app;
 
 import java.beans.PropertyChangeEvent;
 import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -30,7 +32,7 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 	int baseTime = 0;
 	int chapter = 0;
 	
-	boolean verbose = true;
+	boolean verbose = false;
 	String lastDVD_ID = ""; 
 
 	DVX_RecordButton dvxRecordButton = null;
@@ -292,7 +294,45 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 		result += "UOP_Stop" +   "\t"  +     DSDvd.UOP_Stop + "\t"+ "\r";		
 		return result; */
 		
-		return "\t\t\t\tSelect_Video_Mode_Preference	Select_Karaoke_Audio_Presentation_Mode	Select_Angle	Select_SubPic_Stream	Select_Audio_Stream	Still_Off	Select_Or_Activate_Button	Resume	ShowMenu_Chapter	ShowMenu_Angle	ShowMenu_Audio	ShowMenu_SubPic	ShowMenu_Root	ShowMenu_Title	Play_Backwards	Play_Forwards	PlayNext_Chapter	PlayPrev_Or_Replay_Chapter	Play_Chapter_Or_AtTime	ReturnFromSubMenu	Stop	Play_Title	Play_Chapter	Play_Title_Or_AtTime";
+		return "\t\t\t\tSelect_Video_Mode_Preference	" + 
+		"Select_Karaoke_Audio_Presentation_Mode	Select_Angle	" + 
+		"Select_SubPic_Stream	" + 
+		"Select_Audio_Stream	" + 
+		"Still_Off	" + 
+		"Select_Or_Activate_Button	" + 
+		"Resume	" + 
+		"ShowMenu_Chapter	" + 
+		"ShowMenu_Angle	" + 
+		"ShowMenu_Audio	" + 
+		"ShowMenu_SubPic	" + 
+		"ShowMenu_Root	" + 
+		"ShowMenu_Title	" + 
+		"Play_Backwards	" + 
+		"Play_Forwards	" + 
+		"PlayNext_Chapter	" + 
+		"PlayPrev_Or_Replay_Chapter	" + 
+		"Play_Chapter_Or_AtTime	" + 
+		"ReturnFromSubMenu	" + 
+		"Stop	" + 
+		"Play_Title	" + 
+		"Play_Chapter	" + 
+		"Play_Title_Or_AtTime";
 	}
+
+    public static boolean internetConnectionExists(String URLName){
+        try {
+          HttpURLConnection.setFollowRedirects(false);
+          // note : you may also need
+          //        HttpURLConnection.setInstanceFollowRedirects(false)
+          HttpURLConnection con =
+             (HttpURLConnection) new URL(URLName).openConnection();
+          con.setRequestMethod("HEAD");
+          return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        }
+        catch (Exception e) {
+           e.printStackTrace();
+           return false;
+        }
+         }
 
 }
