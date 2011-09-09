@@ -38,7 +38,7 @@
             <column name="description" length="65535" />
         </property>
         <property name="menuVersion" type="java.lang.Integer">
-            <column name="menu_version" not-null="true" />
+            <column name="menu_version" />
         </property>
         <property name="menuUri" type="java.lang.String">
             <column name="menu_uri" length="65535" />

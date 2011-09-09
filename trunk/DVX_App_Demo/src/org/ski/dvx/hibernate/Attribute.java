@@ -1,5 +1,7 @@
 package org.ski.dvx.hibernate;
 
+import java.sql.Timestamp;
+
 /**
  * Attribute entity. @author MyEclipse Persistence Tools
  */
@@ -13,8 +15,9 @@ public class Attribute extends AbstractAttribute implements
 	}
 
 	/** full constructor */
-	public Attribute(AttributeId id) {
-		super(id);
+	public Attribute(String attibuteName, String attributeValue,
+			Timestamp modified, Timestamp created) {
+		super(attibuteName, attributeValue, modified, created);
 	}
 
 }

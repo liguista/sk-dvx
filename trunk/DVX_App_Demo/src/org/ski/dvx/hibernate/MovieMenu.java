@@ -14,11 +14,6 @@ public class MovieMenu extends AbstractMovieMenu implements
 	public MovieMenu() {
 	}
 
-	/** minimal constructor */
-	public MovieMenu(Integer menuVersion) {
-		super(menuVersion);
-	}
-
 	/** full constructor */
 	public MovieMenu(Movie movie, Language language, Author author, Path path,
 			Integer languageFk, Integer menuActive, Integer menuNumber,

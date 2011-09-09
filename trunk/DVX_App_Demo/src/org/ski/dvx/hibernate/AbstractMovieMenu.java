@@ -32,11 +32,6 @@ public abstract class AbstractMovieMenu implements java.io.Serializable {
 	public AbstractMovieMenu() {
 	}
 
-	/** minimal constructor */
-	public AbstractMovieMenu(Integer menuVersion) {
-		this.menuVersion = menuVersion;
-	}
-
 	/** full constructor */
 	public AbstractMovieMenu(Movie movie, Language language, Author author,
 			Path path, Integer languageFk, Integer menuActive,
