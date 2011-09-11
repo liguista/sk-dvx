@@ -10,6 +10,7 @@ import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.ski.dvx.app.dialogs.DVDStates;
 import org.ski.dvx.hibernate.Author;
 import org.ski.dvx.hibernate.Language;
 import org.ski.dvx.hibernate.Movie;
@@ -50,6 +51,9 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 	String movieInfo;
 
 	javax.swing.JFrame mainDVXFrame = null;
+	
+	DVDStates dvdStates;
+
 
 	public javax.swing.JFrame getMainDVXFrame() {
 		return mainDVXFrame;

@@ -29,13 +29,11 @@ public class DVX_DB_Support {
 	 * @param args
 	 */
 	DVX_Player dvx_player;
-	
-
 
 	
 // ------------------------------------------------------------------------------------
 	
-	DVX_DB_Support(DVX_Player dvx_player, String defaultAuthor)
+	public DVX_DB_Support(DVX_Player dvx_player, String defaultAuthor)
 	{
 		this.dvx_player = dvx_player;
 		
@@ -73,7 +71,7 @@ public class DVX_DB_Support {
 		return getLanguage(languageName);
 	}
 
-	Movie getMovieHash(String movieHash)
+	public Movie getMovieHash(String movieHash)
 	{
 		Movie movie = new Movie();
 		movie.setMovieSbnNumber(movieHash);
@@ -90,7 +88,7 @@ public class DVX_DB_Support {
 		return null;
 	}
 	
-	Movie getInsertMovieHash(String path, String movieSbnNumber)
+	public Movie getInsertMovieHash(String movieSbnNumber, String path)
 	{
 		Movie movie = getMovieHash(movieSbnNumber);
 		if (movie!=null)
@@ -115,7 +113,7 @@ public class DVX_DB_Support {
 		return getMovieHash(movieSbnNumber);
 	}
 
-	void updateMovie(Movie movie)
+	public void updateMovie(Movie movie)
 	{
 		MovieDAO movieDao = new MovieDAO();
 		Transaction tx = movieDao.getSession().beginTransaction();
@@ -125,7 +123,7 @@ public class DVX_DB_Support {
 	}
 	// ------------------------------------------------------------------------------------
 		
-	String getMenuURI(Author author, Language language, Movie movie, int menuID, int menuItem) // add language here...
+	public String getMenuURI(Author author, Language language, Movie movie, int menuID, int menuItem) // add language here...
 	{
 		 
 		MovieMenu mm = new MovieMenu();
@@ -165,7 +163,7 @@ public class DVX_DB_Support {
 	int lastChapter = -1;
 	int lastOffset = 0;
 //	
-	boolean validateTimedEvent(Description description, Movie movie, Author author, Language language)
+	public boolean validateTimedEvent(Description description, Author author, Language language, Movie movie)
 	{		
 		// validate author if not all		
 		if (author.getAuthorId()!=0)	// author all
@@ -195,7 +193,7 @@ public class DVX_DB_Support {
 	}
 	
 // look to timed event and fire it if it exists
-	void checkTimeEvent(Movie movie, Author author, Language language, int chapter, int offset, int startFrame)
+	public void checkTimeEvent(Author author, Language language, Movie movie, int chapter, int offset, int startFrame)
 	{
 		try
 		{
@@ -252,7 +250,7 @@ public class DVX_DB_Support {
 					break;
 			} */
 //			if (mmDescription.getMovie().equals(movie) ) //&& mmDescription.getAuthor().equals(author)
-			if (validateTimedEvent(mmDescription, movie, author, language))
+			if (validateTimedEvent(mmDescription, author, language,  movie))
 			{
 				System.out.println("Movie id = " + mmDescription.getMovie().getMovieId() + " - " + movie.getMovieId());
 //				if (mmDescription.getMovie().getMovieId()==movie.getMovieId())	// validate movie
@@ -277,7 +275,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	User getInsertUser(String userName)
+	public User getInsertUser(String userName)
 	{
 		User user = new User();
 		
@@ -305,34 +303,45 @@ public class DVX_DB_Support {
 	}
 	
 	// ------------------------------------------------------------------------------------
+	public Author getInsertAuthor(String userName)
+	{
+		User user = getInsertUser(userName);
+		return getInsertAuthor(user);
+	}
 		
-	Author getInsertAuthor(User user)
+	public Author getInsertAuthor(User user)
 	{
 		Author author = new Author();
 		author.setUser(user);
 		AuthorDAO authorDao = new AuthorDAO();
 		@SuppressWarnings("unchecked")
-		List<Author> authors = authorDao.findByExample(author);
-		if (authors.size()>0)
+		List<Author> authorList = authorDao.findByExample(author);
+		for (Author mmAuthor : authorList)
 		{
-			for (int i = 0; i<authors.size();i++)
-			author = authors.get(0);
-			return author;
+			if (mmAuthor.getUser().getUserId()==user.getUserId())
+			{
+				return mmAuthor ;
+			}
 		}
-		else
+// failed to find... insert and return
+		try
 		{
 			Transaction tx = authorDao.getSession().beginTransaction();
 			authorDao.save(author);
 			tx.commit();
 		}
+		catch (Exception ex)
+		{
+			System.out.println("Exception " + ex);
+		}
 		
-		return author;
+		return getInsertAuthor(user);
 		
 	}
 	
 	// ------------------------------------------------------------------------------------
 		
-	void insertUpdateMovieNameClip(Author author , Language language, Movie movie, int menuNumber, int menuItem, Path path, String fileName)
+	public void insertUpdateMovieNameClip(Author author , Language language, Movie movie, int menuNumber, int menuItem, Path path, String fileName)
 
 	{
 		// for another day.. clone of below ...
@@ -340,7 +349,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	void insertUpdateMovieMenu(Author author , Language language, Movie movie, int menuNumber, int menuItem, Path path, String fileName)
+	public void insertUpdateMovieMenu(Author author , Language language, Movie movie, int menuNumber, int menuItem, Path path, String fileName)
 	{
 		int versionNumber = 1;
 		MovieMenu movieMenu = new MovieMenu();
@@ -402,7 +411,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	void insertUpdateTimeClip(Author author , Language language, Movie movie, int chapter, int timeOffset, int descriptionStartFrame, Path  path, String fileName)
+	public Description insertUpdateTimeClip(Author author , Language language, Movie movie, int chapter, int timeOffset, int descriptionStartFrame, Path  path, String fileName)
 	{
 //		timeOffset=1234;
 		System.out.println(
@@ -431,6 +440,8 @@ public class DVX_DB_Support {
 //		movieMenu.setPath();	// GCA to be implemented later
 		
 		DescriptionDAO descriptionDao = new DescriptionDAO();
+		try
+		{
 		Transaction tx = descriptionDao.getSession().beginTransaction();
 		
 		@SuppressWarnings("unchecked")
@@ -480,12 +491,19 @@ public class DVX_DB_Support {
 										
 										);
 		description.setPath(path);
-		descriptionDao.save(description);
+			descriptionDao.save(description);
 
 		tx.commit();
 
-		checkTimeEvent( movie,  author,  language,  chapter,  timeOffset,  descriptionStartFrame);
+//		checkTimeEvent( author,  language,  movie,  chapter,  timeOffset,  descriptionStartFrame);
+		}
+		catch (Exception ex)
+		{
+			System.err.println("Exception " + ex);
+			description = null;
+		}
 
+		return description;
 //		
 	}
 	
@@ -512,7 +530,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	String [] getLanguageList()
+	public String [] getLanguageList()
 	{
 		
 		LanguageDAO languageDao = new LanguageDAO();
@@ -528,7 +546,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	String [] getAuthorList()
+	public String [] getAuthorList()
 	{
 		
 		AuthorDAO arthorDao = new AuthorDAO();
@@ -544,7 +562,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	User getUser(String userName)
+	public User getUser(String userName)
 	{
 		User user = new User();
 		user.setUserName(userName);
@@ -559,7 +577,7 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
-	Author getAuthor(String authorName)
+	public Author getAuthor(String authorName)
 	{
 		Author author = new Author();
 		User user = getUser(authorName);
@@ -579,7 +597,7 @@ public class DVX_DB_Support {
 	}
 	
 	// ------------------------------------------------------------------------------------
-	void dvx_log(Movie movie, User user, String transactionType,
+	public void dvx_log(Movie movie, User user, String transactionType,
 			String transactionLevel, String transactionDetails)
 	{
 		if (true)
@@ -597,6 +615,68 @@ public class DVX_DB_Support {
 				);	
 		}
 	}
+	
+	public void deleteUser(User user)
+	{
+		UserDAO userDAO = new UserDAO();
+		
+		Transaction tx = userDAO.getSession().beginTransaction();
+		userDAO.delete(user);
+		tx.commit();
+	}
+
+	public void deleteAuthor(Author author)
+	{
+		AuthorDAO authorDAO = new AuthorDAO();
+		
+		Transaction tx = authorDAO.getSession().beginTransaction();
+		authorDAO.delete(author);
+		tx.commit();
+	}
+
+	public void deleteMovie(Movie movie)
+	{
+		MovieDAO movieDAO = new MovieDAO();
+		
+		Transaction tx = movieDAO.getSession().beginTransaction();
+		movieDAO.delete(movie);
+		tx.commit();
+	}
+
+	public void deleteDescription(Description description)
+	{
+		
+		DescriptionDAO descriptionDAO = new DescriptionDAO();
+		Transaction tx = descriptionDAO.getSession().beginTransaction();
+		descriptionDAO.delete(description);
+		tx.commit();
+	}
+	
+	public void deleteDescription(Author author, Language language, Movie movie, int chapter, int timeOffset, int frame)
+	{
+		DescriptionDAO descriptionDAO = new DescriptionDAO();
+		Description descriptionTemplate = new Description();
+		{
+			descriptionTemplate.setAuthor(author);
+			descriptionTemplate.setLanguage(language);
+			descriptionTemplate.setMovie(movie);
+			// chapter is currently ignored...
+			descriptionTemplate.setDescriptionStartTimeInt(timeOffset);
+			// frame is currently ignored...
+			List<Description> descriptionList = descriptionDAO.findByExample(descriptionTemplate);
+			
+			for (Description description : descriptionList)
+			{
+				if (validateTimedEvent(description, author ,language, movie))
+				{
+					deleteDescription(description);
+				}
+				
+			}
+
+		}
+	}
+	
 }
 
 
