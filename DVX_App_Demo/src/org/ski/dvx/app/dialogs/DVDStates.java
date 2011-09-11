@@ -3,10 +3,28 @@
  */
 package org.ski.dvx.app.dialogs;
 
-/**
- * @author Greg
- *
+import java.awt.Toolkit;
+
+import javax.print.DocFlavor.URL;
+
+import org.ski.dvx.app.DVX_Constants;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
+
+/*
+ * DVDStates.java
+ *
+ * Created on Sep 8, 2011, 10:47:10 PM
+ */
+
+/**
+ *
+ * @author Greg
+ */
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -64,8 +82,34 @@ public class DVDStates extends javax.swing.JFrame {
         jCheckBoxUOP_Select_Karaoke_Audio_Presentation_Mode = new javax.swing.JCheckBox();
         jButtonOk = new javax.swing.JButton();
         jCheckBoxUOP_Select_Video_Mode_Preference = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldMovieID = new javax.swing.JTextField();
+        jTextFieldMovieName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldChapterCount = new javax.swing.JTextField();
+        jTextFieldTitleCount = new javax.swing.JTextField();
+        jLabelWidth = new javax.swing.JLabel();
+        jLabelHeight = new javax.swing.JLabel();
+        jLabelAspect = new javax.swing.JLabel();
+        jLabelBitDepth = new javax.swing.JLabel();
+        jTextFieldWidth = new javax.swing.JTextField();
+        jTextFieldHeight = new javax.swing.JTextField();
+        jTextFieldAspect = new javax.swing.JTextField();
+        jTextFieldBitDepth = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextFieldDSJDuration = new javax.swing.JTextField();
+        jTextFieldDSJName = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jCheckBoxSelect_Karaoke_Audio_Presentation_Mode.setText("UOP_Play_Title_Or_AtTime (0)");
         jCheckBoxSelect_Karaoke_Audio_Presentation_Mode.addActionListener(new java.awt.event.ActionListener() {
@@ -140,48 +184,163 @@ public class DVDStates extends javax.swing.JFrame {
 
         jCheckBoxUOP_Select_Video_Mode_Preference.setText("UOP_Select_Video_Mode_Preference (24)");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Movie Id");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Movie Name");
+
+        jTextFieldMovieID.setText("jTextField1");
+
+        jTextFieldMovieName.setText("jTextField2");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("# Chapters");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("# Titles");
+
+        jTextFieldChapterCount.setText("jTextField3");
+
+        jTextFieldTitleCount.setText("jTextField4");
+
+        jLabelWidth.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelWidth.setText("Width");
+
+        jLabelHeight.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelHeight.setText("Height");
+
+        jLabelAspect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelAspect.setText("Aspect");
+
+        jLabelBitDepth.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelBitDepth.setText("Bit Depth");
+
+        jTextFieldWidth.setText("jTextField1");
+
+        jTextFieldHeight.setText("jTextField2");
+
+        jTextFieldAspect.setText("jTextField3");
+
+        jTextFieldBitDepth.setText("jTextField4");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("DSJ Duration");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("DSJ Name");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setText("jLabel11");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setText("jLabel12");
+
+        jTextFieldDSJDuration.setText("jTextField5");
+
+        jTextFieldDSJName.setText("jTextField6");
+
+        jTextField7.setText("jTextField7");
+
+        jTextField8.setText("jTextField8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxSelect_Karaoke_Audio_Presentation_Mode)
-                    .addComponent(jCheckBoxUOP_Play_Chapter)
-                    .addComponent(jCheckBoxUOP_Play_Title)
-                    .addComponent(jCheckBoxUOP_Stop)
-                    .addComponent(jCheckBoxUOP_ReturnFromSubMenu)
-                    .addComponent(jCheckBoxUOP_Play_Chapter_Or_AtTime)
-                    .addComponent(jCheckBoxUOP_PlayPrev_Or_Replay_Chapter)
-                    .addComponent(jCheckBoxUOP_PlayNext_Chapter)
-                    .addComponent(jCheckBoxUOP_Play_Forwards)
-                    .addComponent(jCheckBoxUOP_Play_Backwards))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxUOP_Still_Off)
-                    .addComponent(jCheckBoxUOP_Select_Or_Activate_Button)
-                    .addComponent(jCheckBoxUOP_Resume)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Chapter)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Angle)
-                    .addComponent(jCheckBoxUOP_Pause_On)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCheckBoxSelect_Karaoke_Audio_Presentation_Mode)
+                                .addComponent(jCheckBoxUOP_Play_Chapter)
+                                .addComponent(jCheckBoxUOP_Play_Title)
+                                .addComponent(jCheckBoxUOP_Stop)
+                                .addComponent(jCheckBoxUOP_ReturnFromSubMenu)
+                                .addComponent(jCheckBoxUOP_Play_Chapter_Or_AtTime)
+                                .addComponent(jCheckBoxUOP_PlayPrev_Or_Replay_Chapter)
+                                .addComponent(jCheckBoxUOP_PlayNext_Chapter))
+                            .addGap(9, 9, 9)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCheckBoxUOP_Play_Backwards)
+                                .addComponent(jCheckBoxUOP_Play_Forwards)
+                                .addComponent(jCheckBoxUOP_ShowMenu_Title)
+                                .addComponent(jCheckBoxxUOP_ShowMenu_Root)
+                                .addComponent(jCheckBoxUOP_ShowMenu_Root)
+                                .addComponent(jCheckBoxUOP_ShowMenu_Audio)
+                                .addComponent(jCheckBoxUOP_ShowMenu_Angle)
+                                .addComponent(jCheckBoxUOP_ShowMenu_Chapter))
+                            .addGap(52, 52, 52)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCheckBoxUOP_Resume)
+                                .addComponent(jCheckBoxUOP_Select_Or_Activate_Button)
+                                .addComponent(jCheckBoxUOP_Still_Off)
+                                .addComponent(jCheckBoxUOP_Pause_On)
+                                .addComponent(jCheckBoxUOP_Select_Audio_Stream)
+                                .addComponent(jCheckBoxUOP_Select_SubPic_Stream)
+                                .addComponent(jCheckBoxUOP_Select_Angle)
+                                .addComponent(jCheckBoxUOP_Select_Karaoke_Audio_Presentation_Mode)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jCheckBoxUOP_Select_Video_Mode_Preference))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator2)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxUOP_ShowMenu_Title)
-                            .addComponent(jCheckBoxUOP_ShowMenu_Root)
-                            .addComponent(jCheckBoxUOP_ShowMenu_Audio)
-                            .addComponent(jCheckBoxxUOP_ShowMenu_Root))
-                        .addGap(43, 43, 43)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldChapterCount)
+                                    .addComponent(jTextFieldTitleCount, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldMovieName)
+                                    .addComponent(jTextFieldMovieID, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxUOP_Select_Karaoke_Audio_Presentation_Mode)
-                            .addComponent(jCheckBoxUOP_Select_Angle)
-                            .addComponent(jCheckBoxUOP_Select_SubPic_Stream)
-                            .addComponent(jCheckBoxUOP_Select_Audio_Stream)
-                            .addComponent(jCheckBoxUOP_Select_Video_Mode_Preference))))
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(753, Short.MAX_VALUE)
-                .addComponent(jButtonOk, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelWidth)
+                                    .addComponent(jLabelHeight)
+                                    .addComponent(jLabelAspect))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldAspect)
+                                    .addComponent(jTextFieldHeight)
+                                    .addComponent(jTextFieldWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelBitDepth)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldBitDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldDSJDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(240, 240, 240)
+                                .addComponent(jButtonOk, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldDSJName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(131, 131, 131)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -190,71 +349,121 @@ public class DVDStates extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxSelect_Karaoke_Audio_Presentation_Mode)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Title)
-                    .addComponent(jCheckBoxUOP_Select_Audio_Stream))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_Play_Chapter)
-                    .addComponent(jCheckBoxxUOP_ShowMenu_Root, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxUOP_Select_SubPic_Stream))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_Play_Title)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Root)
-                    .addComponent(jCheckBoxUOP_Select_Angle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_Stop)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Audio)
-                    .addComponent(jCheckBoxUOP_Select_Karaoke_Audio_Presentation_Mode))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_ReturnFromSubMenu)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Angle)
-                    .addComponent(jCheckBoxUOP_Select_Video_Mode_Preference))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_Play_Chapter_Or_AtTime)
-                    .addComponent(jCheckBoxUOP_ShowMenu_Chapter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_PlayPrev_Or_Replay_Chapter)
+                    .addComponent(jCheckBoxUOP_Play_Forwards)
                     .addComponent(jCheckBoxUOP_Resume))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_PlayNext_Chapter)
-                    .addComponent(jCheckBoxUOP_Select_Or_Activate_Button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUOP_Play_Forwards)
-                    .addComponent(jCheckBoxUOP_Still_Off))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_Play_Chapter)
                     .addComponent(jCheckBoxUOP_Play_Backwards)
+                    .addComponent(jCheckBoxUOP_Select_Or_Activate_Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_Play_Title)
+                    .addComponent(jCheckBoxUOP_ShowMenu_Title)
+                    .addComponent(jCheckBoxUOP_Still_Off))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_Stop)
+                    .addComponent(jCheckBoxxUOP_ShowMenu_Root, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBoxUOP_Pause_On))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonOk)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_ReturnFromSubMenu)
+                    .addComponent(jCheckBoxUOP_ShowMenu_Root)
+                    .addComponent(jCheckBoxUOP_Select_Audio_Stream))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_Play_Chapter_Or_AtTime)
+                    .addComponent(jCheckBoxUOP_ShowMenu_Audio)
+                    .addComponent(jCheckBoxUOP_Select_SubPic_Stream))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_PlayPrev_Or_Replay_Chapter)
+                    .addComponent(jCheckBoxUOP_ShowMenu_Angle)
+                    .addComponent(jCheckBoxUOP_Select_Angle))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUOP_PlayNext_Chapter)
+                    .addComponent(jCheckBoxUOP_ShowMenu_Chapter)
+                    .addComponent(jCheckBoxUOP_Select_Karaoke_Audio_Presentation_Mode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxUOP_Select_Video_Mode_Preference)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldMovieID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldMovieName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldChapterCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextFieldTitleCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextFieldDSJDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextFieldDSJName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonOk)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelWidth)
+                            .addComponent(jTextFieldWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelHeight)
+                            .addComponent(jTextFieldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelAspect)
+                            .addComponent(jTextFieldAspect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelBitDepth)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextFieldBitDepth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
+        setTitle("DVX Debug State");
     }// </editor-fold>
 
-private void jCheckBoxUOP_Select_SubPic_StreamActionPerformed(java.awt.event.ActionEvent evt) {
+private void jCheckBoxUOP_Select_SubPic_StreamActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
 // TODO add your handling code here:
-}
+}                                                                 
 
-private void jCheckBoxSelect_Karaoke_Audio_Presentation_ModeActionPerformed(java.awt.event.ActionEvent evt) {
+private void jCheckBoxSelect_Karaoke_Audio_Presentation_ModeActionPerformed(java.awt.event.ActionEvent evt) {                                                                                
 // TODO add your handling code here:
-}
+}                                                                               
 
-private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {
+private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {                                          
 // TODO add your handling code here:
-}
+}                                         
 
-private void jCheckBoxxUOP_ShowMenu_RootActionPerformed(java.awt.event.ActionEvent evt) {
+private void jCheckBoxxUOP_ShowMenu_RootActionPerformed(java.awt.event.ActionEvent evt) {                                                            
 // TODO add your handling code here:
-}
+}                                                           
 
 public void updateState(int state)
 {
@@ -348,33 +557,128 @@ public void updateState(int state)
     private javax.swing.JCheckBox jCheckBoxUOP_Still_Off;
     private javax.swing.JCheckBox jCheckBoxUOP_Stop;
     private javax.swing.JCheckBox jCheckBoxxUOP_ShowMenu_Root;
-    
-    
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelAspect;
+    private javax.swing.JLabel jLabelBitDepth;
+    private javax.swing.JLabel jLabelHeight;
+    private javax.swing.JLabel jLabelWidth;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JTextField getjTextField7() {
+		return jTextField7;
+	}
+
+	public void setjTextField7(javax.swing.JTextField jTextField7) {
+		this.jTextField7 = jTextField7;
+	}
+
+	public javax.swing.JTextField getjTextField8() {
+		return jTextField8;
+	}
+
+	public void setjTextField8(javax.swing.JTextField jTextField8) {
+		this.jTextField8 = jTextField8;
+	}
+
+	public javax.swing.JTextField getjTextFieldAspect() {
+		return jTextFieldAspect;
+	}
+
+	public void setjTextFieldAspect(javax.swing.JTextField jTextFieldAspect) {
+		this.jTextFieldAspect = jTextFieldAspect;
+	}
+
+	public javax.swing.JTextField getjTextFieldBitDepth() {
+		return jTextFieldBitDepth;
+	}
+
+	public void setjTextFieldBitDepth(javax.swing.JTextField jTextFieldBitDepth) {
+		this.jTextFieldBitDepth = jTextFieldBitDepth;
+	}
+
+	public javax.swing.JTextField getjTextFieldChapterCount() {
+		return jTextFieldChapterCount;
+	}
+
+	public void setjTextFieldChapterCount(
+			javax.swing.JTextField jTextFieldChapterCount) {
+		this.jTextFieldChapterCount = jTextFieldChapterCount;
+	}
+
+	public javax.swing.JTextField getjTextFieldDSJDuration() {
+		return jTextFieldDSJDuration;
+	}
+
+	public void setjTextFieldDSJDuration(
+			javax.swing.JTextField jTextFieldDSJDuration) {
+		this.jTextFieldDSJDuration = jTextFieldDSJDuration;
+	}
+
+	public javax.swing.JTextField getjTextFieldDSJName() {
+		return jTextFieldDSJName;
+	}
+
+	public void setjTextFieldDSJName(javax.swing.JTextField jTextFieldDSJName) {
+		this.jTextFieldDSJName = jTextFieldDSJName;
+	}
+
+	public javax.swing.JTextField getjTextFieldHeight() {
+		return jTextFieldHeight;
+	}
+
+	public void setjTextFieldHeight(javax.swing.JTextField jTextFieldHeight) {
+		this.jTextFieldHeight = jTextFieldHeight;
+	}
+
+	public javax.swing.JTextField getjTextFieldMovieID() {
+		return jTextFieldMovieID;
+	}
+
+	public void setjTextFieldMovieID(javax.swing.JTextField jTextFieldMovieID) {
+		this.jTextFieldMovieID = jTextFieldMovieID;
+	}
+
+	public javax.swing.JTextField getjTextFieldMovieName() {
+		return jTextFieldMovieName;
+	}
+
+	public void setjTextFieldMovieName(javax.swing.JTextField jTextFieldMovieName) {
+		this.jTextFieldMovieName = jTextFieldMovieName;
+	}
+
+	public javax.swing.JTextField getjTextFieldTitleCount() {
+		return jTextFieldTitleCount;
+	}
+
+	public void setjTextFieldTitleCount(javax.swing.JTextField jTextFieldTitleCount) {
+		this.jTextFieldTitleCount = jTextFieldTitleCount;
+	}
+
+	public javax.swing.JTextField getjTextFieldWidth() {
+		return jTextFieldWidth;
+	}
+
+	public void setjTextFieldWidth(javax.swing.JTextField jTextFieldWidth) {
+		this.jTextFieldWidth = jTextFieldWidth;
+	}
+	private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldAspect;
+    private javax.swing.JTextField jTextFieldBitDepth;
+    private javax.swing.JTextField jTextFieldChapterCount;
+    private javax.swing.JTextField jTextFieldDSJDuration;
+    private javax.swing.JTextField jTextFieldDSJName;
+    private javax.swing.JTextField jTextFieldHeight;
+    private javax.swing.JTextField jTextFieldMovieID;
+    private javax.swing.JTextField jTextFieldMovieName;
+    private javax.swing.JTextField jTextFieldTitleCount;
+    private javax.swing.JTextField jTextFieldWidth;
     // End of variables declaration
 }
-/* Select_Video_Mode_Preference	" + 
-		"Select_Karaoke_Audio_Presentation_Mode	" + 
-		"Select_Angle	" + 
-		"Select_SubPic_Stream	" + 
-		"Select_SubPic_Stream	" +Select_Audio_Stream	" + 
-		"Still_Off	" + 
-		"Select_Or_Activate_Button	" + 
-		"Resume	" + 
-		"ShowMenu_Chapter	" + 
-		"ShowMenu_Angle	" + 
-		"ShowMenu_Audio	" + 
-		"ShowMenu_SubPic	" + 
-		"ShowMenu_Root	" + 
-		"ShowMenu_Title	" + 
-		"Play_Backwards	" + 
-		"Play_Forwards	" + 
-		"PlayNext_Chapter	" + 
-		"PlayPrev_Or_Replay_Chapter	" + 
-		"Play_Chapter_Or_AtTime	" + 
-		"ReturnFromSubMenu	" + 
-		"Stop	" + 
-		"Play_Title	" + 
-		"Play_Chapter	" + 
-		"Play_Title_Or_AtTime"
- 
- */
