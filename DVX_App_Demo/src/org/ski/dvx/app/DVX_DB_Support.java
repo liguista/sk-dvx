@@ -1,3 +1,35 @@
+/*
+	Project:		Windows DVX Player/Editor
+	
+	File Name:		
+
+	Designer:		Josh Miele
+
+	Author:			Greg Ames
+
+	Contributors:	Owen Edwards
+					
+	Created:		September 10, 2011
+	
+	Copyright:	 	The Smith-Kettlewell Eye Research Institute
+					© 2011
+					All Rights Reserved
+					
+					http://www.ski.org/
+					
+					The Smith-Kettlewell Eye Research Institute
+					2318 Fillmore Street 
+					San Francisco, CA  94115 
+					415-345-2000  
+				 
+	Notice:			Parts of this project are based on Open Source 
+					and/or Public Domain Code. Please use good judgement 
+					if you include any of this project in your project.
+					
+	Contact:		Josh Miele
+					jam@ski.org
+*/
+
 package org.ski.dvx.app;
 
 import java.io.File;
@@ -193,14 +225,15 @@ public class DVX_DB_Support {
 	}
 	
 // look to timed event and fire it if it exists
-	public void checkTimeEvent(Author author, Language language, Movie movie, int chapter, int offset, int startFrame)
+	public boolean checkTimeEvent(Author author, Language language, Movie movie, int chapter, int offset, int startFrame)
 	{
+		boolean result = false;
 		try
 		{
 		if (movie==null)
 		{
 			System.err.println("checkTimeEvent Movie is null");
-			return;
+			return false;
 		}
 		System.out.println("Looking for " + movie.getMovieSbnNumber() + "-" +
 				author.getUser().getUserId() + "-" + 
@@ -234,6 +267,7 @@ public class DVX_DB_Support {
 		@SuppressWarnings("unchecked")
 		List<Description> descriptionList = descriptionDao.findByExample(description);
 		System.out.println(" checkTimeEvent list size = " + descriptionList.size());
+		if (descriptionList.size()>0)
 		for (Description mmDescription : descriptionList)	// iterate over the results...
 		{
 /*			if (chapter==2)
@@ -261,6 +295,9 @@ public class DVX_DB_Support {
 								movie.getMovieSbnNumber() + 
 								DVX_Constants.MOVIE_DESCRIPTIONS_PATH + 
 								mmDescription.getDescriptionUri(), false);
+					
+					result = true;
+				
 	//		 		if (chapter==2)
 	//					System.out.println("Chapter 2 Event : " + mmDescription.getLanguage().getLanguageName());
 //				}
@@ -270,7 +307,10 @@ public class DVX_DB_Support {
 		catch(Exception ex)
 		{
 			System.err.println("CheckTimeEvent Exception : " + ex);
+			result = false;
 		}
+		
+		return result;
 	}
 	
 	// ------------------------------------------------------------------------------------
@@ -279,9 +319,14 @@ public class DVX_DB_Support {
 	{
 		User user = new User();
 		
+		int userType = DVX_Constants.USER_TYPE_USER;
+		
+		if (userName=="All")
+			userType = DVX_Constants.USER_TYPE_ALL;
+		
 		user.setUserName(userName);
 		user.setUserActive(true);
-		user.setUserType(DVX_Constants.USER_TYPE_USER);
+		user.setUserType(userType);	// this messed up the all user... 
 		
 		UserDAO userDao = new UserDAO();
 		
@@ -627,11 +672,17 @@ public class DVX_DB_Support {
 
 	public void deleteAuthor(Author author)
 	{
-		AuthorDAO authorDAO = new AuthorDAO();
-		
-		Transaction tx = authorDAO.getSession().beginTransaction();
-		authorDAO.delete(author);
-		tx.commit();
+		try{
+			AuthorDAO authorDAO = new AuthorDAO();
+			
+			Transaction tx = authorDAO.getSession().beginTransaction();
+			authorDAO.delete(author);
+			tx.commit();
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Exception " + ex);
+		}
 	}
 
 	public void deleteMovie(Movie movie)
@@ -649,6 +700,15 @@ public class DVX_DB_Support {
 		DescriptionDAO descriptionDAO = new DescriptionDAO();
 		Transaction tx = descriptionDAO.getSession().beginTransaction();
 		descriptionDAO.delete(description);
+		tx.commit();
+	}
+	
+	public void deletePath(Path path)
+	{
+		
+		PathDAO pathDAO = new PathDAO();
+		Transaction tx = pathDAO.getSession().beginTransaction();
+		pathDAO.delete(path);
 		tx.commit();
 	}
 	
