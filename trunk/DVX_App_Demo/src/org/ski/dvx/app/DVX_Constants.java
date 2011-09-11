@@ -8,14 +8,17 @@ public class DVX_Constants {
 	public final static String HYPHEN = "-";
 	public final static String SPACE_HYPHEN_SPACE = "-";
 	public final static String MEDIA_PATH = "media/";
+	
+	public final static String DVX_RESOURCES = "../resources/" ;
+	public final static String DVX_RESOURCES_IMAGES = DVX_RESOURCES + "images/";
 
 	public final static String GLOBAL_PATH = MEDIA_PATH + "globals/";
 	public final static String GLOBAL_IMAGES_PATH = GLOBAL_PATH + "images/";
 	public final static String GLOBAL_IMAGES_PATH_24_X_24 = GLOBAL_IMAGES_PATH + "icons/";
 	public final static String GLOBAL_MOVIE_PATH = GLOBAL_PATH  + "movies/";
 	
-	public final static String GLOBAL_SPLASH_IMAGE = GLOBAL_IMAGES_PATH  + "sksplash.gif";
-	public final static String GLOBAL_APPLICATION_ICON = GLOBAL_IMAGES_PATH  + "dvxicon.gif";
+	public final static String GLOBAL_SPLASH_IMAGE = DVX_RESOURCES_IMAGES  + "sksplash.gif";
+	public final static String GLOBAL_APPLICATION_ICON = DVX_RESOURCES_IMAGES  + "dvxicon.gif";
 	public final static String DVX_APPLICATION_NAME = "DVX - The New Media Player";
 
 	public final static String MOVIE_PATH = MEDIA_PATH  + "movies/";

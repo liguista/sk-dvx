@@ -2,6 +2,7 @@ package org.ski.dvx.app;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 public class DVX_Splash extends Window {
   private Image splashImage;
@@ -10,6 +11,7 @@ public class DVX_Splash extends Window {
   private static final int BORDERSIZE = 5;
   private static final Color BORDERCOLOR = Color.blue;
   Toolkit tk;
+
 
   public DVX_Splash(Frame f, String imgName) {
     super(f);
@@ -21,19 +23,30 @@ public class DVX_Splash extends Window {
     }
   public Image loadSplashImage() {
     MediaTracker tracker = new MediaTracker(this);
-    Image result;
-    result = tk.getImage(imgName);
-    tracker.addImage(result, 0);
-    try {
-      tracker.waitForAll();
-      }
-    catch (Exception e) {
-      e.printStackTrace();
-      }
-    imgWidth = result.getWidth(this);
-    imgHeight = result.getHeight(this);
-    return (result);
-    }
+    Image result = null;
+//    result = tk.getImage(imgName);
+    try
+    {
+    	URL imageURL = ClassLoader.getSystemClassLoader().getResource(imgName);
+	    result = tk.getImage(imageURL);
+	    
+	    tracker.addImage(result, 0);
+	    try {
+	      tracker.waitForAll();
+	      }
+	    catch (Exception e) {
+	      e.printStackTrace();
+	      }
+	    imgWidth = result.getWidth(this);
+	    imgHeight = result.getHeight(this);
+	    return (result);
+	    }
+    catch (Exception ex)
+    {
+        ex.printStackTrace();
+   }
+    return result;
+   }
 
   public void showSplashScreen() {
     Dimension screenSize = tk.getScreenSize();

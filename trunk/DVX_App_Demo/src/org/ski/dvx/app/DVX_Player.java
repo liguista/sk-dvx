@@ -6,12 +6,17 @@ import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
+import java.net.URL;
 // import java.io.StringWriter;
 
 //import org.ski.dvx.hibernate.Movie;
 
 import de.humatic.dsj.*;
+
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.AsyncAppender;
@@ -48,7 +53,6 @@ public class DVX_Player extends DVX_GUI {
 //	static Logger logger_getUOPs;
 	static Logger dvxPlayerLogger;
 
-	DVDStates dvdStates;
 
 	/**
 	 * Rendering mode flags. Some decoders, subtitles etc. will only work with
@@ -126,9 +130,9 @@ public class DVX_Player extends DVX_GUI {
 
 				splash = new DVX_Splash(mainDVXFrame, DVX_Constants.GLOBAL_SPLASH_IMAGE); 
 				splash.showSplashScreen();
-				
-				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(DVX_Constants.GLOBAL_APPLICATION_ICON));
-				
+				System.out.println("DVX_Constants.GLOBAL_APPLICATION_ICON = " + DVX_Constants.GLOBAL_APPLICATION_ICON);
+				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
+				//				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
 
 			}
 			/* jMenuFile.add(jMenuItemQuit);
@@ -337,12 +341,26 @@ public class DVX_Player extends DVX_GUI {
 						}
 
 					});
-
-			System.out.println("dvd.toString() "  		+ dvd.toString()); 
-			System.out.println("dvd.getInfo " 			+ dvd.getInfo()); 
-			System.out.println("dvd.getName "  			+ dvd.getName()); 
-			System.out.println("dvd.getNumChapters " 	+ dvd.getNumChapters()); 
-			System.out.println("dvd.getNumTitles "  	+ dvd.getNumTitles()); 
+			String result= dvd.toString();
+			System.out.println("dvd.toString() "  		+ result); 
+			result = dvd.getInfo();
+			System.out.println("dvd.getInfo " 			+ result); 
+			dvdStates.getjTextFieldWidth().setText("" + dvd.getWidth());
+			dvdStates.getjTextFieldHeight().setText("" + dvd.getHeight());
+			dvdStates.getjTextFieldBitDepth().setText("" + dvd.getBitDepth());
+			
+			dvdStates.getjTextFieldDSJDuration().setText("" + dvd.getDuration());
+			
+			int[] ratio = dvd.getAspectRatio();
+			dvdStates.getjTextFieldAspect().setText(ratio[0]+":"+ratio[1]);
+			result = dvd.getName();
+			System.out.println("dvd.getName "  			+ result); 
+			int i = dvd.getNumChapters();
+			System.out.println("dvd.getNumChapters " 	+ i); 
+			dvdStates.getjTextFieldChapterCount().setText(""+i);
+			i =dvd.getNumTitles();
+			System.out.println("dvd.getNumTitles "  	+ i); 
+			dvdStates.getjTextFieldTitleCount().setText(""+i);
 
 			/*
 			 * String [] streams = dvd.getStreams(0);
@@ -455,18 +473,20 @@ public class DVX_Player extends DVX_GUI {
 					System.out.println(DVX_Constants.ASTRIX_BAR); 
 					System.out.println(DVX_Constants.DVD_ID + result); 
 					
-					Movie movieID = dvxDBSupport.getInsertMovieHash(DVX_Constants.MOVIE_PATH + 
+					Movie movieID = dvxDBSupport.getInsertMovieHash(result,
+																	DVX_Constants.MOVIE_PATH + 
 																	result + 
 																	DVX_Constants.MOVIE_MENUS_PATH +
-																	DVX_Constants.MOVIE_NAME_MP3,
-																	result);
+																	DVX_Constants.MOVIE_NAME_MP3
+																	);
 					if (movieID!=null)
 					{
-						movie = dvxDBSupport.getInsertMovieHash(DVX_Constants.MOVIE_PATH + 
+						movie = dvxDBSupport.getInsertMovieHash(result,
+								DVX_Constants.MOVIE_PATH + 
 								result + 
 								DVX_Constants.MOVIE_MENUS_PATH +
-								DVX_Constants.MOVIE_NAME_MP3,
-								result);
+								DVX_Constants.MOVIE_NAME_MP3
+								);
 						dvxDBSupport.log(	movie, 
 											getUser(),  
 											DVX_Constants.TRANSACTION_TYPE_LOGIN, 
@@ -541,6 +561,10 @@ public class DVX_Player extends DVX_GUI {
 						setMovieInfo(os.toString());
 //						dvxDBSupport.updateMovie(movie);
 						
+						dvdStates.getjTextFieldMovieID().setText(movie.getMovieSbnNumber());
+						dvdStates.getjTextFieldMovieName().setText(movie.getMovieName());
+						dvdStates.getjTextFieldDSJName().setText(dvd.getName());
+						
 					}
 
 				}
@@ -592,7 +616,7 @@ public class DVX_Player extends DVX_GUI {
 					if (dvxDBSupport!=null)
 						if (movie!=null)
 						{
-							dvxDBSupport.checkTimeEvent(movie, getAuthor(), language, chapter,
+							dvxDBSupport.checkTimeEvent(getAuthor(), language, movie, chapter,
 								((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
 						}
 					setPlayingMode();	// set the status for record to time mode...
@@ -626,16 +650,17 @@ public class DVX_Player extends DVX_GUI {
 				if (dvxDBSupport!=null)
 					if (movie!=null)
 					{
-						dvxDBSupport.checkTimeEvent(movie, getAuthor(), language, chapter,
-							((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
+						dvxDBSupport.checkTimeEvent(getAuthor(), language, movie, chapter,
+//								((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
+								realTime, 0);
 					}
 				setPlayingMode();	// set the status for record to time mode...
 				
 //				int theTime = ((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC);
-				jLabelHour.setText(num2StringFmt(hours));
-				jTextMinutes.setText(num2StringFmt(minutes));
-				jTextSeconds.setText(num2StringFmt(seconds));
-				jTextFrame.setText(num2StringFmt( frame));
+				jLabelHour.setText(		num2StringFmt(hours));
+				jTextMinutes.setText(	num2StringFmt(minutes));
+				jTextSeconds.setText(	num2StringFmt(seconds));
+				jTextFrame.setText(		num2StringFmt( frame));
 				
 //				System.out.println("The current time is - " + num2StringFmt(hours) + ":" + num2StringFmt(minutes) + ":" +  num2StringFmt(seconds) + ":" +  num2StringFmt(frame));
 				
@@ -793,7 +818,23 @@ public class DVX_Player extends DVX_GUI {
 	}
 	
 	public static void main(String[] args) {
-		
+		try
+		{
+	       UIManager.setLookAndFeel(
+	               UIManager.getSystemLookAndFeelClassName());	// make it look more like a Windows application
+	       } 
+	       catch (UnsupportedLookAndFeelException e) {
+	          // handle exception
+	       }
+	       catch (ClassNotFoundException e) {
+	          // handle exception
+	       }
+	       catch (InstantiationException e) {
+	          // handle exception
+	       }
+	       catch (IllegalAccessException e) {
+	          // handle exception
+	       }
 //		BasicConfigurator.configure();
 /*		try
 		{
@@ -811,8 +852,22 @@ public class DVX_Player extends DVX_GUI {
 			System.err.println("Logger exception..." + ex);
 		} */
 		
-		System.out.println(getOpsHeaders());
+//		System.out.println(getOpsHeaders());
+	       
+/*	       
+	       try
+	       {
+		       java.net.URL imageURL = ClassLoader.getSystemClassLoader().getResource("/resources/images/sksplash.gif");
+		        if (imageURL != null) {
+		           ImageIcon icon = new ImageIcon(imageURL);
+		       }
+	       } 
+	       catch (Exception ex)
+	       {
+	    	   System.out.println("Exception = " + ex);
+	       } */
 		DVX_Player dvx_player = new DVX_Player();
+		
 //		System.out.println("Path = " + dvx_player.getClass().getProtectionDomain().getCodeSource().getLocation());
 		dvx_player.createGraph();
 		

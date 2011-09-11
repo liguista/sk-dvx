@@ -667,7 +667,7 @@ public class DVX_Menus extends DVX_Base_Class{
      });
      
      jMenuItemDebug4 = new javax.swing.JMenuItem();
-     jMenuItemDebug4.setText("Debug 4");
+     jMenuItemDebug4.setText("Show States");
      jMenuDebug.add(jMenuItemDebug4);
      jMenuItemDebug4.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -676,7 +676,7 @@ public class DVX_Menus extends DVX_Base_Class{
      });
      
      jMenuItemDebug5 = new javax.swing.JMenuItem();
-     jMenuItemDebug5.setText("Debug5");
+     jMenuItemDebug5.setText("Hide States");
      jMenuDebug.add(jMenuItemDebug5);
      jMenuItemDebug5.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -812,7 +812,15 @@ public class DVX_Menus extends DVX_Base_Class{
 			   GraphicsDevice[] gs = ge.getScreenDevices();		
 			   GraphicsDevice gd = gs[0];
 			   dvd.goFullScreen(gd, 0);
-			   }
+		}
+		if (command.equalsIgnoreCase("Show States"))
+		{
+			dvdStates.setVisible(true);
+		}
+		if (command.equalsIgnoreCase("Hide States"))
+		{
+			dvdStates.setVisible(false);
+		}
 	}
 	
 	/**
