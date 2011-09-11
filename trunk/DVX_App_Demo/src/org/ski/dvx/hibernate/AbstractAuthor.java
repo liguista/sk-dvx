@@ -28,11 +28,6 @@ public abstract class AbstractAuthor implements java.io.Serializable {
 	public AbstractAuthor() {
 	}
 
-	/** minimal constructor */
-	public AbstractAuthor(Timestamp created) {
-		this.created = created;
-	}
-
 	/** full constructor */
 	public AbstractAuthor(User user, Timestamp created, Timestamp modified,
 			Set movieMenus, Set descriptions, Set paths, Set crewCasts) {

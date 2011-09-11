@@ -14,11 +14,6 @@ public class Author extends AbstractAuthor implements java.io.Serializable {
 	public Author() {
 	}
 
-	/** minimal constructor */
-	public Author(Timestamp created) {
-		super(created);
-	}
-
 	/** full constructor */
 	public Author(User user, Timestamp created, Timestamp modified,
 			Set movieMenus, Set descriptions, Set paths, Set crewCasts) {

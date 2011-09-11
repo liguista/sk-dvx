@@ -25,6 +25,9 @@
         <property name="movieSbnNumber" type="java.lang.String">
             <column name="movie_sbn_number" length="65535" />
         </property>
+        <property name="movieAuthorFk" type="java.lang.Integer">
+            <column name="movie_author_fk" />
+        </property>
         <property name="movieActive" type="java.lang.Integer">
             <column name="movie_active" />
         </property>
@@ -60,6 +63,9 @@
         </property>
         <property name="movieWebpage" type="java.lang.String">
             <column name="movie_webpage" length="65535" />
+        </property>
+        <property name="moviePathFk" type="java.lang.Integer">
+            <column name="movie_path_fk" />
         </property>
         <property name="created" type="java.sql.Timestamp">
             <column name="created" length="19" />

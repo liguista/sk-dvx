@@ -19,6 +19,7 @@ public abstract class AbstractMovie implements java.io.Serializable {
 	private Rating rating;
 	private String movieName;
 	private String movieSbnNumber;
+	private Integer movieAuthorFk;
 	private Integer movieActive;
 	private Integer movieReleased;
 	private String movieRatingTemp;
@@ -31,6 +32,7 @@ public abstract class AbstractMovie implements java.io.Serializable {
 	private Integer movieBudget;
 	private Integer movieRevenue;
 	private String movieWebpage;
+	private Integer moviePathFk;
 	private Timestamp created;
 	private Timestamp modified;
 	private Set movieChapters = new HashSet(0);
@@ -50,20 +52,21 @@ public abstract class AbstractMovie implements java.io.Serializable {
 
 	/** full constructor */
 	public AbstractMovie(Country country, Status status, Rating rating,
-			String movieName, String movieSbnNumber, Integer movieActive,
-			Integer movieReleased, String movieRatingTemp,
+			String movieName, String movieSbnNumber, Integer movieAuthorFk,
+			Integer movieActive, Integer movieReleased, String movieRatingTemp,
 			Integer movieLanguageMainFk, Integer movieRating,
 			String movieQuote, String movieDescription,
 			String movieExtraFeatures, Integer movieRuntime,
 			Integer movieBudget, Integer movieRevenue, String movieWebpage,
-			Timestamp created, Timestamp modified, Set movieChapters,
-			Set transactionLogs, Set posters, Set reviews, Set movieTrailers,
-			Set movieMenus, Set movieCasts, Set descriptions) {
+			Integer moviePathFk, Timestamp created, Timestamp modified,
+			Set movieChapters, Set transactionLogs, Set posters, Set reviews,
+			Set movieTrailers, Set movieMenus, Set movieCasts, Set descriptions) {
 		this.country = country;
 		this.status = status;
 		this.rating = rating;
 		this.movieName = movieName;
 		this.movieSbnNumber = movieSbnNumber;
+		this.movieAuthorFk = movieAuthorFk;
 		this.movieActive = movieActive;
 		this.movieReleased = movieReleased;
 		this.movieRatingTemp = movieRatingTemp;
@@ -76,6 +79,7 @@ public abstract class AbstractMovie implements java.io.Serializable {
 		this.movieBudget = movieBudget;
 		this.movieRevenue = movieRevenue;
 		this.movieWebpage = movieWebpage;
+		this.moviePathFk = moviePathFk;
 		this.created = created;
 		this.modified = modified;
 		this.movieChapters = movieChapters;
@@ -136,6 +140,14 @@ public abstract class AbstractMovie implements java.io.Serializable {
 
 	public void setMovieSbnNumber(String movieSbnNumber) {
 		this.movieSbnNumber = movieSbnNumber;
+	}
+
+	public Integer getMovieAuthorFk() {
+		return this.movieAuthorFk;
+	}
+
+	public void setMovieAuthorFk(Integer movieAuthorFk) {
+		this.movieAuthorFk = movieAuthorFk;
 	}
 
 	public Integer getMovieActive() {
@@ -232,6 +244,14 @@ public abstract class AbstractMovie implements java.io.Serializable {
 
 	public void setMovieWebpage(String movieWebpage) {
 		this.movieWebpage = movieWebpage;
+	}
+
+	public Integer getMoviePathFk() {
+		return this.moviePathFk;
+	}
+
+	public void setMoviePathFk(Integer moviePathFk) {
+		this.moviePathFk = moviePathFk;
 	}
 
 	public Timestamp getCreated() {

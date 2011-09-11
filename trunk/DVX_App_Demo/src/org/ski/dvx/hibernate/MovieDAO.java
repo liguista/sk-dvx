@@ -26,6 +26,7 @@ public class MovieDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String MOVIE_NAME = "movieName";
 	public static final String MOVIE_SBN_NUMBER = "movieSbnNumber";
+	public static final String MOVIE_AUTHOR_FK = "movieAuthorFk";
 	public static final String MOVIE_ACTIVE = "movieActive";
 	public static final String MOVIE_RELEASED = "movieReleased";
 	public static final String MOVIE_RATING_TEMP = "movieRatingTemp";
@@ -38,6 +39,7 @@ public class MovieDAO extends BaseHibernateDAO {
 	public static final String MOVIE_BUDGET = "movieBudget";
 	public static final String MOVIE_REVENUE = "movieRevenue";
 	public static final String MOVIE_WEBPAGE = "movieWebpage";
+	public static final String MOVIE_PATH_FK = "moviePathFk";
 
 	public void save(Movie transientInstance) {
 		log.debug("saving Movie instance");
@@ -111,6 +113,10 @@ public class MovieDAO extends BaseHibernateDAO {
 		return findByProperty(MOVIE_SBN_NUMBER, movieSbnNumber);
 	}
 
+	public List findByMovieAuthorFk(Object movieAuthorFk) {
+		return findByProperty(MOVIE_AUTHOR_FK, movieAuthorFk);
+	}
+
 	public List findByMovieActive(Object movieActive) {
 		return findByProperty(MOVIE_ACTIVE, movieActive);
 	}
@@ -157,6 +163,10 @@ public class MovieDAO extends BaseHibernateDAO {
 
 	public List findByMovieWebpage(Object movieWebpage) {
 		return findByProperty(MOVIE_WEBPAGE, movieWebpage);
+	}
+
+	public List findByMoviePathFk(Object moviePathFk) {
+		return findByProperty(MOVIE_PATH_FK, moviePathFk);
 	}
 
 	public List findAll() {
