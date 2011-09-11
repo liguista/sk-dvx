@@ -14,7 +14,7 @@
             <column name="user_fk" />
         </many-to-one>
         <property name="created" type="java.sql.Timestamp">
-            <column name="created" length="19" not-null="true" />
+            <column name="created" length="19" />
         </property>
         <property name="modified" type="java.sql.Timestamp">
             <column name="modified" length="19" />
