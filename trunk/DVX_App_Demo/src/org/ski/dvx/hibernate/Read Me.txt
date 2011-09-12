@@ -1,0 +1,9 @@
+NOTE:
+
+These Hibernate files are reverse engineered by MyEclipseIDE.
+
+They are generally not edited by hand.
+
+If there is a change in the database, these must be regenerated completely again.
+
+Greg Ames
