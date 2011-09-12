@@ -39,9 +39,11 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.beans.PropertyChangeEvent;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Greg
+ * The Class DVX_Menus.
  *
+ * @author Greg
  */
 
 
@@ -49,80 +51,209 @@ public class DVX_Menus extends DVX_Base_Class{
 
 // menu bar stuff
     
-    private javax.swing.JMenuBar jMenuBarDVX;
+    /** The j menu bar dvx. */
+private javax.swing.JMenuBar jMenuBarDVX;
+    
+    /** The j menu bookmarks. */
     private javax.swing.JMenu jMenuBookmarks;
+    
+    /** The j menu chapter. */
     private javax.swing.JMenu jMenuChapter;
+    
+    /** The j menu edit. */
     private javax.swing.JMenu jMenuEdit;
+    
+    /** The j menu file. */
     private javax.swing.JMenu jMenuFile;
+    
+    /** The j menu debug. */
     private javax.swing.JMenu jMenuDebug;
    
+    /** The j menu item1. */
     private javax.swing.JMenuItem jMenuItem1;
+    
+    /** The j menu item all. */
     private javax.swing.JMenuItem jMenuItemAll;
+    
+    /** The j menu item bookmark1. */
     private javax.swing.JMenuItem jMenuItemBookmark1;
+    
+    /** The j menu item bookmark3. */
     private javax.swing.JMenuItem jMenuItemBookmark3;
+    
+    /** The j menu item chapter1. */
     private javax.swing.JMenuItem jMenuItemChapter1;
+    
+    /** The j menu item chapter2. */
     private javax.swing.JMenuItem jMenuItemChapter2;
+    
+    /** The j menu item chapter3. */
     private javax.swing.JMenuItem jMenuItemChapter3;
+    
+    /** The j menu item copy. */
     private javax.swing.JMenuItem jMenuItemCopy;
+    
+    /** The j menu item cut. */
     private javax.swing.JMenuItem jMenuItemCut;
+    
+    /** The j menu item delete. */
     private javax.swing.JMenuItem jMenuItemDelete;
+    
+    /** The j menu item eject. */
     private javax.swing.JMenuItem jMenuItemEject;
+    
+    /** The j menu item english. */
     private javax.swing.JMenuItem jMenuItemEnglish;
+    
+    /** The j menu item french. */
     private javax.swing.JMenuItem jMenuItemFrench;
+    
+    /** The j menu item japanese. */
     private javax.swing.JMenuItem jMenuItemJapanese;
+    
+    /** The j menu item minus10 minutes. */
     private javax.swing.JMenuItem jMenuItemMinus10Minutes;
+    
+    /** The j menu item minus10 second. */
     private javax.swing.JMenuItem jMenuItemMinus10Second;
+    
+    /** The j menu item minus1 minute. */
     private javax.swing.JMenuItem jMenuItemMinus1Minute;
+    
+    /** The j menu item mount. */
     private javax.swing.JMenuItem jMenuItemMount;
+    
+    /** The j menu item movie information. */
     private javax.swing.JMenuItem jMenuItemMovieInformation;
+    
+    /** The j menu item next chapter. */
     private javax.swing.JMenuItem jMenuItemNextChapter;
+    
+    /** The j menu item paste. */
     private javax.swing.JMenuItem jMenuItemPaste;
+    
+    /** The j menu item pause. */
     private javax.swing.JMenuItem jMenuItemPause;
+    
+    /** The j menu item play. */
     private javax.swing.JMenuItem jMenuItemPlay;
+    
+    /** The j menu item plus10 minutes. */
     private javax.swing.JMenuItem jMenuItemPlus10Minutes;
+    
+    /** The j menu item plus10 second. */
     private javax.swing.JMenuItem jMenuItemPlus10Second;
+    
+    /** The j menu item plus1 minute. */
     private javax.swing.JMenuItem jMenuItemPlus1Minute;
+    
+    /** The j menu item previous chapter. */
     private javax.swing.JMenuItem jMenuItemPreviousChapter;
+    
+    /** The j menu item redo. */
     private javax.swing.JMenuItem jMenuItemRedo;
+    
+    /** The j menu item remove last description. */
     private javax.swing.JMenuItem jMenuItemRemoveLastDescription;
+    
+    /** The j menu item select description. */
     private javax.swing.JMenuItem jMenuItemSelectDescription;
+    
+    /** The j menu item set bookmark1. */
     private javax.swing.JMenuItem jMenuItemSetBookmark1;
+    
+    /** The j menu item set bookmark2. */
     private javax.swing.JMenuItem jMenuItemSetBookmark2;
+    
+    /** The j menu item set bookmark3. */
     private javax.swing.JMenuItem jMenuItemSetBookmark3;
+    
+    /** The j menu item set movie description. */
     private javax.swing.JMenuItem jMenuItemSetMovieDescription;
+    
+    /** The j menu item shutup. */
     private javax.swing.JMenuItem jMenuItemShutup;
+    
+    /** The j menu item spanish. */
     private javax.swing.JMenuItem jMenuItemSpanish;
+    
+    /** The j menu item stop. */
     private javax.swing.JMenuItem jMenuItemStop;
+    
+    /** The j menu item title1. */
     private javax.swing.JMenuItem jMenuItemTitle1;
+    
+    /** The j menu item title2. */
     private javax.swing.JMenuItem jMenuItemTitle2;
+    
+    /** The j menu item title3. */
     private javax.swing.JMenuItem jMenuItemTitle3;
+    
+    /** The j menu item undo. */
     private javax.swing.JMenuItem jMenuItemUndo;
+    
+    /** The j menu item bookmark2. */
     private javax.swing.JMenuItem jMenuItemBookmark2;
+    
+    /** The j menu language. */
     private javax.swing.JMenu jMenuLanguage;
+    
+    /** The j menu descriptions. */
     private javax.swing.JMenu  jMenuDescriptions;
+    
+    /** The j menu title. */
     private javax.swing.JMenu jMenuTitle;
+    
+    /** The j menu transport. */
     private javax.swing.JMenu jMenuTransport;
 
+    /** The j menu item debug1. */
     private javax.swing.JMenuItem jMenuItemDebug1;
+    
+    /** The j menu item debug2. */
     private javax.swing.JMenuItem jMenuItemDebug2;
+    
+    /** The j menu item debug3. */
     private javax.swing.JMenuItem jMenuItemDebug3;
+    
+    /** The j menu item debug4. */
     private javax.swing.JMenuItem jMenuItemDebug4;
+    
+    /** The j menu item debug5. */
     private javax.swing.JMenuItem jMenuItemDebug5;
 
     
+    /** The j check box menu item mute dvd. */
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemMuteDVD;
+    
+    /** The j check box menu item mute dvx. */
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemMuteDVX;
     
+    /** The j menu help. */
     private javax.swing.JMenu jMenuHelp;
+    
+    /** The j menu item help contents. */
     private javax.swing.JMenuItem jMenuItemHelpContents;
+    
+    /** The j menu item about dvx. */
     private javax.swing.JMenuItem jMenuItemAboutDVX;
+    
+    /** The j menu item description list. */
     private javax.swing.JMenuItem jMenuItemDescriptionList;
     
+    /**
+     * Instantiates a new dV x_ menus.
+     */
     DVX_Menus()
     {
     	super();
     }
         
+    /**
+     * Inits the menus.
+     *
+     * @param dvxFrame the dvx frame
+     */
     void initMenus(javax.swing.JFrame dvxFrame)
     {
     	jMenuBarDVX = new javax.swing.JMenuBar();
@@ -730,29 +861,65 @@ public class DVX_Menus extends DVX_Base_Class{
 		
 	}
 
+	/**
+	 * J menu item movie informatio action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jMenuItemMovieInformatioActionPerformed(java.awt.event.ActionEvent evt) {
 	// TODO add your handling code here:
 	}
 
+	/**
+	 * J menu item play action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jMenuItemPlayActionPerformed(java.awt.event.ActionEvent evt) {
 	// TODO add your handling code here:
 	}
 
+	/**
+	 * J menu item set movie description action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jMenuItemSetMovieDescriptionActionPerformed(java.awt.event.ActionEvent evt) {
 	// TODO add your handling code here:
 	}
 
+	/**
+	 * J menu item next chapter action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jMenuItemNextChapterActionPerformed(java.awt.event.ActionEvent evt) {
 	// TODO add your handling code here:
 	}
 
+	/**
+	 * J menu item title1 action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jMenuItemTitle1ActionPerformed(java.awt.event.ActionEvent evt) {
 	// TODO add your handling code here:
 	}
+	
+	/**
+	 * J menu item description list action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jMenuItemDescriptionListActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 		}
 	
+	/**
+	 * Handle menu event.
+	 *
+	 * @param event the event
+	 */
 	void handleMenuEvent(java.awt.event.ActionEvent event)
 	{
 		System.out.println("Menu command = " + event.getActionCommand());

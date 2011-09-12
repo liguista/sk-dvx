@@ -60,7 +60,9 @@ import org.apache.log4j.PatternLayout;
 import org.apache.log4j.PropertyConfigurator;
 import org.ski.dvx.app.dialogs.DVDStates;
 import org.ski.dvx.hibernate.Movie;
+import org.ski.dvx.hibernate.MovieMenu;
 
+// TODO: Auto-generated Javadoc
 /*import java.awt.*;
 import java.awt.event.*;
 
@@ -80,10 +82,14 @@ import org.ski.dvx.hibernate.Language;
 import org.ski.dvx.hibernate.User;*/
 
 
+/**
+ * The Class DVX_Player.
+ */
 public class DVX_Player extends DVX_GUI {
 
 //	static Logger logger_getUOPs;
-	static Logger dvxPlayerLogger;
+	/** The dvx player logger. */
+static Logger dvxPlayerLogger;
 
 
 	/**
@@ -109,12 +115,16 @@ public class DVX_Player extends DVX_GUI {
 	// DSFilterInfo.filterInfoForName("MainConcept (Demo) MPEG-2 Video Decoder")
 	};
 
+	/** The audio decoders. */
 	private DSFilterInfo[] audioDecoders = new DSFilterInfo[] { null,
 			DSFilterInfo.filterInfoForName("Default DirectSound Device"), 
 			DSFilterInfo.filterInfoForName("Microsoft DTV-DVD Audio Decoder"), 
 			DSFilterInfo.filterInfoForName("ffdshow audio decoder") 
 	};
 
+	/**
+	 * Instantiates a new dV x_ player.
+	 */
 	public DVX_Player() {
 		// movie = dvdSupport.getMovie("A Beautiful Mind");
 		super();
@@ -132,6 +142,9 @@ public class DVX_Player extends DVX_GUI {
 	}
 
 	
+	/**
+	 * Sets the playing mode.
+	 */
 	void setPlayingMode()
 	{
 		if (dvxRecordButton!=null)
@@ -141,6 +154,9 @@ public class DVX_Player extends DVX_GUI {
 		}
 	}
 
+	/**
+	 * Sets the menu mode.
+	 */
 	void setMenuMode()
 	{
 		dvxRecordButton.setMenuMode(true);
@@ -153,6 +169,9 @@ public class DVX_Player extends DVX_GUI {
 	//
 	// *************************************************************************************************************************************			
 
+	/**
+	 * Creates the graph.
+	 */
 	public void createGraph() {
 
 		System.out.println("Root path = " + this.getClass().getProtectionDomain().getCodeSource().getLocation());
@@ -421,6 +440,9 @@ public class DVX_Player extends DVX_GUI {
 	// propertyChange - This is the main dispatcher !!!
 	//
 	// *************************************************************************************************************************************			
+	/* (non-Javadoc)
+	 * @see org.ski.dvx.app.DVX_Menus#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(java.beans.PropertyChangeEvent pe) {
 		
 		try
@@ -728,6 +750,9 @@ public class DVX_Player extends DVX_GUI {
 // EC_DVD_BUTTON_CHANGE
 //
 // *************************************************************************************************************************************			
+// TODO
+// use the path in the Menu...
+			
 			if (de.humatic.dsj.DSConstants.EC_DVD_BUTTON_CHANGE == DSJUtils.getEventValue_int(pe) ) 
 			{
 				System.out.print("Menu Hover : " + ge[1] + " = " + ge[2] + DVX_Messages.getString("PlayDVD.43"));  //$NON-NLS-2$ //$NON-NLS-3$
@@ -741,8 +766,11 @@ public class DVX_Player extends DVX_GUI {
 				dvxRecordButton.setMenuId(menuID);
 				dvxRecordButton.setMenuMode(true);
 				dvxRecordButton.setPlayingMode(false);
-				String soundFile = dvxDBSupport.getMenuURI(null /* author */, language, movie,
-						menuPage, menuID);
+				MovieMenu movieMenu = dvxDBSupport.getMovieMenu(author , language, movie, menuPage, menuID);
+				String soundFile = null;
+				if (movieMenu!=null)
+					soundFile = movieMenu.getMenuUri();
+					//if (movieMenu!=null)
 					System.out.println(
 										"Sound file = " + 
 										DVX_Constants.MOVIE_PATH + 
@@ -849,6 +877,11 @@ public class DVX_Player extends DVX_GUI {
 		}
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		try
 		{

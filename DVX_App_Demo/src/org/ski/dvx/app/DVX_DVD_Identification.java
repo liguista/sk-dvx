@@ -49,12 +49,20 @@ import java.nio.ByteOrder;
 import java.util.logging.Logger;
 import java.util.zip.CRC32;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_DVD_Identification.
+ */
 public class DVX_DVD_Identification
 {
+     
+     /** The Constant LOGGER. */
      private static final Logger LOGGER = Logger.getLogger(DVX_DVD_Identification.class.getName());
      
+     /** The Constant DBID_EXEC. */
      private static final String DBID_EXEC = DVX_Messages.getString("DBID.0"); //$NON-NLS-1$
      
+     /** The dvd device. */
      private static String dvdDevice = "";
 /*
      public static void main(String[] args)
@@ -136,7 +144,13 @@ String paddedVolumeLabel = volumeLabel.concat(Messages.getString("DBID.6")); //$
             }
      } */
 
-     public static String getDVD_ID(String path)
+     /**
+ * Gets the dV d_ id.
+ *
+ * @param path the path
+ * @return the dV d_ id
+ */
+public static String getDVD_ID(String path)
      {
     	 try
          {
@@ -163,6 +177,12 @@ String paddedVolumeLabel = volumeLabel.concat(Messages.getString("DBID.6")); //$
          }
          return null;
      }
+     
+     /**
+      * Gets the volume label.
+      *
+      * @return the volume label
+      */
      public static String getVolumeLabel()
      {
              try
@@ -189,7 +209,13 @@ String paddedVolumeLabel = volumeLabel.concat(Messages.getString("DBID.6")); //$
              }
              return null;
      }
-     
+     // based on code from http://www.rgagnon.com/howto.html
+      
+     /**
+      * Gets the dvd volume name.
+      *
+      * @return the string
+      */
      public static String GetDVDVolumeName()
      {
    	 	String volumeLabel = DVX_Messages.getString("DBID.20"); //$NON-NLS-1$
@@ -214,7 +240,13 @@ String paddedVolumeLabel = volumeLabel.concat(Messages.getString("DBID.6")); //$
     	 	dvdDevice = volumeLabel;
     	 	return volumeLabel;
      }
-     
+     // based on code from http://www.rgagnon.com/howto.html
+      
+     /**
+      * Gets the dV d_ id.
+      *
+      * @return the dV d_ id
+      */
      public static String getDVD_ID()
      {  	 
     	 String result = getDVD_ID(GetDVDVolumeName()); 
@@ -222,7 +254,12 @@ String paddedVolumeLabel = volumeLabel.concat(Messages.getString("DBID.6")); //$
     	 result = result.substring(index +1 ,result.length());
     	 return result;  	    	
      }
+     // based on code from http://www.rgagnon.com/howto.html
+     // http://www.rgagnon.com/javadetails/java-0574.html
      
+     /**
+      * Open dvd drive.
+      */
      public static void openDvdDrive() {
     	    try {
     	        File file = File.createTempFile("realhowto",".vbs");
@@ -243,8 +280,12 @@ String paddedVolumeLabel = volumeLabel.concat(Messages.getString("DBID.6")); //$
     	        e.printStackTrace();
     	    }
     	  }
-
-    	  public static void closeDvdDrive() {
+     // based on code from http://www.rgagnon.com/howto.html
+     // http://www.rgagnon.com/javadetails/java-0574.html
+    	  /**
+      * Close dvd drive.
+      */
+     public static void closeDvdDrive() {
     	    try {
     	        File file = File.createTempFile("realhowto",".vbs");
     	        file.deleteOnExit();

@@ -32,39 +32,78 @@
 
 package org.ski.dvx.app;
 
+// TODO: Auto-generated Javadoc
 // import java.sql.Timestamp;
 // import java.util.HashSet;
 // import java.util.Set;
 
 
+/**
+ * The Class DVX_Movie_Prop.
+ */
 public class DVX_Movie_Prop {
 	
+	/**
+	 * Gets the movie id.
+	 *
+	 * @return the movie id
+	 */
 	public Integer getMovieId() {
 		return movieId;
 	}
 	
+	/**
+	 * Sets the movie id.
+	 *
+	 * @param movieId the new movie id
+	 */
 	public void setMovieId(Integer movieId) {
 		this.movieId = movieId;
 	}
 	
+	/**
+	 * Gets the movie name.
+	 *
+	 * @return the movie name
+	 */
 	public String getMovieName() {
 		return movieName;
 	}
 	
+	/**
+	 * Sets the movie name.
+	 *
+	 * @param movieName the new movie name
+	 */
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
 	
+	/**
+	 * Gets the movie sbn number.
+	 *
+	 * @return the movie sbn number
+	 */
 	public String getMovieSbnNumber() {
 		return movieSbnNumber;
 	}
 	
+	/**
+	 * Sets the movie sbn number.
+	 *
+	 * @param movieSbnNumber the new movie sbn number
+	 */
 	public void setMovieSbnNumber(String movieSbnNumber) {
 		this.movieSbnNumber = movieSbnNumber;
 	}
 	
+	/** The movie id. */
 	private Integer movieId;
+	
+	/** The movie name. */
 	private String movieName;
+	
+	/** The movie sbn number. */
 	private String movieSbnNumber;
 
 }

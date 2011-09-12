@@ -84,15 +84,34 @@ import javax.sound.sampled.AudioFileFormat;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_RecordSound.
+ */
 public class DVX_RecordSound
 extends Thread
 {
+	
+	/** The m_line. */
 	private TargetDataLine			m_line;
+	
+	/** The m_target type. */
 	private AudioFileFormat.Type	m_targetType;
+	
+	/** The m_audio input stream. */
 	private AudioInputStream		m_audioInputStream;
+	
+	/** The m_output file. */
 	private File					m_outputFile;
 
 
+	/**
+	 * Instantiates a new dV x_ record sound.
+	 *
+	 * @param line the line
+	 * @param targetType the target type
+	 * @param file the file
+	 */
 	public DVX_RecordSound(TargetDataLine line,
 				     AudioFileFormat.Type targetType,
 				     File file)

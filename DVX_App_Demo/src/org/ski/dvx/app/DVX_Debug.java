@@ -42,28 +42,39 @@ import org.ski.dvx.hibernate.Language;
 import org.ski.dvx.hibernate.Movie;
 import org.ski.dvx.hibernate.Path;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Greg
+ * The Class DVX_Debug.
  *
+ * @author Greg
  */
 public class DVX_Debug extends DVX_Player{
 
-	/**
-	 * @param args
-	 */
+	/** The dvx player logger. */
 	static Logger dvxPlayerLogger;	
 	
 	
 	
+	/**
+	 * Instantiates a new dV x_ debug.
+	 */
 	DVX_Debug()
 	{
 		super();
 	}
 
+	/** The Constant THE_TIME. */
 	static final int THE_TIME = 5 * 1000;
+	
+	/** The Constant THE_FRAME. */
 	static final int THE_FRAME = 0;
+	
+	/** The Constant THE_CHAPTER. */
 	static final int THE_CHAPTER = 2;
 	
+	/**
+	 * Test it.
+	 */
 	void testIt()
 	{
 		
@@ -113,6 +124,11 @@ public class DVX_Debug extends DVX_Player{
 //		dvxDBSupport.checkTimeEvent( movie,  author,  language, THE_CHAPTER, THE_TIME, THE_FRAME);
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		

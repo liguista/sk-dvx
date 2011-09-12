@@ -42,30 +42,64 @@ import javax.speech.synthesis.Voice;
 
 import com.cloudgarden.speech.userinterface.Mouth;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_Speak.
+ */
 public class DVX_Speak {
+    
+    /** The desc. */
     SynthesizerModeDesc desc = null;
+	
+	/** The synth. */
 	Synthesizer synth = null;
 
+	/** The speaking rate. */
 	float speakingRate = 160.0f;
+	
+	/** The volume. */
 	float volume = 1.0f;
 
+	/**
+	 * Gets the volume.
+	 *
+	 * @return the volume
+	 */
 	public float getVolume() {
 		return volume;
 	}
 
+	/**
+	 * Sets the volume.
+	 *
+	 * @param volume the new volume
+	 */
 	public void setVolume(float volume) {
 		this.volume = volume;
 	}
 
+	/**
+	 * Gets the speaking rate.
+	 *
+	 * @return the speaking rate
+	 */
 	public float getSpeakingRate() {
 		return speakingRate;
 	}
 
+	/**
+	 * Sets the speaking rate.
+	 *
+	 * @param speakingRate the new speaking rate
+	 */
 	public void setSpeakingRate(float speakingRate) {
 		this.speakingRate = speakingRate;
 	}
 
 	
+	/**
+	 * Instantiates a new dV x_ speak.
+	 */
 	DVX_Speak()
 	{
 		try
@@ -78,6 +112,11 @@ public class DVX_Speak {
 		}
 	}
 	
+	/**
+	 * Speak.
+	 *
+	 * @param message the message
+	 */
 	public void speak (String message) {
 		try {
 		    
