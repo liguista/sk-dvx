@@ -1,6 +1,34 @@
-/**
- * 
- */
+/*
+	Project:		Windows DVX Player/Editor
+	
+	File Name:		
+
+	Designer:		Josh Miele
+
+	Author:			Greg Ames
+
+	Contributors:	Owen Edwards
+					
+	Created:		September 10, 2011
+	
+	Copyright:	 	The Smith-Kettlewell Eye Research Institute
+					© 2011
+					All Rights Reserved
+					
+					http://www.ski.org/
+					
+					The Smith-Kettlewell Eye Research Institute
+					2318 Fillmore Street 
+					San Francisco, CA  94115 
+					415-345-2000  
+				 
+	Notice:			Parts of this project are based on Open Source 
+					and/or Public Domain Code. Please use good judgement 
+					if you include any of this project in your project.
+					
+	Contact:		Josh Miele
+					jam@ski.org
+*/
 package org.ski.dvx.app;
 
 import java.beans.PropertyChangeEvent;
@@ -18,9 +46,11 @@ import org.ski.dvx.hibernate.User;
 
 import de.humatic.dsj.DSDvd;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Greg
+ * The Class DVX_Base_Class.
  *
+ * @author Greg
  */
 public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 
@@ -28,171 +58,372 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
 	 */
 
+	/** The dvd. */
 	DSDvd dvd;
 
+	/** The base time. */
 	int baseTime = 0;
+	
+	/** The chapter. */
 	int chapter = 0;
 	
+	/** The verbose. */
 	boolean verbose = false;
+	
+	/** The last dv d_ id. */
 	String lastDVD_ID = ""; 
 
+	/** The dvx record button. */
 	DVX_RecordButton dvxRecordButton = null;
+	
+	/** The dvx file support. */
 	DVX_File_Support dvxFileSupport = null;
+	
+	/** The dvx db support. */
 	DVX_DB_Support dvxDBSupport = null;
+	
+	/** The dvx speak. */
 	DVX_Speak dvxSpeak = null;
+	
+	/** The language. */
 	Language language = null;
+	
+	/** The movie. */
 	Movie movie = null;
+	
+	/** The splash. */
 	DVX_Splash splash = null;
 
+	/** The user. */
 	User user = null;
+	
+	/** The author. */
 	Author author = null;
 //	private Language language = null;
 	
-	String movieInfo;
+	/** The movie info. */
+String movieInfo;
 
+	/** The main dvx frame. */
 	javax.swing.JFrame mainDVXFrame = null;
 	
+	/** The dvd states. */
 	DVDStates dvdStates;
 
 
+	/**
+	 * Gets the main dvx frame.
+	 *
+	 * @return the main dvx frame
+	 */
 	public javax.swing.JFrame getMainDVXFrame() {
 		return mainDVXFrame;
 	}
 
+	/**
+	 * Sets the main dvx frame.
+	 *
+	 * @param mainDVXFrame the new main dvx frame
+	 */
 	public void setMainDVXFrame(javax.swing.JFrame mainDVXFrame) {
 		this.mainDVXFrame = mainDVXFrame;
 	}
 
+	/**
+	 * Gets the dvx record button.
+	 *
+	 * @return the dvx record button
+	 */
 	public DVX_RecordButton getDvxRecordButton() {
 		return dvxRecordButton;
 	}
 
+	/**
+	 * Sets the dvx record button.
+	 *
+	 * @param dvxRecordButton the new dvx record button
+	 */
 	public void setDvxRecordButton(DVX_RecordButton dvxRecordButton) {
 		this.dvxRecordButton = dvxRecordButton;
 	}
 
+	/**
+	 * Gets the dvx file support.
+	 *
+	 * @return the dvx file support
+	 */
 	public DVX_File_Support getDvxFileSupport() {
 		return dvxFileSupport;
 	}
 
+	/**
+	 * Sets the dvx file support.
+	 *
+	 * @param dvxFileSupport the new dvx file support
+	 */
 	public void setDvxFileSupport(DVX_File_Support dvxFileSupport) {
 		this.dvxFileSupport = dvxFileSupport;
 	}
 
+	/**
+	 * Gets the dvx db support.
+	 *
+	 * @return the dvx db support
+	 */
 	public DVX_DB_Support getDvxDBSupport() {
 		return dvxDBSupport;
 	}
 
+	/**
+	 * Sets the dvx db support.
+	 *
+	 * @param dvxDBSupport the new dvx db support
+	 */
 	public void setDvxDBSupport(DVX_DB_Support dvxDBSupport) {
 		this.dvxDBSupport = dvxDBSupport;
 	}
 
+	/**
+	 * Gets the dvx speak.
+	 *
+	 * @return the dvx speak
+	 */
 	public DVX_Speak getDvxSpeak() {
 		return dvxSpeak;
 	}
 
+	/**
+	 * Sets the dvx speak.
+	 *
+	 * @param dvxSpeak the new dvx speak
+	 */
 	public void setDvxSpeak(DVX_Speak dvxSpeak) {
 		this.dvxSpeak = dvxSpeak;
 	}
 
+	/**
+	 * Gets the language.
+	 *
+	 * @return the language
+	 */
 	public Language getLanguage() {
 		return language;
 	}
 
+	/**
+	 * Sets the language.
+	 *
+	 * @param language the new language
+	 */
 	public void setLanguage(Language language) {
 		this.language = language;
 	}
 
+	/**
+	 * Gets the movie.
+	 *
+	 * @return the movie
+	 */
 	public Movie getMovie() {
 		return movie;
 	}
 
+	/**
+	 * Sets the movie.
+	 *
+	 * @param movie the new movie
+	 */
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
 
+	/**
+	 * Gets the splash.
+	 *
+	 * @return the splash
+	 */
 	public DVX_Splash getSplash() {
 		return splash;
 	}
 
+	/**
+	 * Sets the splash.
+	 *
+	 * @param splash the new splash
+	 */
 	public void setSplash(DVX_Splash splash) {
 		this.splash = splash;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	public User getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param user the new user
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	/**
+	 * Gets the author.
+	 *
+	 * @return the author
+	 */
 	public Author getAuthor() {
 		return author;
 	}
 
+	/**
+	 * Sets the author.
+	 *
+	 * @param author the new author
+	 */
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
 
+	/**
+	 * Gets the dvd.
+	 *
+	 * @return the dvd
+	 */
 	public DSDvd getDvd() {
 		return dvd;
 	}
 
+	/**
+	 * Sets the dvd.
+	 *
+	 * @param dvd the new dvd
+	 */
 	public void setDvd(DSDvd dvd) {
 		this.dvd = dvd;
 	}
 
+	/**
+	 * Gets the base time.
+	 *
+	 * @return the base time
+	 */
 	public int getBaseTime() {
 		return baseTime;
 	}
 
+	/**
+	 * Sets the base time.
+	 *
+	 * @param baseTime the new base time
+	 */
 	public void setBaseTime(int baseTime) {
 		this.baseTime = baseTime;
 	}
 
+	/**
+	 * Gets the chapter.
+	 *
+	 * @return the chapter
+	 */
 	public int getChapter() {
 		return chapter;
 	}
 
+	/**
+	 * Sets the chapter.
+	 *
+	 * @param chapter the new chapter
+	 */
 	public void setChapter(int chapter) {
 		this.chapter = chapter;
 	}
 
+	/**
+	 * Checks if is verbose.
+	 *
+	 * @return true, if is verbose
+	 */
 	public boolean isVerbose() {
 		return verbose;
 	}
 
+	/**
+	 * Sets the verbose.
+	 *
+	 * @param verbose the new verbose
+	 */
 	public void setVerbose(boolean verbose) {
 		this.verbose = verbose;
 	}
 
+	/**
+	 * Gets the last dv d_ id.
+	 *
+	 * @return the last dv d_ id
+	 */
 	public String getLastDVD_ID() {
 		return lastDVD_ID;
 	}
 
+	/**
+	 * Sets the last dv d_ id.
+	 *
+	 * @param lastDVD_ID the new last dv d_ id
+	 */
 	public void setLastDVD_ID(String lastDVD_ID) {
 		this.lastDVD_ID = lastDVD_ID;
 	}
 
+	/**
+	 * Gets the movie info.
+	 *
+	 * @return the movie info
+	 */
 	public String getMovieInfo() {
 		return movieInfo;
 	}
 
+	/**
+	 * Sets the movie info.
+	 *
+	 * @param movieInfo the new movie info
+	 */
 	public void setMovieInfo(String movieInfo) {
 		this.movieInfo = movieInfo;
 	}
 
+	/** The log4 j logger. */
 	Logger  log4JLogger;
+	
+	/**
+	 * Gets the log4 jlogger.
+	 *
+	 * @return the log4 jlogger
+	 */
 	public Logger getLog4Jlogger() {
 		return log4JLogger;
 	}
 
+	/**
+	 * Sets the log4 jlogger.
+	 *
+	 * @param log4JLogger the new log4 jlogger
+	 */
 	public void setLog4Jlogger(Logger log4JLogger) {
 		this.log4JLogger = log4JLogger;
 	}
 
 
+	/**
+	 * Instantiates a new dV x_ base_ class.
+	 */
 	DVX_Base_Class()
 	{
 		super();
@@ -212,12 +443,21 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 		log4JLogger = Logger.getLogger(this.getClass());
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/**
+	 * Num2 string fmt.
+	 *
+	 * @param number the number
+	 * @return the string
+	 */
 	String num2StringFmt(int number)
 	{
 		if (number<10)
@@ -226,6 +466,12 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 		
 	}
 	
+	/**
+	 * Num to bool.
+	 *
+	 * @param num the num
+	 * @return the string
+	 */
 	String numToBool(int num)
 	{
 		String result = "";
@@ -245,6 +491,11 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 		return result;
 	}
 	
+	/**
+	 * Gets the ops headers.
+	 *
+	 * @return the ops headers
+	 */
 	static String getOpsHeaders()
 	{
 /*		String result = "";
@@ -323,6 +574,12 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 		"Play_Title_Or_AtTime";
 	}
 
+    /**
+     * Internet connection exists.
+     *
+     * @param URLName the uRL name
+     * @return true, if successful
+     */
     public static boolean internetConnectionExists(String URLName){
         try {
           HttpURLConnection.setFollowRedirects(false);
