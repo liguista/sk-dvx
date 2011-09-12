@@ -23,7 +23,7 @@
 					415-345-2000  
 				 
 	Notice:			Parts of this project are based on Open Source 
-					and/or Public Domain Code. Please use good judgement 
+					and/or Public Domain Code. Please use good judgment 
 					if you include any of this project in your project.
 					
 	Contact:		Josh Miele
