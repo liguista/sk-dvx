@@ -23,7 +23,7 @@
 					415-345-2000  
 				 
 	Notice:			Parts of this project are based on Open Source 
-					and/or Public Domain Code. Please use good judgement 
+					and/or Public Domain Code. Please use good judgment 
 					if you include any of this project in your project.
 					
 	Contact:		Josh Miele
@@ -41,6 +41,7 @@ import javax.print.DocFlavor.URL;
 
 import org.ski.dvx.app.DVX_Constants;
 
+// TODO: Auto-generated Javadoc
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -53,6 +54,7 @@ import org.ski.dvx.app.DVX_Constants;
  */
 
 /**
+ * The Class DVDStates.
  *
  * @author Greg
  */
@@ -74,7 +76,9 @@ import org.ski.dvx.app.DVX_Constants;
  */
 public class DVDStates extends javax.swing.JFrame {
 
-    /** Creates new form DVDStates */
+    /**
+     * Creates new form DVDStates.
+     */
     public DVDStates() {
         initComponents();
     }
@@ -481,22 +485,47 @@ public class DVDStates extends javax.swing.JFrame {
         setTitle("DVX Debug State");
     }// </editor-fold>
 
+/**
+ * J check box uo p_ select_ sub pic_ stream action performed.
+ *
+ * @param evt the evt
+ */
 private void jCheckBoxUOP_Select_SubPic_StreamActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
 // TODO add your handling code here:
 }                                                                 
 
+/**
+ * J check box select_ karaoke_ audio_ presentation_ mode action performed.
+ *
+ * @param evt the evt
+ */
 private void jCheckBoxSelect_Karaoke_Audio_Presentation_ModeActionPerformed(java.awt.event.ActionEvent evt) {                                                                                
 // TODO add your handling code here:
 }                                                                               
 
+/**
+ * J button ok action performed.
+ *
+ * @param evt the evt
+ */
 private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {                                          
 // TODO add your handling code here:
 }                                         
 
+/**
+ * J check boxx uo p_ show menu_ root action performed.
+ *
+ * @param evt the evt
+ */
 private void jCheckBoxxUOP_ShowMenu_RootActionPerformed(java.awt.event.ActionEvent evt) {                                                            
 // TODO add your handling code here:
 }                                                           
 
+/**
+ * Update state.
+ *
+ * @param state the state
+ */
 public void updateState(int state)
 {
     jCheckBoxSelect_Karaoke_Audio_Presentation_Mode.setSelected	((state & (1<<0))!=0);
@@ -527,7 +556,10 @@ public void updateState(int state)
     jCheckBoxxUOP_ShowMenu_Root.setSelected						((state & (1<<23))!=0);
  
 }
+    
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -563,154 +595,378 @@ public void updateState(int state)
         });
     }
     // Variables declaration - do not modify
+    /** The j button ok. */
     private javax.swing.JButton jButtonOk;
+    
+    /** The j check box select_ karaoke_ audio_ presentation_ mode. */
     private javax.swing.JCheckBox jCheckBoxSelect_Karaoke_Audio_Presentation_Mode;
+    
+    /** The j check box uo p_ pause_ on. */
     private javax.swing.JCheckBox jCheckBoxUOP_Pause_On;
+    
+    /** The j check box uo p_ play next_ chapter. */
     private javax.swing.JCheckBox jCheckBoxUOP_PlayNext_Chapter;
+    
+    /** The j check box uo p_ play prev_ or_ replay_ chapter. */
     private javax.swing.JCheckBox jCheckBoxUOP_PlayPrev_Or_Replay_Chapter;
+    
+    /** The j check box uo p_ play_ backwards. */
     private javax.swing.JCheckBox jCheckBoxUOP_Play_Backwards;
+    
+    /** The j check box uo p_ play_ chapter. */
     private javax.swing.JCheckBox jCheckBoxUOP_Play_Chapter;
+    
+    /** The j check box uo p_ play_ chapter_ or_ at time. */
     private javax.swing.JCheckBox jCheckBoxUOP_Play_Chapter_Or_AtTime;
+    
+    /** The j check box uo p_ play_ forwards. */
     private javax.swing.JCheckBox jCheckBoxUOP_Play_Forwards;
+    
+    /** The j check box uo p_ play_ title. */
     private javax.swing.JCheckBox jCheckBoxUOP_Play_Title;
+    
+    /** The j check box uo p_ resume. */
     private javax.swing.JCheckBox jCheckBoxUOP_Resume;
+    
+    /** The j check box uo p_ return from sub menu. */
     private javax.swing.JCheckBox jCheckBoxUOP_ReturnFromSubMenu;
+    
+    /** The j check box uo p_ select_ angle. */
     private javax.swing.JCheckBox jCheckBoxUOP_Select_Angle;
+    
+    /** The j check box uo p_ select_ audio_ stream. */
     private javax.swing.JCheckBox jCheckBoxUOP_Select_Audio_Stream;
+    
+    /** The j check box uo p_ select_ karaoke_ audio_ presentation_ mode. */
     private javax.swing.JCheckBox jCheckBoxUOP_Select_Karaoke_Audio_Presentation_Mode;
+    
+    /** The j check box uo p_ select_ or_ activate_ button. */
     private javax.swing.JCheckBox jCheckBoxUOP_Select_Or_Activate_Button;
+    
+    /** The j check box uo p_ select_ sub pic_ stream. */
     private javax.swing.JCheckBox jCheckBoxUOP_Select_SubPic_Stream;
+    
+    /** The j check box uo p_ select_ video_ mode_ preference. */
     private javax.swing.JCheckBox jCheckBoxUOP_Select_Video_Mode_Preference;
+    
+    /** The j check box uo p_ show menu_ angle. */
     private javax.swing.JCheckBox jCheckBoxUOP_ShowMenu_Angle;
+    
+    /** The j check box uo p_ show menu_ audio. */
     private javax.swing.JCheckBox jCheckBoxUOP_ShowMenu_Audio;
+    
+    /** The j check box uo p_ show menu_ chapter. */
     private javax.swing.JCheckBox jCheckBoxUOP_ShowMenu_Chapter;
+    
+    /** The j check box uo p_ show menu_ root. */
     private javax.swing.JCheckBox jCheckBoxUOP_ShowMenu_Root;
+    
+    /** The j check box uo p_ show menu_ title. */
     private javax.swing.JCheckBox jCheckBoxUOP_ShowMenu_Title;
+    
+    /** The j check box uo p_ still_ off. */
     private javax.swing.JCheckBox jCheckBoxUOP_Still_Off;
+    
+    /** The j check box uo p_ stop. */
     private javax.swing.JCheckBox jCheckBoxUOP_Stop;
+    
+    /** The j check boxx uo p_ show menu_ root. */
     private javax.swing.JCheckBox jCheckBoxxUOP_ShowMenu_Root;
+    
+    /** The j label1. */
     private javax.swing.JLabel jLabel1;
+    
+    /** The j label10. */
     private javax.swing.JLabel jLabel10;
+    
+    /** The j label11. */
     private javax.swing.JLabel jLabel11;
+    
+    /** The j label12. */
     private javax.swing.JLabel jLabel12;
+    
+    /** The j label2. */
     private javax.swing.JLabel jLabel2;
+    
+    /** The j label3. */
     private javax.swing.JLabel jLabel3;
+    
+    /** The j label4. */
     private javax.swing.JLabel jLabel4;
+    
+    /** The j label9. */
     private javax.swing.JLabel jLabel9;
+    
+    /** The j label aspect. */
     private javax.swing.JLabel jLabelAspect;
+    
+    /** The j label bit depth. */
     private javax.swing.JLabel jLabelBitDepth;
+    
+    /** The j label height. */
     private javax.swing.JLabel jLabelHeight;
+    
+    /** The j label width. */
     private javax.swing.JLabel jLabelWidth;
+    
+    /** The j separator1. */
     private javax.swing.JSeparator jSeparator1;
+    
+    /** The j separator2. */
     private javax.swing.JSeparator jSeparator2;
+    
+    /**
+     * Gets the j text field7.
+     *
+     * @return the j text field7
+     */
     public javax.swing.JTextField getjTextField7() {
 		return jTextField7;
 	}
 
+	/**
+	 * Sets the j text field7.
+	 *
+	 * @param jTextField7 the new j text field7
+	 */
 	public void setjTextField7(javax.swing.JTextField jTextField7) {
 		this.jTextField7 = jTextField7;
 	}
 
+	/**
+	 * Gets the j text field8.
+	 *
+	 * @return the j text field8
+	 */
 	public javax.swing.JTextField getjTextField8() {
 		return jTextField8;
 	}
 
+	/**
+	 * Sets the j text field8.
+	 *
+	 * @param jTextField8 the new j text field8
+	 */
 	public void setjTextField8(javax.swing.JTextField jTextField8) {
 		this.jTextField8 = jTextField8;
 	}
 
+	/**
+	 * Gets the j text field aspect.
+	 *
+	 * @return the j text field aspect
+	 */
 	public javax.swing.JTextField getjTextFieldAspect() {
 		return jTextFieldAspect;
 	}
 
+	/**
+	 * Sets the j text field aspect.
+	 *
+	 * @param jTextFieldAspect the new j text field aspect
+	 */
 	public void setjTextFieldAspect(javax.swing.JTextField jTextFieldAspect) {
 		this.jTextFieldAspect = jTextFieldAspect;
 	}
 
+	/**
+	 * Gets the j text field bit depth.
+	 *
+	 * @return the j text field bit depth
+	 */
 	public javax.swing.JTextField getjTextFieldBitDepth() {
 		return jTextFieldBitDepth;
 	}
 
+	/**
+	 * Sets the j text field bit depth.
+	 *
+	 * @param jTextFieldBitDepth the new j text field bit depth
+	 */
 	public void setjTextFieldBitDepth(javax.swing.JTextField jTextFieldBitDepth) {
 		this.jTextFieldBitDepth = jTextFieldBitDepth;
 	}
 
+	/**
+	 * Gets the j text field chapter count.
+	 *
+	 * @return the j text field chapter count
+	 */
 	public javax.swing.JTextField getjTextFieldChapterCount() {
 		return jTextFieldChapterCount;
 	}
 
+	/**
+	 * Sets the j text field chapter count.
+	 *
+	 * @param jTextFieldChapterCount the new j text field chapter count
+	 */
 	public void setjTextFieldChapterCount(
 			javax.swing.JTextField jTextFieldChapterCount) {
 		this.jTextFieldChapterCount = jTextFieldChapterCount;
 	}
 
+	/**
+	 * Gets the j text field dsj duration.
+	 *
+	 * @return the j text field dsj duration
+	 */
 	public javax.swing.JTextField getjTextFieldDSJDuration() {
 		return jTextFieldDSJDuration;
 	}
 
+	/**
+	 * Sets the j text field dsj duration.
+	 *
+	 * @param jTextFieldDSJDuration the new j text field dsj duration
+	 */
 	public void setjTextFieldDSJDuration(
 			javax.swing.JTextField jTextFieldDSJDuration) {
 		this.jTextFieldDSJDuration = jTextFieldDSJDuration;
 	}
 
+	/**
+	 * Gets the j text field dsj name.
+	 *
+	 * @return the j text field dsj name
+	 */
 	public javax.swing.JTextField getjTextFieldDSJName() {
 		return jTextFieldDSJName;
 	}
 
+	/**
+	 * Sets the j text field dsj name.
+	 *
+	 * @param jTextFieldDSJName the new j text field dsj name
+	 */
 	public void setjTextFieldDSJName(javax.swing.JTextField jTextFieldDSJName) {
 		this.jTextFieldDSJName = jTextFieldDSJName;
 	}
 
+	/**
+	 * Gets the j text field height.
+	 *
+	 * @return the j text field height
+	 */
 	public javax.swing.JTextField getjTextFieldHeight() {
 		return jTextFieldHeight;
 	}
 
+	/**
+	 * Sets the j text field height.
+	 *
+	 * @param jTextFieldHeight the new j text field height
+	 */
 	public void setjTextFieldHeight(javax.swing.JTextField jTextFieldHeight) {
 		this.jTextFieldHeight = jTextFieldHeight;
 	}
 
+	/**
+	 * Gets the j text field movie id.
+	 *
+	 * @return the j text field movie id
+	 */
 	public javax.swing.JTextField getjTextFieldMovieID() {
 		return jTextFieldMovieID;
 	}
 
+	/**
+	 * Sets the j text field movie id.
+	 *
+	 * @param jTextFieldMovieID the new j text field movie id
+	 */
 	public void setjTextFieldMovieID(javax.swing.JTextField jTextFieldMovieID) {
 		this.jTextFieldMovieID = jTextFieldMovieID;
 	}
 
+	/**
+	 * Gets the j text field movie name.
+	 *
+	 * @return the j text field movie name
+	 */
 	public javax.swing.JTextField getjTextFieldMovieName() {
 		return jTextFieldMovieName;
 	}
 
+	/**
+	 * Sets the j text field movie name.
+	 *
+	 * @param jTextFieldMovieName the new j text field movie name
+	 */
 	public void setjTextFieldMovieName(javax.swing.JTextField jTextFieldMovieName) {
 		this.jTextFieldMovieName = jTextFieldMovieName;
 	}
 
+	/**
+	 * Gets the j text field title count.
+	 *
+	 * @return the j text field title count
+	 */
 	public javax.swing.JTextField getjTextFieldTitleCount() {
 		return jTextFieldTitleCount;
 	}
 
+	/**
+	 * Sets the j text field title count.
+	 *
+	 * @param jTextFieldTitleCount the new j text field title count
+	 */
 	public void setjTextFieldTitleCount(javax.swing.JTextField jTextFieldTitleCount) {
 		this.jTextFieldTitleCount = jTextFieldTitleCount;
 	}
 
+	/**
+	 * Gets the j text field width.
+	 *
+	 * @return the j text field width
+	 */
 	public javax.swing.JTextField getjTextFieldWidth() {
 		return jTextFieldWidth;
 	}
 
+	/**
+	 * Sets the j text field width.
+	 *
+	 * @param jTextFieldWidth the new j text field width
+	 */
 	public void setjTextFieldWidth(javax.swing.JTextField jTextFieldWidth) {
 		this.jTextFieldWidth = jTextFieldWidth;
 	}
+	
+	/** The j text field7. */
 	private javax.swing.JTextField jTextField7;
+    
+    /** The j text field8. */
     private javax.swing.JTextField jTextField8;
+    
+    /** The j text field aspect. */
     private javax.swing.JTextField jTextFieldAspect;
+    
+    /** The j text field bit depth. */
     private javax.swing.JTextField jTextFieldBitDepth;
+    
+    /** The j text field chapter count. */
     private javax.swing.JTextField jTextFieldChapterCount;
+    
+    /** The j text field dsj duration. */
     private javax.swing.JTextField jTextFieldDSJDuration;
+    
+    /** The j text field dsj name. */
     private javax.swing.JTextField jTextFieldDSJName;
+    
+    /** The j text field height. */
     private javax.swing.JTextField jTextFieldHeight;
+    
+    /** The j text field movie id. */
     private javax.swing.JTextField jTextFieldMovieID;
+    
+    /** The j text field movie name. */
     private javax.swing.JTextField jTextFieldMovieName;
+    
+    /** The j text field title count. */
     private javax.swing.JTextField jTextFieldTitleCount;
+    
+    /** The j text field width. */
     private javax.swing.JTextField jTextFieldWidth;
     // End of variables declaration
 }
