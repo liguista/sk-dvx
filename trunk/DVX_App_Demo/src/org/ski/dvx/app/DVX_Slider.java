@@ -48,12 +48,22 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_Slider.
+ */
 public class DVX_Slider extends JFrame {
 
+    /** The slider. */
     private JSlider slider;
+    
+    /** The label. */
     private JLabel label;
     
+    /** The slider1. */
     private JSlider slider1;
+    
+    /** The label1. */
     private JLabel label1;
 
 //    ImageIcon mute = new ImageIcon(getClass().getResource("mute.png"));
@@ -61,10 +71,16 @@ public class DVX_Slider extends JFrame {
     //ImageIcon med = new ImageIcon(getClass().getResource("med.png"));
     //ImageIcon max = new ImageIcon(getClass().getResource("max.png"));
 
-    public DVX_Slider() {
+    /**
+ * Instantiates a new dV x_ slider.
+ */
+public DVX_Slider() {
         initUI();
     }
 
+    /**
+     * Inits the ui.
+     */
     public final void initUI() {
         
         JPanel panel = new JPanel();
@@ -135,6 +151,11 @@ public class DVX_Slider extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable() {

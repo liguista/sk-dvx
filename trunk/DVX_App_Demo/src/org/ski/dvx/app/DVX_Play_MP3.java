@@ -35,8 +35,17 @@ package org.ski.dvx.app;
 import javazoom.jl.player.Player;
 import java.io.FileInputStream;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_Play_MP3.
+ */
 public class DVX_Play_MP3 {
 
+	/**
+	 * Play m p3.
+	 *
+	 * @param path the path
+	 */
 	public static void playMP3(String path)
 	{
 		try

@@ -41,6 +41,13 @@ import java.net.URLConnection;
 
 public class DVX_Get_Movie_Name_Google {
 
+	/**
+	 * Gets the google wave.
+	 *
+	 * @param path the path
+	 * @param message the message
+	 * @return the google wave
+	 */
 	public static void getGoogleWave(String path, String message)
 	{
 		String result = "";
@@ -74,6 +81,13 @@ public class DVX_Get_Movie_Name_Google {
 		}
 	}
 	
+	/**
+	 * Gets the movie name.
+	 *
+	 * @param path the path
+	 * @param hash the hash
+	 * @return the movie name
+	 */
 	public static String getMovieName(String path, String hash)
 	{
 		String result = DVX_Constants.MOVE_UNIDENTIFIED;

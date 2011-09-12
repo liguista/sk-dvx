@@ -34,10 +34,19 @@ package org.ski.dvx.app;
 
 import java.io.File;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_File_Support.
+ */
 public class DVX_File_Support {
 
 	// validate the directory structure is valid on the disk...
 	
+	/**
+	 * DV x_ file_ support.
+	 *
+	 * @param dvdId the dvd id
+	 */
 	public static void DVX_File_Support(String dvdId)
 	{
 		File path = new File(DVX_Constants.MOVIE_PATH +  dvdId);

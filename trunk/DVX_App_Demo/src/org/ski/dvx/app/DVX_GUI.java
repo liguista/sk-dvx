@@ -49,9 +49,11 @@ import org.ski.dvx.hibernate.Author;
 import org.ski.dvx.hibernate.Language;
 import org.ski.dvx.hibernate.Movie;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Greg
+ * The Class DVX_GUI.
  *
+ * @author Greg
  */
 public class DVX_GUI extends DVX_Menus{
 	
@@ -59,59 +61,148 @@ public class DVX_GUI extends DVX_Menus{
     // Variables declaration - do not modify                     
 //  private javax.swing.JButton jButtonAdd;
 //   private javax.swing.JButton jButtonPlay;
-  javax.swing.JButton jButtonRecord;
+  /** The j button record. */
+    javax.swing.JButton jButtonRecord;
+  
+  /** The j button chapter minus. */
   javax.swing.JButton jButtonChapterMinus;
+  
+  /** The j button chapter plus. */
   javax.swing.JButton jButtonChapterPlus;
+  
+  /** The j combo box author. */
   javax.swing.JComboBox jComboBoxAuthor;
+  
+  /** The j combo box chapter. */
   javax.swing.JComboBox jComboBoxChapter;
+  
+  /** The j combo box title. */
   javax.swing.JComboBox jComboBoxTitle;
+  
+  /** The j combo box language. */
   javax.swing.JComboBox jComboBoxLanguage;
+  
+  /** The j label author. */
   javax.swing.JLabel jLabelAuthor;
+  
+  /** The j label hour. */
   javax.swing.JLabel jLabelHour;
+  
+  /** The j label dv dvolume. */
   javax.swing.JLabel jLabelDVDvolume;
+  
+  /** The j label dvx volume. */
   javax.swing.JLabel jLabelDVXVolume;
+  
+  /** The j label frame. */
   javax.swing.JLabel jLabelFrame;
+  
+  /** The j label language. */
   javax.swing.JLabel jLabelLanguage;
+  
+  /** The j label min. */
   javax.swing.JLabel jLabelMin;
+  
+  /** The j label sec. */
   javax.swing.JLabel jLabelSec;
+  
+  /** The j label title. */
   javax.swing.JLabel jLabelTitle;
+  
+  /** The j panel1. */
   javax.swing.JPanel jPanel1;
+  
+  /** The j panel root. */
   javax.swing.JPanel jPanelRoot;
+  
+  /** The j separator1. */
   javax.swing.JSeparator jSeparator1;
+  
+  /** The j separator2. */
   javax.swing.JSeparator jSeparator2;
+  
+  /** The j slider dvx volume. */
   javax.swing.JSlider jSliderDVXVolume;
+  
+  /** The j slider dvd volume. */
   javax.swing.JSlider jSliderDVDVolume;
+  
+  /** The j text chapter. */
   javax.swing.JTextField jTextChapter;
+  
+  /** The j text frame. */
   javax.swing.JTextField jTextFrame;
+  
+  /** The j text minutes. */
   javax.swing.JTextField jTextMinutes;
+  
+  /** The j text seconds. */
   javax.swing.JTextField jTextSeconds;
+  
+  /** The label chapter. */
   javax.swing.JLabel labelChapter;
+  
+  /** The label language. */
   javax.swing.JLabel labelLanguage;
+  
+  /** The label language1. */
   javax.swing.JLabel labelLanguage1;
+  
+  /** The label language2. */
   javax.swing.JLabel labelLanguage2;
+  
+  /** The label title. */
   javax.swing.JLabel labelTitle;
   // End of variables declaration    
 
+  /** The btn chapter plus. */
   javax.swing.JButton btnChapterPlus;
+  
+  /** The btn chapter minus. */
   javax.swing.JButton btnChapterMinus;
 
+  /** The btn title plus. */
   javax.swing.JButton btnTitlePlus ;
+  
+  /** The btn title minus. */
   javax.swing.JButton btnTitleMinus;
 
+  /** The j button shut up. */
   javax.swing.JButton jButtonShutUp;
+  
+  /** The j button time. */
   javax.swing.JButton jButtonTime ;
+  
+  /** The j button play. */
   javax.swing.JButton jButtonPlay;
+  
+  /** The j button pause. */
   javax.swing.JButton jButtonPause ;
+  
+  /** The j button stop. */
   javax.swing.JButton jButtonStop ;
+  
+  /** The j button eject. */
   javax.swing.JButton jButtonEject;
+  
+  /** The j button mount. */
   javax.swing.JButton jButtonMount;
 
+  /**
+   * Instantiates a new dV x_ gui.
+   */
   DVX_GUI()
   {
 	  super();
   }
 	
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    /**
+     * Inits the gui.
+     *
+     * @param frame the frame
+     * @param thePanel the the panel
+     */
     void initGui(javax.swing.JFrame frame, JPanel thePanel) {
     	
     	initMenus(frame);
@@ -582,7 +673,9 @@ public class DVX_GUI extends DVX_Menus{
     
 
     /**
-     * @param evt
+     * Slider dvd volume action performed.
+     *
+     * @param evt the evt
      */
     private void sliderDVDVolumeActionPerformed(ChangeEvent evt) {                                          
     		System.out.println("sliderDVDVolumeActionPerformed - " + jSliderDVDVolume.getValue());
@@ -600,7 +693,9 @@ public class DVX_GUI extends DVX_Menus{
     	}                                         
 
     /**
-     * @param evt
+     * Slider dvx volume action performed.
+     *
+     * @param evt the evt
      */
     private void sliderDVXVolumeActionPerformed(ChangeEvent evt) {                                          
     		System.out.println("sliderDVXVolumeActionPerformed - " + jSliderDVXVolume.getValue());		
@@ -611,6 +706,11 @@ public class DVX_GUI extends DVX_Menus{
     		
     	}            
 
+    /**
+     * J combo box author action performed.
+     *
+     * @param evt the evt
+     */
     private void jComboBoxAuthorActionPerformed(java.awt.event.ActionEvent evt) {                                                
     	String selected = jComboBoxAuthor.getSelectedItem().toString();
     	System.out.println("jComboBoxAuthorActionPerformed - " + jComboBoxAuthor.getSelectedItem());
@@ -620,6 +720,11 @@ public class DVX_GUI extends DVX_Menus{
     	dvxSpeak.speak("Author " + selected );
     }                                               
 
+    /**
+     * J combo box language action performed.
+     *
+     * @param evt the evt
+     */
     private void jComboBoxLanguageActionPerformed(java.awt.event.ActionEvent evt) {                                                
     	String selected = jComboBoxLanguage.getSelectedItem().toString();
     		System.out.println("jComboBoxLanguageActionPerformed - " + selected);
@@ -634,6 +739,11 @@ public class DVX_GUI extends DVX_Menus{
     	System.out.println("jTextChapterActionPerformed - ");
     }   */                                         
 
+    /**
+     * J combo box chapter action performed.
+     *
+     * @param evt the evt
+     */
     private void jComboBoxChapterActionPerformed(java.awt.event.ActionEvent evt) {                                                   
     		int chapter = + jComboBoxChapter.getSelectedIndex();
     		dvd.chapterStep(chapter + 1);
@@ -641,25 +751,55 @@ public class DVX_GUI extends DVX_Menus{
     		System.out.println("jComboBoxChapterActionPerformed - " + chapter);
     	}                                                  
 
+    /**
+     * J combo box title action performed.
+     *
+     * @param evt the evt
+     */
     private void jComboBoxTitleActionPerformed(java.awt.event.ActionEvent evt) {                                                   
     		System.out.println("jComboBoxTitleActionPerformed - "+ jComboBoxTitle.getSelectedIndex());
     		dvd.gotoTitle(jComboBoxTitle.getSelectedIndex());
     		dvxSpeak.speak("Title " + jComboBoxTitle.getSelectedIndex());		
     	}                                                  
 
+    /**
+     * J button chapter plus action performed.
+     *
+     * @param evt the evt
+     */
     private void jButtonChapterPlusActionPerformed(java.awt.event.ActionEvent evt) {                                                   
     		System.out.println("jButtonChapterPlusActionPerformed - ");
     		dvd.chapterStep(1);
     		dvxSpeak.speak("Chapter Plus");
     	}                                                  
 
+    /**
+     * J button chapter minus action performed.
+     *
+     * @param evt the evt
+     */
     private void jButtonChapterMinusActionPerformed(java.awt.event.ActionEvent evt) {                                                    
     		System.out.println("jButtonChapterMinusActionPerformed - ");
     		dvd.chapterStep(-1);
     		dvxSpeak.speak("Chapter Minus");
     	}         
     
+	/**
+	 * The listener interface for receiving myButton events.
+	 * The class that is interested in processing a myButton
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addMyButtonListener<code> method. When
+	 * the myButton event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see MyButtonEvent
+	 */
 	public class MyButtonListener implements ActionListener {
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			JButton jb = (JButton)e.getSource();
 			String  menuName = jb.getLabel();

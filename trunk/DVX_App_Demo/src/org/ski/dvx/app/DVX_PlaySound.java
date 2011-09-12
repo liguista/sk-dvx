@@ -44,11 +44,23 @@ import javax.sound.sampled.LineListener;
 
 import javazoom.jl.player.Player;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DVX_PlaySound.
+ */
 public class DVX_PlaySound {
+	
+	/** The sound clip. */
 	static Clip soundClip = null;
 
+	/** The waiting. */
 	static boolean waiting ;
 	
+	/**
+	 * Play m p3.
+	 *
+	 * @param path the path
+	 */
 	public static void playMP3(String path)
 	{
 		try
@@ -65,6 +77,12 @@ public class DVX_PlaySound {
 		
 	}
 
+	/**
+	 * Play wav.
+	 *
+	 * @param filePath the file path
+	 * @param wait the wait
+	 */
 	static void  playWav(String filePath, boolean wait) {
 		// specify the sound to play
 		// (assuming the sound can be played by the audio system)
