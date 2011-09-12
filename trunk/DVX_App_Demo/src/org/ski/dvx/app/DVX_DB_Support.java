@@ -53,19 +53,27 @@ import org.ski.dvx.hibernate.TransactionLog;
 import org.ski.dvx.hibernate.User;
 import org.ski.dvx.hibernate.UserDAO;
 
+// TODO: Auto-generated Javadoc
 // ***********************************************************************************
 
+/**
+ * The Class DVX_DB_Support.
+ */
 public class DVX_DB_Support {
 
-	/**
-	 * @param args
-	 */
+	/** The dvx_player. */
 	DVX_Player dvx_player;
 
 	
 // ------------------------------------------------------------------------------------
 	
-	public DVX_DB_Support(DVX_Player dvx_player, String defaultAuthor)
+	/**
+ * Instantiates a new dV x_ d b_ support.
+ *
+ * @param dvx_player the dvx_player
+ * @param defaultAuthor the default author
+ */
+public DVX_DB_Support(DVX_Player dvx_player, String defaultAuthor)
 	{
 		this.dvx_player = dvx_player;
 		
@@ -74,7 +82,16 @@ public class DVX_DB_Support {
 	
 // ------------------------------------------------------------------------------------
 
-	public void log(Movie movie, User user, String transactionType,
+	/**
+ * Log.
+ *
+ * @param movie the movie
+ * @param user the user
+ * @param transactionType the transaction type
+ * @param transactionLevel the transaction level
+ * @param transactionDetails the transaction details
+ */
+public void log(Movie movie, User user, String transactionType,
 			String transactionLevel, String transactionDetails)
 	{
 		dvx_log(movie, user, transactionType, transactionLevel, transactionDetails);
@@ -82,6 +99,12 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the language.
+	 *
+	 * @param languageName the language name
+	 * @return the language
+	 */
 	public Language getLanguage(String languageName) {
 		// TODO Auto-generated method stub
 		
@@ -103,6 +126,12 @@ public class DVX_DB_Support {
 		return getLanguage(languageName);
 	}
 
+	/**
+	 * Gets the movie hash.
+	 *
+	 * @param movieHash the movie hash
+	 * @return the movie hash
+	 */
 	public Movie getMovieHash(String movieHash)
 	{
 		Movie movie = new Movie();
@@ -120,6 +149,13 @@ public class DVX_DB_Support {
 		return null;
 	}
 	
+	/**
+	 * Gets the insert movie hash.
+	 *
+	 * @param movieSbnNumber the movie sbn number
+	 * @param path the path
+	 * @return the insert movie hash
+	 */
 	public Movie getInsertMovieHash(String movieSbnNumber, String path)
 	{
 		Movie movie = getMovieHash(movieSbnNumber);
@@ -145,6 +181,11 @@ public class DVX_DB_Support {
 		return getMovieHash(movieSbnNumber);
 	}
 
+	/**
+	 * Update movie.
+	 *
+	 * @param movie the movie
+	 */
 	public void updateMovie(Movie movie)
 	{
 		MovieDAO movieDao = new MovieDAO();
@@ -155,35 +196,45 @@ public class DVX_DB_Support {
 	}
 	// ------------------------------------------------------------------------------------
 		
-	public String getMenuURI(Author author, Language language, Movie movie, int menuID, int menuItem) // add language here...
+	/**
+	 * Gets the menu uri.
+	 *
+	 * @param author the author
+	 * @param language the language
+	 * @param movie the movie
+	 * @param menuID the menu id
+	 * @param menuItem the menu item
+	 * @return the menu uri
+	 */
+	public MovieMenu getMovieMenu(Author author, Language language, Movie movie, int menuID, int menuItem) // add language here...
 	{
 		 
-		MovieMenu mm = new MovieMenu();
+		MovieMenu movieMenu = new MovieMenu();
 		
 		System.out.println(movie.getMovieName() + " = " + menuID + " : " + menuItem);
 		
-		mm.setMenuItem(menuItem);
-		mm.setMenuNumber(menuID);
-		mm.setMenuActive(1);
-		if (author!=null)
-			mm.setAuthor(author);
-		if (language!=null)
-			mm.setLanguage(language);
+		movieMenu.setMenuItem(menuItem);
+		movieMenu.setMenuNumber(menuID);
+		movieMenu.setMenuActive(1);
+//		if (author!=null)
+		movieMenu.setAuthor(author);
+//		if (language!=null)
+		movieMenu.setLanguage(language);
 		
 //		mm.setMovie(movie);
 //		mm.setMovie(movie);
 		MovieMenuDAO mmDao = new MovieMenuDAO();
 //		List mmDao.findByExample(mm); = mmDao.findByExample(mm);
 		@SuppressWarnings("unchecked")
-		List<MovieMenu> mmList = mmDao.findByExample(mm);
+		List<MovieMenu> mmList = mmDao.findByExample(movieMenu);
 //		mmList = mmDao.findAll();
 		System.out.println("List size = " + mmList.size());
 		
 		for (MovieMenu mmItem : mmList)
 		{
-			if (mmItem.getMovie().equals(movie))
+			if (validateMenuEvent(mmItem,  author,  language,  movie))
 			{
-				return mmItem.getMenuUri();
+				return mmItem;
 			}
 		}
 		
@@ -192,10 +243,22 @@ public class DVX_DB_Support {
 		return null;
 	}
 		
+	/** The last chapter. */
 	int lastChapter = -1;
+	
+	/** The last offset. */
 	int lastOffset = 0;
 //	
-	public boolean validateTimedEvent(Description description, Author author, Language language, Movie movie)
+	/**
+ * Validate timed event.
+ *
+ * @param description the description
+ * @param author the author
+ * @param language the language
+ * @param movie the movie
+ * @return true, if successful
+ */
+public boolean validateTimedEvent(Description description, Author author, Language language, Movie movie)
 	{		
 		// validate author if not all		
 		if (author.getAuthorId()!=0)	// author all
@@ -223,9 +286,58 @@ public class DVX_DB_Support {
 
 		return true;
 	}
-	
+
+	/**
+	 * Validate menu event.
+	 *
+	 * @param menu the menu
+	 * @param author the author
+	 * @param language the language
+	 * @param movie the movie
+	 * @return true, if successful
+	 */
+	public boolean validateMenuEvent(MovieMenu menu, Author author, Language language, Movie movie)
+	{		
+		// validate author if not all		
+		if (author.getAuthorId()!=0)	// author all
+		{
+			if (menu.getAuthor().getAuthorId()!=author.getAuthorId())
+			{
+				return false;
+			}
+		}
+		
+		// validate language if not all		
+		if (language.getLanguageId()!=0)	// author all
+		{
+			if (menu.getLanguage().getLanguageId()!=language.getLanguageId())
+			{
+				return false;
+			}
+		}
+		
+		// validate the movie matches...
+		if (menu.getMovie().getMovieId()!=movie.getMovieId())
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 // look to timed event and fire it if it exists
-	public boolean checkTimeEvent(Author author, Language language, Movie movie, int chapter, int offset, int startFrame)
+	/**
+ * Check time event.
+ *
+ * @param author the author
+ * @param language the language
+ * @param movie the movie
+ * @param chapter the chapter
+ * @param offset the offset
+ * @param startFrame the start frame
+ * @return true, if successful
+ */
+public boolean checkTimeEvent(Author author, Language language, Movie movie, int chapter, int offset, int startFrame)
 	{
 		boolean result = false;
 		try
@@ -263,6 +375,7 @@ public class DVX_DB_Support {
 		
 		description.setDescriptionStartTimeInt(offset);
 		description.setDescriptionChapter(chapter);
+		description.setDescriptionActive(1);			// very important... make sure we are not triggerin any old ones...
 		
 		@SuppressWarnings("unchecked")
 		List<Description> descriptionList = descriptionDao.findByExample(description);
@@ -315,6 +428,12 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the insert user.
+	 *
+	 * @param userName the user name
+	 * @return the insert user
+	 */
 	public User getInsertUser(String userName)
 	{
 		User user = new User();
@@ -348,12 +467,24 @@ public class DVX_DB_Support {
 	}
 	
 	// ------------------------------------------------------------------------------------
+	/**
+	 * Gets the insert author.
+	 *
+	 * @param userName the user name
+	 * @return the insert author
+	 */
 	public Author getInsertAuthor(String userName)
 	{
 		User user = getInsertUser(userName);
 		return getInsertAuthor(user);
 	}
 		
+	/**
+	 * Gets the insert author.
+	 *
+	 * @param user the user
+	 * @return the insert author
+	 */
 	public Author getInsertAuthor(User user)
 	{
 		Author author = new Author();
@@ -386,6 +517,17 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Insert update movie name clip.
+	 *
+	 * @param author the author
+	 * @param language the language
+	 * @param movie the movie
+	 * @param menuNumber the menu number
+	 * @param menuItem the menu item
+	 * @param path the path
+	 * @param fileName the file name
+	 */
 	public void insertUpdateMovieNameClip(Author author , Language language, Movie movie, int menuNumber, int menuItem, Path path, String fileName)
 
 	{
@@ -394,6 +536,17 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Insert update movie menu.
+	 *
+	 * @param author the author
+	 * @param language the language
+	 * @param movie the movie
+	 * @param menuNumber the menu number
+	 * @param menuItem the menu item
+	 * @param path the path
+	 * @param fileName the file name
+	 */
 	public void insertUpdateMovieMenu(Author author , Language language, Movie movie, int menuNumber, int menuItem, Path path, String fileName)
 	{
 		int versionNumber = 1;
@@ -417,21 +570,25 @@ public class DVX_DB_Support {
 		if (movieMenuList.size()>0)	// it exists..
 		{
 			MovieMenu movieMenuOld = movieMenuList.get(0);
-			movieMenuOld.setMenuActive(0);
-			movieMenuOld.setMenuUri(movieMenuOld.getMenuUri() + movieMenuOld.getMenuVersion());	// rename old file name with suffix...
 			
-			movieMenu.setMenuVersion(movieMenuOld.getMenuVersion() + 1);	// bump the version
-			versionNumber = movieMenuOld.getMenuVersion() +1;
-			File oldFile = new File(DVX_Constants.MOVIE_PATH + 
-					movie.getMovieSbnNumber() + 
-					DVX_Constants.MOVIE_MENUS_PATH + 
-					movieMenuOld.getMenuUri());
-
-			oldFile.renameTo(new File(DVX_Constants.MOVIE_PATH + 
-					movie.getMovieSbnNumber() + 
-					DVX_Constants.MOVIE_MENUS_PATH + 
-					movieMenuOld.getMenuUri()+"."+movieMenuOld.getMenuVersion()));
-			movieMenuDao.merge(movieMenuOld);
+			if (validateMenuEvent(movieMenuOld, author ,  language,  movie));
+			{
+				movieMenuOld.setMenuActive(0);
+				movieMenuOld.setMenuUri(movieMenuOld.getMenuUri() + movieMenuOld.getMenuVersion());	// rename old file name with suffix...
+				
+				movieMenu.setMenuVersion(movieMenuOld.getMenuVersion() + 1);	// bump the version
+				versionNumber = movieMenuOld.getMenuVersion() +1;
+				File oldFile = new File(DVX_Constants.MOVIE_PATH + 
+						movie.getMovieSbnNumber() + 
+						DVX_Constants.MOVIE_MENUS_PATH + 
+						movieMenuOld.getMenuUri());
+	
+				oldFile.renameTo(new File(DVX_Constants.MOVIE_PATH + 
+						movie.getMovieSbnNumber() + 
+						DVX_Constants.MOVIE_MENUS_PATH + 
+						movieMenuOld.getMenuUri()+"."+movieMenuOld.getMenuVersion()));
+				movieMenuDao.merge(movieMenuOld);
+			}
 			
 		}	// create new one...
 		movieMenu.setMenuUri(movie.getMovieSbnNumber() + 
@@ -448,6 +605,9 @@ public class DVX_DB_Support {
 									author.getUser().getUserName()  + DVX_Constants.SPACE_HYPHEN_SPACE +
 									"Menu ID " + menuNumber + DVX_Constants.SPACE_HYPHEN_SPACE + 
 									"Item ID " + menuItem );
+		movieMenu.setPath(path);
+		
+		movieMenu.setMenuActive(1);	// important for versioning...
 		movieMenu.setMenuVersion(versionNumber);	// bump the version
 		movieMenu.setPath(path);
 		movieMenuDao.save(movieMenu);
@@ -456,6 +616,19 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Insert update time clip.
+	 *
+	 * @param author the author
+	 * @param language the language
+	 * @param movie the movie
+	 * @param chapter the chapter
+	 * @param timeOffset the time offset
+	 * @param descriptionStartFrame the description start frame
+	 * @param path the path
+	 * @param fileName the file name
+	 * @return the description
+	 */
 	public Description insertUpdateTimeClip(Author author , Language language, Movie movie, int chapter, int timeOffset, int descriptionStartFrame, Path  path, String fileName)
 	{
 //		timeOffset=1234;
@@ -472,6 +645,8 @@ public class DVX_DB_Support {
 		
 		Description description = new Description();
 		
+		description.setAuthor(author);
+		description.setLanguage(language);
 		description.setMovie(movie);
 		description.setDescriptionActive(1);
 		
@@ -480,8 +655,6 @@ public class DVX_DB_Support {
 		description.setDescriptionStartFrame(descriptionStartFrame);
 		description.setDescriptionTypeEnum(DVX_Constants.DESCRIPTION_TYPE_AUDIO_DESCRIPTION);
 		
-		description.setAuthor(author);
-		description.setLanguage(language);
 //		movieMenu.setPath();	// GCA to be implemented later
 		
 		DescriptionDAO descriptionDao = new DescriptionDAO();
@@ -495,20 +668,24 @@ public class DVX_DB_Support {
 		if (descriptionList.size()>0)	// it exists..
 		{
 			Description descriptionOld = descriptionList.get(0);	// get the old description
-			descriptionOld.setDescriptionActive(0);					// mark it as inactive
-			descriptionOld.setDescriptionUri(descriptionOld.getDescriptionUri() + descriptionOld.getDescriptionVersion());	// rename old file name with suffix...
-			descriptionOld.setDescriptionVersion(descriptionOld.getDescriptionVersion() + 1);	// bump the version
-			
-			File oldFile = new File(DVX_Constants.MOVIE_PATH + 
-					movie.getMovieSbnNumber() + 
-					DVX_Constants.MOVIE_MENUS_PATH + 
-					descriptionOld.getDescriptionUri());
+			if (validateTimedEvent(descriptionOld, author, language, movie))	// validate the information...
+			{
+				descriptionOld.setDescriptionActive(0);					// mark it as inactive
+				descriptionOld.setDescriptionUri(descriptionOld.getDescriptionUri() + descriptionOld.getDescriptionVersion());	// rename old file name with suffix...
+				descriptionOld.setDescriptionVersion(descriptionOld.getDescriptionVersion() + 1);	// bump the version
+				
+				File oldFile = new File(DVX_Constants.MOVIE_PATH + 
+						movie.getMovieSbnNumber() + 
+						DVX_Constants.MOVIE_MENUS_PATH + 
+						descriptionOld.getDescriptionUri());
+	
+				oldFile.renameTo(new File(DVX_Constants.MOVIE_PATH + 
+						movie.getMovieSbnNumber() + 
+						DVX_Constants.MOVIE_MENUS_PATH + 
+						descriptionOld.getDescriptionUri()+"."+descriptionOld.getDescriptionVersion()));
+				descriptionDao.merge(descriptionOld);
+			}
 
-			oldFile.renameTo(new File(DVX_Constants.MOVIE_PATH + 
-					movie.getMovieSbnNumber() + 
-					DVX_Constants.MOVIE_MENUS_PATH + 
-					descriptionOld.getDescriptionUri()+"."+descriptionOld.getDescriptionVersion()));
-			descriptionDao.merge(descriptionOld);
 		}	// create new one...
 		description.setDescriptionUri(movie.getMovieSbnNumber() + 
 				DVX_Constants.HYPHEN + +
@@ -536,7 +713,9 @@ public class DVX_DB_Support {
 										
 										);
 		description.setPath(path);
-			descriptionDao.save(description);
+		description.setDescriptionActive(1);	// important for versioning...
+		description.setDescriptionVersion(1);
+		descriptionDao.save(description);
 
 		tx.commit();
 
@@ -554,6 +733,13 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the insert path.
+	 *
+	 * @param author the author
+	 * @param path the path
+	 * @return the insert path
+	 */
 	public Path getInsertPath(Author author , String path)	// may want to add author... GCA
 	{
 		Path resultPath = new Path();
@@ -575,6 +761,11 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the language list.
+	 *
+	 * @return the language list
+	 */
 	public String [] getLanguageList()
 	{
 		
@@ -591,6 +782,11 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the author list.
+	 *
+	 * @return the author list
+	 */
 	public String [] getAuthorList()
 	{
 		
@@ -607,6 +803,12 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the user.
+	 *
+	 * @param userName the user name
+	 * @return the user
+	 */
 	public User getUser(String userName)
 	{
 		User user = new User();
@@ -622,6 +824,12 @@ public class DVX_DB_Support {
 	
 	// ------------------------------------------------------------------------------------
 		
+	/**
+	 * Gets the author.
+	 *
+	 * @param authorName the author name
+	 * @return the author
+	 */
 	public Author getAuthor(String authorName)
 	{
 		Author author = new Author();
@@ -642,6 +850,15 @@ public class DVX_DB_Support {
 	}
 	
 	// ------------------------------------------------------------------------------------
+	/**
+	 * Dvx_log.
+	 *
+	 * @param movie the movie
+	 * @param user the user
+	 * @param transactionType the transaction type
+	 * @param transactionLevel the transaction level
+	 * @param transactionDetails the transaction details
+	 */
 	public void dvx_log(Movie movie, User user, String transactionType,
 			String transactionLevel, String transactionDetails)
 	{
@@ -661,6 +878,12 @@ public class DVX_DB_Support {
 		}
 	}
 	
+	// ------------------------------------------------------------------------------------
+	/**
+	 * Delete user.
+	 *
+	 * @param user the user
+	 */
 	public void deleteUser(User user)
 	{
 		UserDAO userDAO = new UserDAO();
@@ -670,6 +893,12 @@ public class DVX_DB_Support {
 		tx.commit();
 	}
 
+	// ------------------------------------------------------------------------------------
+	/**
+	 * Delete author.
+	 *
+	 * @param author the author
+	 */
 	public void deleteAuthor(Author author)
 	{
 		try{
@@ -685,6 +914,12 @@ public class DVX_DB_Support {
 		}
 	}
 
+	// ------------------------------------------------------------------------------------
+	/**
+	 * Delete movie.
+	 *
+	 * @param movie the movie
+	 */
 	public void deleteMovie(Movie movie)
 	{
 		MovieDAO movieDAO = new MovieDAO();
@@ -694,6 +929,12 @@ public class DVX_DB_Support {
 		tx.commit();
 	}
 
+	// ------------------------------------------------------------------------------------
+	/**
+	 * Delete description.
+	 *
+	 * @param description the description
+	 */
 	public void deleteDescription(Description description)
 	{
 		
@@ -703,6 +944,12 @@ public class DVX_DB_Support {
 		tx.commit();
 	}
 	
+	// ------------------------------------------------------------------------------------
+	/**
+	 * Delete path.
+	 *
+	 * @param path the path
+	 */
 	public void deletePath(Path path)
 	{
 		
@@ -712,6 +959,17 @@ public class DVX_DB_Support {
 		tx.commit();
 	}
 	
+	// ------------------------------------------------------------------------------------
+	/**
+	 * Delete description.
+	 *
+	 * @param author the author
+	 * @param language the language
+	 * @param movie the movie
+	 * @param chapter the chapter
+	 * @param timeOffset the time offset
+	 * @param frame the frame
+	 */
 	public void deleteDescription(Author author, Language language, Movie movie, int chapter, int timeOffset, int frame)
 	{
 		DescriptionDAO descriptionDAO = new DescriptionDAO();
@@ -736,7 +994,46 @@ public class DVX_DB_Support {
 
 		}
 	}
+	// ------------------------------------------------------------------------------------
 	
+	public void deleteMovieMenu(MovieMenu movieMenu)
+	{
+		MovieMenuDAO movieMenuDAO = new MovieMenuDAO();
+		
+		Transaction tx = movieMenuDAO.getSession().beginTransaction();
+		movieMenuDAO.delete(movieMenu);
+		tx.commit();		
+	}
+	
+	// this one deletes inactive ones too
+	
+	public void deleteMovieMenus(MovieMenu movieMenu)
+	{
+		MovieMenuDAO movieMenuDAO = new MovieMenuDAO();
+		
+		MovieMenu target = new MovieMenu();
+		
+		target.setAuthor(movieMenu.getAuthor());
+		target.setLanguage(movieMenu.getLanguage());
+		target.setMovie(movieMenu.getMovie());
+		target.setMenuNumber(movieMenu.getMenuNumber());
+		target.setMenuItem(movieMenu.getMenuItem());
+		
+		List<MovieMenu> movieMenuList = movieMenuDAO.findByExample(target);
+		
+		Transaction tx = movieMenuDAO.getSession().beginTransaction();
+		
+		for (MovieMenu theMenu : movieMenuList)
+		{
+			if (validateMenuEvent(theMenu, movieMenu.getAuthor() ,movieMenu.getLanguage(), movieMenu.getMovie()))
+				movieMenuDAO.delete(theMenu);
+			
+		}
+		tx.commit();
+
+	}
+	
+
 }
 
 
