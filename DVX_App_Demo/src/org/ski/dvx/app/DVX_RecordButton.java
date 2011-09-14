@@ -61,7 +61,7 @@ public class DVX_RecordButton extends JButton{
 //	public Language language;
 	
 	/** The dvx_player. */
-DVX_GUI dvx_player; 
+	DVX_GUI dvx_player; 
 	
 	/** The menu page. */
 	public int menuPage;
