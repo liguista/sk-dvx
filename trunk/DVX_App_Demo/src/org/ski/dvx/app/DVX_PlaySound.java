@@ -83,6 +83,23 @@ public class DVX_PlaySound {
 	 * @param filePath the file path
 	 * @param wait the wait
 	 */
+	
+	static void  shutUp()
+	{
+		waiting = false;
+		try {
+			if (soundClip != null) 	// if clip is playing... stop it and close
+			{						// it...
+				soundClip.stop();
+				soundClip.close();
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Shut up exception... " + ex);
+		}
+	}
+	
 	static void  playWav(String filePath, boolean wait) {
 		// specify the sound to play
 		// (assuming the sound can be played by the audio system)
