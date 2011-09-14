@@ -260,27 +260,47 @@ public void log(Movie movie, User user, String transactionType,
  */
 public boolean validateTimedEvent(Description description, Author author, Language language, Movie movie)
 	{		
+	
+	if (description==null)
+	{
+		System.out.println("********* Description is null ***********");
+		return false;
+		
+	}
 		// validate author if not all		
-		if (author.getAuthorId()!=0)	// author all
+		if (author.getAuthorId()!=DVX_Constants.DVX_AUTHOR_ALL_ID)	// author all
 		{
-			if (description.getAuthor().getAuthorId()!=author.getAuthorId())
+			int a = description.getAuthor().getAuthorId();
+			int b = author.getAuthorId();
+			if (a!=b)
 			{
+//				int a = description.getAuthor().getAuthorId();
+//				int b = author.getAuthorId();
+				boolean flag = a==b;
+				System.out.println("validateTimedEvent Author != " + description.getAuthor().getAuthorId() + " - " + author.getAuthorId());
 				return false;
 			}
 		}
 		
 		// validate language if not all		
-		if (language.getLanguageId()!=0)	// author all
+		if (language.getLanguageId()!=DVX_Constants.DVX_LANGUAGE_ALL_ID)	// author all
 		{
-			if (description.getLanguage().getLanguageId()!=language.getLanguageId())
+			int a = description.getLanguage().getLanguageId();
+			int b = language.getLanguageId();
+			if (a!=b)
 			{
+				System.out.println("validateTimedEvent Language != " + description.getLanguage().getLanguageId() + " - " + language.getLanguageId());
 				return false;
 			}
 		}
 		
 		// validate the movie matches...
-		if (description.getMovie().getMovieId()!=movie.getMovieId())
+		int a = description.getMovie().getMovieId();
+		int b = movie.getMovieId();
+		
+		if (a!=b)
 		{
+			System.out.println("validateTimedEvent MovieID != " + description.getMovie().getMovieId() + " - " + movie.getMovieId());
 			return false;
 		}
 
@@ -299,25 +319,31 @@ public boolean validateTimedEvent(Description description, Author author, Langua
 	public boolean validateMenuEvent(MovieMenu menu, Author author, Language language, Movie movie)
 	{		
 		// validate author if not all		
-		if (author.getAuthorId()!=0)	// author all
+		if (author.getAuthorId()!=DVX_Constants.DVX_AUTHOR_ALL_ID)	// author all
 		{
-			if (menu.getAuthor().getAuthorId()!=author.getAuthorId())
+			int a = menu.getAuthor().getAuthorId();
+			int b = author.getAuthorId();
+			if (a!=b)
 			{
 				return false;
 			}
 		}
 		
 		// validate language if not all		
-		if (language.getLanguageId()!=0)	// author all
+		if (language.getLanguageId()!=DVX_Constants.DVX_LANGUAGE_ALL_ID)	// author all
 		{
-			if (menu.getLanguage().getLanguageId()!=language.getLanguageId())
+			int a = menu.getLanguage().getLanguageId();
+			int b = language.getLanguageId();
+			if (a!=b)
 			{
 				return false;
 			}
 		}
+		int a = menu.getMovie().getMovieId();
+		int b = movie.getMovieId();
 		
 		// validate the movie matches...
-		if (menu.getMovie().getMovieId()!=movie.getMovieId())
+		if (a!=b)
 		{
 			return false;
 		}
@@ -337,9 +363,26 @@ public boolean validateTimedEvent(Description description, Author author, Langua
  * @param startFrame the start frame
  * @return true, if successful
  */
+	
+	int lastTimeChapter = -1;
+	int lastTimeOffset = -1;
+	int lastTimeFrame = -1;
 public boolean checkTimeEvent(Author author, Language language, Movie movie, int chapter, int offset, int startFrame)
 	{
+		// TODO FIX THIS. Currently ignoring and filtering frame...
+		// HACK !!!!
+		startFrame = 0;
+		if (!dvx_player.isPlaying())	// are we in playing mode?
+			return false;
+		if ((lastTimeChapter==chapter)&& (lastTimeOffset==offset) && (lastTimeFrame==startFrame))
+		{
+			System.out.println("Same as last time check...");
+			return false;
+		}
 		boolean result = false;
+		lastTimeChapter=chapter;
+		lastTimeOffset=offset;
+		lastTimeFrame=startFrame;
 		try
 		{
 		if (movie==null)
@@ -397,6 +440,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 					break;
 			} */
 //			if (mmDescription.getMovie().equals(movie) ) //&& mmDescription.getAuthor().equals(author)
+			if (mmDescription!=null)	// this should never happen...
 			if (validateTimedEvent(mmDescription, author, language,  movie))
 			{
 				System.out.println("Movie id = " + mmDescription.getMovie().getMovieId() + " - " + movie.getMovieId());
@@ -599,10 +643,15 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 				DVX_Constants.HYPHEN + + 
 				menuItem + 
 				DVX_Constants.GLOBAL_AUDIO_FILE_TYPE_WAV );
-//		movieMenu.setAuthor(author);
-//		movieMenu.setLanguage(language);
-		movieMenu.setDescription(	movie.getMovieName() + DVX_Constants.SPACE_HYPHEN_SPACE + 
-									author.getUser().getUserName()  + DVX_Constants.SPACE_HYPHEN_SPACE +
+		movieMenu.setAuthor(author);
+		movieMenu.setLanguage(language);
+		if (language==null)
+		{
+			System.err.println("insertUpdateMovieMenu language in NULL!!!");
+		}
+		movieMenu.setDescription(	author.getUser().getUserName()  + DVX_Constants.SPACE_HYPHEN_SPACE +
+									language.getLanguageName() + DVX_Constants.SPACE_HYPHEN_SPACE + 
+									movie.getMovieName() + DVX_Constants.SPACE_HYPHEN_SPACE + 
 									"Menu ID " + menuNumber + DVX_Constants.SPACE_HYPHEN_SPACE + 
 									"Item ID " + menuItem );
 		movieMenu.setPath(path);
