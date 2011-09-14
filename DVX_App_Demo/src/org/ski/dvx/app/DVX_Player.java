@@ -129,15 +129,14 @@ static Logger dvxPlayerLogger;
 		// movie = dvdSupport.getMovie("A Beautiful Mind");
 		super();
 		dvxSpeak = new DVX_Speak();
-		dvxDBSupport = new DVX_DB_Support(this,"Greg");
-		language = dvxDBSupport.getLanguage("English");
+		dvxDBSupport = new DVX_DB_Support(this , DVX_Constants.DVX_DEFAULT_AUTHOR);
+		language = dvxDBSupport.getLanguage(DVX_Constants.DVX_DEFAULT_LANGUAGE);
 //		dvxDBSupport.setDvx_speak(dvxSpeak);	
 		
 		dvxPlayerLogger = Logger.getLogger(this.getClass());
 		
 		dvdStates = new DVDStates();
 		dvdStates.setVisible(true);
-		
 
 	}
 
@@ -182,7 +181,8 @@ static Logger dvxPlayerLogger;
 				splash = new DVX_Splash(mainDVXFrame, DVX_Constants.GLOBAL_SPLASH_IMAGE); 
 				splash.showSplashScreen();
 				System.out.println("DVX_Constants.GLOBAL_APPLICATION_ICON = " + DVX_Constants.GLOBAL_APPLICATION_ICON);
-				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
+				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(DVX_Constants.GLOBAL_APPLICATION_ICON));
+//				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
 				//				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
 
 			}
@@ -602,6 +602,7 @@ static Logger dvxPlayerLogger;
 						setMovie(movie);
 						
 						setMenuMode();
+						setMenuTitleSeen(false);
 						
 //						StringWriter sw = new StringWriter();
 						ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -704,7 +705,7 @@ static Logger dvxPlayerLogger;
 					{
 						dvxDBSupport.checkTimeEvent(getAuthor(), language, movie, chapter,
 //								((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
-								realTime, 0);
+								realTime, frame);
 					}
 				setPlayingMode();	// set the status for record to time mode...
 				
