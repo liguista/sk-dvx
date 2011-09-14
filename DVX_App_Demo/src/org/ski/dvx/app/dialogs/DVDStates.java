@@ -483,6 +483,8 @@ public class DVDStates extends javax.swing.JFrame {
 
         pack();
         setTitle("DVX Debug State");
+//        setVisible(false);
+		setIconImage (Toolkit.getDefaultToolkit().getImage(DVX_Constants.GLOBAL_APPLICATION_ICON));
     }// </editor-fold>
 
 /**
