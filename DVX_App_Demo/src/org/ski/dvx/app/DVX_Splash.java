@@ -87,8 +87,8 @@ public class DVX_Splash extends Window {
 //    result = tk.getImage(imgName);
     try
     {
-    	URL imageURL = ClassLoader.getSystemClassLoader().getResource(imgName);
-	    result = tk.getImage(imageURL);
+//    	URL imageURL = ClassLoader.getSystemClassLoader().getResource(imgName);
+	    result = tk.getImage(imgName);
 	    
 	    tracker.addImage(result, 0);
 	    try {
