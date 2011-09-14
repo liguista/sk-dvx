@@ -41,16 +41,16 @@ public class DVX_Constants {
 	public final static String SPACE_HYPHEN_SPACE = "-";
 	public final static String MEDIA_PATH = "media/";
 	
-	public final static String DVX_RESOURCES = "../resources/" ;
-	public final static String DVX_RESOURCES_IMAGES = DVX_RESOURCES + "images/";
+//	public final static String DVX_RESOURCES = "../resources/" ;
+//	public final static String DVX_RESOURCES_IMAGES = DVX_RESOURCES + "images/";
 
 	public final static String GLOBAL_PATH = MEDIA_PATH + "globals/";
 	public final static String GLOBAL_IMAGES_PATH = GLOBAL_PATH + "images/";
 	public final static String GLOBAL_IMAGES_PATH_24_X_24 = GLOBAL_IMAGES_PATH + "icons/";
 	public final static String GLOBAL_MOVIE_PATH = GLOBAL_PATH  + "movies/";
 	
-	public final static String GLOBAL_SPLASH_IMAGE = DVX_RESOURCES_IMAGES  + "sksplash.gif";
-	public final static String GLOBAL_APPLICATION_ICON = DVX_RESOURCES_IMAGES  + "dvxicon.gif";
+	public final static String GLOBAL_SPLASH_IMAGE = GLOBAL_IMAGES_PATH  + "sksplash.gif";
+	public final static String GLOBAL_APPLICATION_ICON = GLOBAL_IMAGES_PATH  + "dvxicon.gif";
 	public final static String DVX_APPLICATION_NAME = "DVX - The New Media Player";
 
 	public final static String MOVIE_PATH = MEDIA_PATH  + "movies/";
@@ -157,6 +157,17 @@ public class DVX_Constants {
 	public final static String  DESCRIPTION_TYPE_AUDIO_UNDEFINED		= "Undefined";
 	public final static String  DESCRIPTION_TYPE_AUDIO_INTERSTITUAL		= "Interstitual";
 	
+	public static final String 	DVX_DEFAULT_AUTHOR = "Greg";
+	public static final String 	DVX_DEFAULT_LANGUAGE = "English";
+	
+	public static final String 	DVX_USER_ALL = "All";
+	public static final int 	DVX_USER_ALL_ID = 0;
+
+	public static final String 	DVX_AUTHOR_ALL = "All";
+	public static final int 	DVX_AUTHOR_ALL_ID = 0;
+
+	public static final String 	DVX_LANGUAGE_ALL = "All";
+	public static final int 	DVX_LANGUAGE_ALL_ID = 0;
 
 	
 	}
