@@ -32,7 +32,9 @@
 
 package org.ski.dvx.app;
 
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 
 // TODO: Auto-generated Javadoc
@@ -110,6 +112,22 @@ public class DVX_Network_Support {
 		}
 		
 	}		
+	   public static boolean internetConnectionExists(String URLName){
+	        try {
+	          HttpURLConnection.setFollowRedirects(false);
+	          // note : you may also need
+	          //        HttpURLConnection.setInstanceFollowRedirects(false)
+	          HttpURLConnection con =
+	             (HttpURLConnection) new URL(URLName).openConnection();
+	          con.setRequestMethod("HEAD");
+	          return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+	        }
+	        catch (Exception e) {
+	           e.printStackTrace();
+	           return false;
+	        }
+	         }
+
 
 }
 
