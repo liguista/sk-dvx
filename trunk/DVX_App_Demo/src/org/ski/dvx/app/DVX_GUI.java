@@ -334,6 +334,7 @@ public class DVX_GUI extends DVX_Menus{
 
         jComboBoxAuthor.setModel(new javax.swing.DefaultComboBoxModel(dvxDBSupport.getAuthorList()));
         jComboBoxAuthor.setToolTipText("User");
+        jComboBoxAuthor.setSelectedIndex(1);
         jComboBoxAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxAuthorActionPerformed(evt);
@@ -345,6 +346,7 @@ public class DVX_GUI extends DVX_Menus{
 
         jComboBoxLanguage.setModel(new javax.swing.DefaultComboBoxModel(dvxDBSupport.getLanguageList()));
         jComboBoxLanguage.setToolTipText("Language");
+        jComboBoxLanguage.setSelectedIndex(1);
         jComboBoxLanguage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxLanguageActionPerformed(evt);
@@ -807,7 +809,8 @@ public class DVX_GUI extends DVX_Menus{
 			
 			if (menuName.equals("Shut Up"))
 			{
-				dvxSpeak.speak("Shut Up");
+//				dvxSpeak.speak("Shut Up");
+				DVX_PlaySound.shutUp();
 			}
 			if (menuName.equals("Eject"))
 			{
