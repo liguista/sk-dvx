@@ -580,20 +580,35 @@ String movieInfo;
      * @param URLName the uRL name
      * @return true, if successful
      */
-    public static boolean internetConnectionExists(String URLName){
-        try {
-          HttpURLConnection.setFollowRedirects(false);
-          // note : you may also need
-          //        HttpURLConnection.setInstanceFollowRedirects(false)
-          HttpURLConnection con =
-             (HttpURLConnection) new URL(URLName).openConnection();
-          con.setRequestMethod("HEAD");
-          return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
-        }
-        catch (Exception e) {
-           e.printStackTrace();
-           return false;
-        }
-         }
+	boolean menuTitleSeen = false;
+	public boolean isMenuTitleSeen() {
+		return menuTitleSeen;
+	}
 
-}
+	public void setMenuTitleSeen(boolean menuTitleSeen) {
+		this.menuTitleSeen = menuTitleSeen;
+	}
+
+	boolean isPlaying()
+	{
+		boolean result = true;
+		if (!menuTitleSeen)
+			if (bitIsSet(dvd.getUOPs(), (1<<20)))	//  i don't think this is correct
+				menuTitleSeen = true;
+			else
+				result =false;	// can't be playing if not past initial menus.
+		
+		result = !bitIsSet(dvd.getUOPs(), (1<<7));
+//		System.out.println("isPlaying " + result);
+		return result;
+	}
+	
+	boolean bitIsSet(int target, int mask)
+	{
+		int temp = target & mask;
+//		System.out.println("Target = " + target + " mask " + mask + " " + temp);
+		if (temp!=0)
+			return true;
+		return false;
+	}
+ }
