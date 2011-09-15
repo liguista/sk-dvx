@@ -49,6 +49,8 @@ import org.ski.dvx.hibernate.Description;
 import org.ski.dvx.hibernate.DescriptionDAO;
 import org.ski.dvx.hibernate.Path;
 import org.ski.dvx.hibernate.PathDAO;
+import org.ski.dvx.hibernate.Rating;
+import org.ski.dvx.hibernate.RatingDAO;
 import org.ski.dvx.hibernate.TransactionLog;
 import org.ski.dvx.hibernate.User;
 import org.ski.dvx.hibernate.UserDAO;
@@ -63,6 +65,8 @@ public class DVX_DB_Support {
 
 	/** The dvx_player. */
 	DVX_Player dvx_player;
+	
+	Description lastDescription;
 
 	
 // ------------------------------------------------------------------------------------
@@ -73,11 +77,9 @@ public class DVX_DB_Support {
  * @param dvx_player the dvx_player
  * @param defaultAuthor the default author
  */
-public DVX_DB_Support(DVX_Player dvx_player, String defaultAuthor)
+public DVX_DB_Support(DVX_Player dvx_player)
 	{
 		this.dvx_player = dvx_player;
-		
-		dvx_player.setAuthor(getAuthor(defaultAuthor));
 	}
 	
 // ------------------------------------------------------------------------------------
@@ -443,6 +445,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 			if (mmDescription!=null)	// this should never happen...
 			if (validateTimedEvent(mmDescription, author, language,  movie))
 			{
+				lastDescription = mmDescription;	// save the last description for later use
 				System.out.println("Movie id = " + mmDescription.getMovie().getMovieId() + " - " + movie.getMovieId());
 //				if (mmDescription.getMovie().getMovieId()==movie.getMovieId())	// validate movie
 //				{
@@ -487,7 +490,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		if (userName=="All")
 			userType = DVX_Constants.USER_TYPE_ALL;
 		
-		user.setUserName(userName);
+		user.setUserHandle(userName);
 		user.setUserActive(true);
 		user.setUserType(userType);	// this messed up the all user... 
 		
@@ -649,7 +652,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		{
 			System.err.println("insertUpdateMovieMenu language in NULL!!!");
 		}
-		movieMenu.setDescription(	author.getUser().getUserName()  + DVX_Constants.SPACE_HYPHEN_SPACE +
+		movieMenu.setDescription(	author.getUser().getUserHandle()  + DVX_Constants.SPACE_HYPHEN_SPACE +
 									language.getLanguageName() + DVX_Constants.SPACE_HYPHEN_SPACE + 
 									movie.getMovieName() + DVX_Constants.SPACE_HYPHEN_SPACE + 
 									"Menu ID " + menuNumber + DVX_Constants.SPACE_HYPHEN_SPACE + 
@@ -751,7 +754,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 //		movieMenu.setAuthor(author);
 //		movieMenu.setLanguage(language);
 		description.setDescriptionLong(	
-										author.getUser().getUserName()  + DVX_Constants.SPACE_HYPHEN_SPACE +
+										author.getUser().getUserHandle()  + DVX_Constants.SPACE_HYPHEN_SPACE +
 										language.getLanguageName()  + DVX_Constants.SPACE_HYPHEN_SPACE +
 										movie.getMovieName() + DVX_Constants.SPACE_HYPHEN_SPACE + 
 										"Chapter ID " + chapter + DVX_Constants.SPACE_HYPHEN_SPACE + 
@@ -845,7 +848,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		String[] authors = new String[authorList.size()];
 		for (int i=0; i<authorList.size();i++)
 		{
-			authors[i]= authorList.get(i).getUser().getUserName();
+			authors[i]= authorList.get(i).getUser().getUserHandle();
 		}
 		return authors;
 	}
@@ -861,7 +864,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 	public User getUser(String userName)
 	{
 		User user = new User();
-		user.setUserName(userName);
+		user.setUserHandle(userName);
 		
 		UserDAO userDao = new UserDAO();
 		@SuppressWarnings("unchecked")
@@ -889,7 +892,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		List<Author> authorList = arthorDao.findByExample(author);
 		for (Author mmAuthor : authorList)
 		{
-			if (mmAuthor.getUser().getUserName().equals(authorName))
+			if (mmAuthor.getUser().getUserHandle().equals(authorName))
 			{
 				return mmAuthor ;
 			}
@@ -1081,7 +1084,75 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		tx.commit();
 
 	}
-	
+
+	/**
+	 * @param string
+	 */
+	public void rateDescription(User user, Language language, Movie movie, String ratingValue) {
+		// TODO Auto-generated method stub
+		int ratingLevel = 0;
+		System.out.println();
+		
+		if (ratingValue.equals("Great"))
+			ratingLevel = 5;
+		if (ratingValue.equals("Good"))
+			ratingLevel = 4;
+		if (ratingValue.equals("Ok"))
+			ratingLevel = 3;
+		if (ratingValue.equals("So So"))
+			ratingLevel = 2;
+		if (ratingValue.equals("Bad"))
+			ratingLevel = 1;
+		
+		if (lastDescription!=null)
+		{
+			RatingDAO ratingDAO = new RatingDAO();
+			Rating rating = new Rating();
+			rating.setDescription(lastDescription);
+			rating.setRatingNameShort(ratingValue);
+			rating.setRating(ratingLevel);
+			rating.setUser(user);
+			rating.setLanguage(language);
+			rating.setMovie(movie);
+			Transaction tx = ratingDAO.getSession().beginTransaction();
+			ratingDAO.save(rating);
+			tx.commit();
+		}
+	}
+
+	/**
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public User getUserLogin(String userName, String password) {
+		// TODO Auto-generated method stub
+		User user = new User();
+
+		user.setUserHandle(userName);
+		user.setUserPassword(password);
+		user.setUserActive(true);
+		UserDAO userDao = new UserDAO();
+		
+		@SuppressWarnings("unchecked")
+		List<User> users = userDao.findByExample(user);
+		if (users.size()>0)
+			return users.get(0);
+
+		return null;
+	}
+
+	/**
+	 * @param user
+	 */
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		UserDAO userDao = new UserDAO();
+		Transaction tx = userDao.getSession().beginTransaction();
+		userDao.merge(user);
+		tx.commit();
+
+	}
 
 }
 

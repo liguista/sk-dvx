@@ -79,7 +79,7 @@ public class DVX_Debug extends DVX_Player{
 	{
 		
 		dvxSpeak = new DVX_Speak();
-		dvxDBSupport = new DVX_DB_Support(this, "Greg");
+		dvxDBSupport = new DVX_DB_Support(this);
 		language = dvxDBSupport.getLanguage("English");
 //		dvxDBSupport.setDvx_speak(dvxSpeak);	
 		

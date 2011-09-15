@@ -129,7 +129,7 @@ public class DVX_DB_SupportTest {
 //		if (dvx_Player==null)
 		{
 			dvx_Player = new DVX_Player();
-			dvx_dv_support = new DVX_DB_Support(dvx_Player, "Greg");
+			dvx_dv_support = new DVX_DB_Support(dvx_Player);
 		}
 		
 	}
