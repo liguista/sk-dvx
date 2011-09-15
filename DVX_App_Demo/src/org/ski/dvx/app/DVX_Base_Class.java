@@ -62,7 +62,7 @@ public class DVX_Base_Class implements java.beans.PropertyChangeListener {
 	DSDvd dvd;
 
 	/** The base time. */
-	int baseTime = 0;
+//	int baseTime = 0;
 	
 	/** The chapter. */
 	int chapter = 0;
@@ -314,18 +314,18 @@ String movieInfo;
 	 *
 	 * @return the base time
 	 */
-	public int getBaseTime() {
+/*	public int getBaseTime() {
 		return baseTime;
 	}
-
+*/
 	/**
 	 * Sets the base time.
 	 *
 	 * @param baseTime the new base time
 	 */
-	public void setBaseTime(int baseTime) {
+/*	public void setBaseTime(int baseTime) {
 		this.baseTime = baseTime;
-	}
+	}*/
 
 	/**
 	 * Gets the chapter.
