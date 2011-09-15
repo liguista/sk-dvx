@@ -46,8 +46,8 @@
         <property name="userDetailHomePhoneNumber" type="java.lang.String">
             <column name="user_detail_home_phone_number" length="65535" />
         </property>
-        <property name="userDetailMobilPhoneNumber" type="java.lang.String">
-            <column name="user_detail_mobil_phone_number" length="65535" />
+        <property name="userDetailCellPhoneNumber" type="java.lang.String">
+            <column name="user_detail_cell_phone_number" length="65535" />
         </property>
         <property name="userDetailSubscriptionStart" type="java.util.Date">
             <column name="user_detail_subscription_start" length="10" />
@@ -55,14 +55,23 @@
         <property name="userDetailSubscriptionEndDate" type="java.util.Date">
             <column name="user_detail_subscription_end_date" length="10" />
         </property>
-        <property name="userDetailActive" type="java.lang.Boolean">
-            <column name="user_detail_active" />
+        <property name="userDetailActive" type="java.lang.String">
+            <column name="user_detail_active" length="10" />
         </property>
         <property name="created" type="java.sql.Timestamp">
             <column name="created" length="19" />
         </property>
         <property name="modified" type="java.sql.Timestamp">
             <column name="modified" length="19" />
+        </property>
+        <property name="userDetailYearOfBirth" type="java.lang.Integer">
+            <column name="user_detail_year_of_birth" />
+        </property>
+        <property name="userDetailGender" type="java.lang.String">
+            <column name="user_detail_gender" length="7" />
+        </property>
+        <property name="userDetailVisionAbility" type="java.lang.String">
+            <column name="user_detail_vision_ability" length="18" />
         </property>
         <set name="userProfiles" inverse="true">
             <key>

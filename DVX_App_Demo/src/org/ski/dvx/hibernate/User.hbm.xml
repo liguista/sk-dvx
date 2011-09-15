@@ -10,11 +10,14 @@
             <column name="user_id" />
             <generator class="native" />
         </id>
-        <property name="userName" type="java.lang.String">
-            <column name="user_name" length="65535" />
+        <property name="userEmail" type="java.lang.String">
+            <column name="user_email" length="65535" />
         </property>
         <property name="userPassword" type="java.lang.String">
             <column name="user_password" length="65535" />
+        </property>
+        <property name="userHandle" type="java.lang.String">
+            <column name="user_handle" length="65535" />
         </property>
         <property name="userLastLogin" type="java.sql.Timestamp">
             <column name="user_last_login" length="19" />
@@ -60,6 +63,12 @@
                 <column name="review_user_fk" />
             </key>
             <one-to-many class="org.ski.dvx.hibernate.Review" />
+        </set>
+        <set name="ratings" inverse="true">
+            <key>
+                <column name="rating_user_fk" />
+            </key>
+            <one-to-many class="org.ski.dvx.hibernate.Rating" />
         </set>
     </class>
 </hibernate-mapping>
