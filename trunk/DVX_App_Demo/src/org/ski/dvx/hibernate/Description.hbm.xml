@@ -26,6 +26,22 @@
         <many-to-one name="path" class="org.ski.dvx.hibernate.Path" fetch="select">
             <column name="description_path_fk" />
         </many-to-one>
+        <property name="descriptionActive" type="java.lang.Integer">
+            <column name="description_active">
+                <comment>Is the description active?</comment>
+            </column>
+        </property>
+        <property name="descriptionChapter" type="java.lang.Integer">
+            <column name="description_chapter" />
+        </property>
+        <property name="descriptionStartTimeInt" type="java.lang.Integer">
+            <column name="description_start_time_int">
+                <comment>This holds the time code as HH:MM:SS:MSX. It is stored as an integer to store the Milliseconds and that is the time base.</comment>
+            </column>
+        </property>
+        <property name="descriptionStartFrame" type="java.lang.Integer">
+            <column name="description_start_frame" />
+        </property>
         <property name="descriptionOrder" type="java.lang.Integer">
             <column name="description_order">
                 <comment>This is the ordinal for the description que.</comment>
@@ -49,17 +65,6 @@
             <column name="description_uri" length="65535">
                 <comment>This is where the description clip is stored.</comment>
             </column>
-        </property>
-        <property name="descriptionChapter" type="java.lang.Integer">
-            <column name="description_chapter" />
-        </property>
-        <property name="descriptionStartTimeInt" type="java.lang.Integer">
-            <column name="description_start_time_int">
-                <comment>This holds the time code as HH:MM:SS:MSX. It is stored as an integer to store the Milliseconds and that is the time base.</comment>
-            </column>
-        </property>
-        <property name="descriptionStartFrame" type="java.lang.Integer">
-            <column name="description_start_frame" />
         </property>
         <property name="descriptionTimeOffset" type="java.lang.Integer">
             <column name="description_time_offset">
@@ -91,11 +96,6 @@
                 <comment>This holds a text representation of the timecode.</comment>
             </column>
         </property>
-        <property name="descriptionActive" type="java.lang.Integer">
-            <column name="description_active">
-                <comment>Is the description active?</comment>
-            </column>
-        </property>
         <property name="descriptionRatingTotal" type="java.lang.Integer">
             <column name="description_rating_total">
                 <comment>Stored average rating.</comment>
@@ -112,5 +112,11 @@
         <property name="modified" type="java.sql.Timestamp">
             <column name="modified" length="19" />
         </property>
+        <set name="ratings" inverse="true">
+            <key>
+                <column name="description_fk" />
+            </key>
+            <one-to-many class="org.ski.dvx.hibernate.Rating" />
+        </set>
     </class>
 </hibernate-mapping>
