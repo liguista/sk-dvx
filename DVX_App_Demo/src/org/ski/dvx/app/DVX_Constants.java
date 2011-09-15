@@ -157,8 +157,9 @@ public class DVX_Constants {
 	public final static String  DESCRIPTION_TYPE_AUDIO_UNDEFINED		= "Undefined";
 	public final static String  DESCRIPTION_TYPE_AUDIO_INTERSTITUAL		= "Interstitual";
 	
-	public static final String 	DVX_DEFAULT_AUTHOR = "Greg";
-	public static final String 	DVX_DEFAULT_LANGUAGE = "English";
+	public static final String 	DVX_DEFAULT_USER 		= "Greg";
+	public static final String 	DVX_DEFAULT_AUTHOR 		= "Greg";
+	public static final String 	DVX_DEFAULT_LANGUAGE 	= "English";
 	
 	public static final String 	DVX_USER_ALL = "All";
 	public static final int 	DVX_USER_ALL_ID = 0;
