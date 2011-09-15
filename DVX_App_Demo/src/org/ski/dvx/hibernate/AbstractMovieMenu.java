@@ -2,169 +2,177 @@ package org.ski.dvx.hibernate;
 
 import java.sql.Timestamp;
 
+
 /**
- * AbstractMovieMenu entity provides the base persistence definition of the
- * MovieMenu entity. @author MyEclipse Persistence Tools
+ * AbstractMovieMenu entity provides the base persistence definition of the MovieMenu entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractMovieMenu implements java.io.Serializable {
+public abstract class AbstractMovieMenu  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer idKey;
-	private Movie movie;
-	private Language language;
-	private Author author;
-	private Path path;
-	private Integer languageFk;
-	private Integer menuActive;
-	private Integer menuNumber;
-	private Integer menuItem;
-	private String description;
-	private Integer menuVersion;
-	private String menuUri;
-	private Timestamp created;
-	private Timestamp modified;
+    // Fields    
 
-	// Constructors
+     private Integer idKey;
+     private Movie movie;
+     private Language language;
+     private Author author;
+     private Path path;
+     private Integer languageFk;
+     private Integer menuActive;
+     private Integer menuNumber;
+     private Integer menuItem;
+     private String description;
+     private Integer menuVersion;
+     private String menuUri;
+     private Timestamp created;
+     private Timestamp modified;
 
-	/** default constructor */
-	public AbstractMovieMenu() {
-	}
 
-	/** full constructor */
-	public AbstractMovieMenu(Movie movie, Language language, Author author,
-			Path path, Integer languageFk, Integer menuActive,
-			Integer menuNumber, Integer menuItem, String description,
-			Integer menuVersion, String menuUri, Timestamp created,
-			Timestamp modified) {
-		this.movie = movie;
-		this.language = language;
-		this.author = author;
-		this.path = path;
-		this.languageFk = languageFk;
-		this.menuActive = menuActive;
-		this.menuNumber = menuNumber;
-		this.menuItem = menuItem;
-		this.description = description;
-		this.menuVersion = menuVersion;
-		this.menuUri = menuUri;
-		this.created = created;
-		this.modified = modified;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractMovieMenu() {
+    }
 
-	public Integer getIdKey() {
-		return this.idKey;
-	}
+    
+    /** full constructor */
+    public AbstractMovieMenu(Movie movie, Language language, Author author, Path path, Integer languageFk, Integer menuActive, Integer menuNumber, Integer menuItem, String description, Integer menuVersion, String menuUri, Timestamp created, Timestamp modified) {
+        this.movie = movie;
+        this.language = language;
+        this.author = author;
+        this.path = path;
+        this.languageFk = languageFk;
+        this.menuActive = menuActive;
+        this.menuNumber = menuNumber;
+        this.menuItem = menuItem;
+        this.description = description;
+        this.menuVersion = menuVersion;
+        this.menuUri = menuUri;
+        this.created = created;
+        this.modified = modified;
+    }
 
-	public void setIdKey(Integer idKey) {
-		this.idKey = idKey;
-	}
+   
+    // Property accessors
 
-	public Movie getMovie() {
-		return this.movie;
-	}
+    public Integer getIdKey() {
+        return this.idKey;
+    }
+    
+    public void setIdKey(Integer idKey) {
+        this.idKey = idKey;
+    }
 
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
+    public Movie getMovie() {
+        return this.movie;
+    }
+    
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
-	public Language getLanguage() {
-		return this.language;
-	}
+    public Language getLanguage() {
+        return this.language;
+    }
+    
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
+    public Author getAuthor() {
+        return this.author;
+    }
+    
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
-	public Author getAuthor() {
-		return this.author;
-	}
+    public Path getPath() {
+        return this.path;
+    }
+    
+    public void setPath(Path path) {
+        this.path = path;
+    }
 
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
+    public Integer getLanguageFk() {
+        return this.languageFk;
+    }
+    
+    public void setLanguageFk(Integer languageFk) {
+        this.languageFk = languageFk;
+    }
 
-	public Path getPath() {
-		return this.path;
-	}
+    public Integer getMenuActive() {
+        return this.menuActive;
+    }
+    
+    public void setMenuActive(Integer menuActive) {
+        this.menuActive = menuActive;
+    }
 
-	public void setPath(Path path) {
-		this.path = path;
-	}
+    public Integer getMenuNumber() {
+        return this.menuNumber;
+    }
+    
+    public void setMenuNumber(Integer menuNumber) {
+        this.menuNumber = menuNumber;
+    }
 
-	public Integer getLanguageFk() {
-		return this.languageFk;
-	}
+    public Integer getMenuItem() {
+        return this.menuItem;
+    }
+    
+    public void setMenuItem(Integer menuItem) {
+        this.menuItem = menuItem;
+    }
 
-	public void setLanguageFk(Integer languageFk) {
-		this.languageFk = languageFk;
-	}
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Integer getMenuActive() {
-		return this.menuActive;
-	}
+    public Integer getMenuVersion() {
+        return this.menuVersion;
+    }
+    
+    public void setMenuVersion(Integer menuVersion) {
+        this.menuVersion = menuVersion;
+    }
 
-	public void setMenuActive(Integer menuActive) {
-		this.menuActive = menuActive;
-	}
+    public String getMenuUri() {
+        return this.menuUri;
+    }
+    
+    public void setMenuUri(String menuUri) {
+        this.menuUri = menuUri;
+    }
 
-	public Integer getMenuNumber() {
-		return this.menuNumber;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public void setMenuNumber(Integer menuNumber) {
-		this.menuNumber = menuNumber;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
+   
 
-	public Integer getMenuItem() {
-		return this.menuItem;
-	}
 
-	public void setMenuItem(Integer menuItem) {
-		this.menuItem = menuItem;
-	}
 
-	public String getDescription() {
-		return this.description;
-	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
-	public Integer getMenuVersion() {
-		return this.menuVersion;
-	}
 
-	public void setMenuVersion(Integer menuVersion) {
-		this.menuVersion = menuVersion;
-	}
 
-	public String getMenuUri() {
-		return this.menuUri;
-	}
-
-	public void setMenuUri(String menuUri) {
-		this.menuUri = menuUri;
-	}
-
-	public Timestamp getCreated() {
-		return this.created;
-	}
-
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-
-	public Timestamp getModified() {
-		return this.modified;
-	}
-
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
 
 }
