@@ -39,6 +39,12 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+
+import org.ski.dvx.app.dialogs.Login;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class DVX_Menus.
@@ -50,8 +56,18 @@ import java.beans.PropertyChangeEvent;
 public class DVX_Menus extends DVX_Base_Class{
 
 // menu bar stuff
+	
+	DVX_Player dvx_player;
     
-    /** The j menu bar dvx. */
+    public DVX_Player getDvx_player() {
+		return dvx_player;
+	}
+
+	public void setDvx_player(DVX_Player dvx_player) {
+		this.dvx_player = dvx_player;
+	}
+
+	/** The j menu bar dvx. */
 private javax.swing.JMenuBar jMenuBarDVX;
     
     /** The j menu bookmarks. */
@@ -69,130 +85,136 @@ private javax.swing.JMenuBar jMenuBarDVX;
     /** The j menu debug. */
     private javax.swing.JMenu jMenuDebug;
    
-    /** The j menu item1. */
+    /** The jMenuItem1. */
     private javax.swing.JMenuItem jMenuItem1;
     
-    /** The j menu item all. */
+    /** The jMenuItem all. */
     private javax.swing.JMenuItem jMenuItemAll;
     
-    /** The j menu item bookmark1. */
+    /** The jMenuItem bookmark1. */
     private javax.swing.JMenuItem jMenuItemBookmark1;
     
-    /** The j menu item bookmark3. */
+    /** The jMenuItem bookmark3. */
     private javax.swing.JMenuItem jMenuItemBookmark3;
     
-    /** The j menu item chapter1. */
+    /** The jMenuItem chapter1. */
     private javax.swing.JMenuItem jMenuItemChapter1;
     
-    /** The j menu item chapter2. */
+    /** The jMenuItem chapter2. */
     private javax.swing.JMenuItem jMenuItemChapter2;
     
-    /** The j menu item chapter3. */
+    /** The jMenuItem chapter3. */
     private javax.swing.JMenuItem jMenuItemChapter3;
     
-    /** The j menu item copy. */
+    /** The jMenuItem copy. */
     private javax.swing.JMenuItem jMenuItemCopy;
     
-    /** The j menu item cut. */
+    /** The jMenuItem cut. */
     private javax.swing.JMenuItem jMenuItemCut;
     
-    /** The j menu item delete. */
+    /** The jMenuItem delete. */
     private javax.swing.JMenuItem jMenuItemDelete;
     
-    /** The j menu item eject. */
+    /** The jMenuItem eject. */
     private javax.swing.JMenuItem jMenuItemEject;
     
-    /** The j menu item english. */
+    /** The jMenuItem english. */
     private javax.swing.JMenuItem jMenuItemEnglish;
     
-    /** The j menu item french. */
+    /** The jMenuItem french. */
     private javax.swing.JMenuItem jMenuItemFrench;
     
-    /** The j menu item japanese. */
+    /** The jMenuItem japanese. */
     private javax.swing.JMenuItem jMenuItemJapanese;
     
-    /** The j menu item minus10 minutes. */
+    /** The jMenuItem minus10 minutes. */
     private javax.swing.JMenuItem jMenuItemMinus10Minutes;
     
-    /** The j menu item minus10 second. */
+    /** The jMenuItem minus10 second. */
     private javax.swing.JMenuItem jMenuItemMinus10Second;
     
-    /** The j menu item minus1 minute. */
+    /** The jMenuItem minus1 minute. */
     private javax.swing.JMenuItem jMenuItemMinus1Minute;
     
-    /** The j menu item mount. */
+    /** The jMenuItem mount. */
     private javax.swing.JMenuItem jMenuItemMount;
     
-    /** The j menu item movie information. */
+    /** The jMenuItem movie information. */
     private javax.swing.JMenuItem jMenuItemMovieInformation;
     
-    /** The j menu item next chapter. */
+    /** The jMenuItem next chapter. */
     private javax.swing.JMenuItem jMenuItemNextChapter;
     
-    /** The j menu item paste. */
+    /** The jMenuItem paste. */
     private javax.swing.JMenuItem jMenuItemPaste;
     
-    /** The j menu item pause. */
+    /** The jMenuItem pause. */
     private javax.swing.JMenuItem jMenuItemPause;
     
-    /** The j menu item play. */
+    /** The jMenuItem play. */
     private javax.swing.JMenuItem jMenuItemPlay;
     
-    /** The j menu item plus10 minutes. */
+    /** The jMenuItem plus10 minutes. */
     private javax.swing.JMenuItem jMenuItemPlus10Minutes;
     
-    /** The j menu item plus10 second. */
+    /** The jMenuItem plus10 second. */
     private javax.swing.JMenuItem jMenuItemPlus10Second;
     
-    /** The j menu item plus1 minute. */
+    /** The jMenuItem plus1 minute. */
     private javax.swing.JMenuItem jMenuItemPlus1Minute;
     
-    /** The j menu item previous chapter. */
+    /** The jMenuItem previous chapter. */
     private javax.swing.JMenuItem jMenuItemPreviousChapter;
     
-    /** The j menu item redo. */
+    /** The jMenuItem redo. */
     private javax.swing.JMenuItem jMenuItemRedo;
     
-    /** The j menu item remove last description. */
+    /** The jMenuItem remove last description. */
     private javax.swing.JMenuItem jMenuItemRemoveLastDescription;
     
-    /** The j menu item select description. */
+    /** The jMenuItem select description. */
     private javax.swing.JMenuItem jMenuItemSelectDescription;
     
-    /** The j menu item set bookmark1. */
+    /** The jMenuItem set bookmark1. */
     private javax.swing.JMenuItem jMenuItemSetBookmark1;
     
-    /** The j menu item set bookmark2. */
+    /** The jMenuItem set bookmark2. */
     private javax.swing.JMenuItem jMenuItemSetBookmark2;
     
-    /** The j menu item set bookmark3. */
+    /** The jMenuItem set bookmark3. */
     private javax.swing.JMenuItem jMenuItemSetBookmark3;
     
-    /** The j menu item set movie description. */
+    /** The jMenuItem set movie description. */
     private javax.swing.JMenuItem jMenuItemSetMovieDescription;
     
-    /** The j menu item shutup. */
+    /** The jMenuItem set movie login . */
+    private javax.swing.JMenuItem jMenuItemLogin;
+
+    /** The jMenuItem set movie logout. */
+    private javax.swing.JMenuItem jMenuItemLogout;
+
+    /** The jMenuItem shutup. */
     private javax.swing.JMenuItem jMenuItemShutup;
     
-    /** The j menu item spanish. */
+    /** The jMenuItem spanish. */
     private javax.swing.JMenuItem jMenuItemSpanish;
     
-    /** The j menu item stop. */
+    /** The jMenuItem stop. */
     private javax.swing.JMenuItem jMenuItemStop;
     
-    /** The j menu item title1. */
+    /** The jMenuItem title1. */
     private javax.swing.JMenuItem jMenuItemTitle1;
     
-    /** The j menu item title2. */
+    /** The jMenuItem title2. */
     private javax.swing.JMenuItem jMenuItemTitle2;
     
-    /** The j menu item title3. */
+    /** The jMenuItem title3. */
     private javax.swing.JMenuItem jMenuItemTitle3;
     
-    /** The j menu item undo. */
+    /** The jMenuItem undo. */
     private javax.swing.JMenuItem jMenuItemUndo;
     
-    /** The j menu item bookmark2. */
+    /** The jMenuItem bookmark2. */
     private javax.swing.JMenuItem jMenuItemBookmark2;
     
     /** The j menu language. */
@@ -207,19 +229,19 @@ private javax.swing.JMenuBar jMenuBarDVX;
     /** The j menu transport. */
     private javax.swing.JMenu jMenuTransport;
 
-    /** The j menu item debug1. */
+    /** The jMenuItem debug1. */
     private javax.swing.JMenuItem jMenuItemDebug1;
     
-    /** The j menu item debug2. */
+    /** The jMenuItem debug2. */
     private javax.swing.JMenuItem jMenuItemDebug2;
     
-    /** The j menu item debug3. */
+    /** The jMenuItem debug3. */
     private javax.swing.JMenuItem jMenuItemDebug3;
     
-    /** The j menu item debug4. */
+    /** The jMenuItem debug4. */
     private javax.swing.JMenuItem jMenuItemDebug4;
     
-    /** The j menu item debug5. */
+    /** The jMenuItem debug5. */
     private javax.swing.JMenuItem jMenuItemDebug5;
 
     
@@ -232,14 +254,34 @@ private javax.swing.JMenuBar jMenuBarDVX;
     /** The j menu help. */
     private javax.swing.JMenu jMenuHelp;
     
-    /** The j menu item help contents. */
+    /** The jMenuItem help contents. */
     private javax.swing.JMenuItem jMenuItemHelpContents;
     
-    /** The j menu item about dvx. */
+    /** The jMenuItem about dvx. */
     private javax.swing.JMenuItem jMenuItemAboutDVX;
     
-    /** The j menu item description list. */
+    /** The jMenuItem description list. */
     private javax.swing.JMenuItem jMenuItemDescriptionList;
+    
+    /** The j menu help. */
+    private javax.swing.JMenu jMenuClipRating;
+    
+    /** The jMenuItem help contents. */
+    private javax.swing.JMenuItem jMenuItemClipRating_Great;
+    
+    /** The jMenuItem about dvx. */
+    private javax.swing.JMenuItem jMenuItemClipRating_Good;
+    
+    /** The jMenuItem description list. */
+    private javax.swing.JMenuItem jMenuItemClipRating_OK;
+    
+    /** The jMenuItem description list. */
+    private javax.swing.JMenuItem jMenuItemClipRating_SOSO;
+    
+    /** The jMenuItem description list. */
+    private javax.swing.JMenuItem jMenuItemClipRating_Bad;
+    
+    
     
     /**
      * Instantiates a new dV x_ menus.
@@ -258,9 +300,13 @@ private javax.swing.JMenuBar jMenuBarDVX;
     {
     	jMenuBarDVX = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
+ 
+        jMenuItemLogin = new javax.swing.JMenuItem();
+        jMenuItemLogout = new javax.swing.JMenuItem();
+        
         jMenuItemMovieInformation = new javax.swing.JMenuItem();
         jMenuItemSelectDescription = new javax.swing.JMenuItem();
-         jMenuItemMount = new javax.swing.JMenuItem();
+        jMenuItemMount = new javax.swing.JMenuItem();
         jMenuItemEject = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuLanguage = new javax.swing.JMenu();
@@ -294,7 +340,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
         jMenuItemPlus1Minute = new javax.swing.JMenuItem();
         jMenuItemMinus10Minutes = new javax.swing.JMenuItem();
         jMenuItemPlus10Minutes = new javax.swing.JMenuItem();
-         jMenuDescriptions = new javax.swing.JMenu();
+        jMenuDescriptions = new javax.swing.JMenu();
         jMenuItemSetMovieDescription = new javax.swing.JMenuItem();
         jMenuItemRemoveLastDescription = new javax.swing.JMenuItem();
         jMenuChapter = new javax.swing.JMenu();
@@ -316,8 +362,31 @@ private javax.swing.JMenuBar jMenuBarDVX;
         jMenuItemBookmark1 = new javax.swing.JMenuItem();
         jMenuItemBookmark2 = new javax.swing.JMenuItem();
         jMenuItemBookmark3 = new javax.swing.JMenuItem();
-	 jMenuFile.setText("File");
-	 
+        
+        jMenuClipRating= new javax.swing.JMenu();
+        
+        /** The jMenuItem help contents. */
+       jMenuItemClipRating_Great = new javax.swing.JMenuItem();
+        
+        /** The jMenuItem about dvx. */
+        jMenuItemClipRating_Good = new javax.swing.JMenuItem();
+        
+        /** The jMenuItem description list. */
+        jMenuItemClipRating_OK = new javax.swing.JMenuItem();
+        
+        /** The jMenuItem description list. */
+        jMenuItemClipRating_SOSO = new javax.swing.JMenuItem();
+        
+        /** The jMenuItem description list. */
+        jMenuItemClipRating_Bad = new javax.swing.JMenuItem();
+
+        
+        // *********************************************************************
+        jMenuFile.setText("File");
+
+        jMenuItemLogin  = addMenuItem(	jMenuFile, "Login...",	null);
+        jMenuItemLogout  = addMenuItem(	jMenuFile, "Logout...",	null);
+
 
      jMenuItemMovieInformation.setText("Movie Information...");
      jMenuItemMovieInformation.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +435,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
      });
  
      jMenuBarDVX.add(jMenuFile);
+     // *********************************************************************
 
      jMenuLanguage.setText("Language");
      jMenuLanguage.addActionListener(new java.awt.event.ActionListener() {
@@ -416,7 +486,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
      });
  
      jMenuBarDVX.add(jMenuLanguage);
-  
+     // *********************************************************************
+ 
      jMenuEdit.setText("Edit");
     
  
@@ -515,6 +586,9 @@ private javax.swing.JMenuBar jMenuBarDVX;
  
      jMenuBarDVX.add(jMenuEdit);
 
+     // *********************************************************************
+
+     
      jMenuTransport.setText("Transport");
    
      jMenuItemPlay.setText("Play");
@@ -593,6 +667,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
  
      jMenuBarDVX.add(jMenuTransport);
 
+     // *********************************************************************
+
       jMenuDescriptions.setText("Descriptions");
       jMenuDescriptions.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -617,6 +693,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
      });
 
      jMenuBarDVX.add( jMenuDescriptions);
+
+     // *********************************************************************
 
      jMenuChapter.setText("Chapter");
 
@@ -664,6 +742,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
 
      jMenuBarDVX.add(jMenuChapter);
 
+     // *********************************************************************
+
      jMenuTitle.setText("Title");
 
      jMenuItemTitle1.setText("Title 1");
@@ -691,6 +771,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
      });
 
      jMenuBarDVX.add(jMenuTitle);
+
+     // *********************************************************************
 
      jMenuBookmarks.setText("Bookmarks");
 
@@ -763,6 +845,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
          }
      });
  */    
+     // *********************************************************************
+
      jMenuHelp = new javax.swing.JMenu();
      jMenuItemHelpContents = new javax.swing.JMenuItem();
      jMenuItemHelpContents.setText("DVX Help");
@@ -798,6 +882,34 @@ private javax.swing.JMenuBar jMenuBarDVX;
 
       jMenuBarDVX.add(jMenuHelp);
 
+      // *********************************************************************
+      /** The jMenuItem about dvx. */
+      
+      /** The jMenuItem description list. */
+      jMenuItemClipRating_Great  = addMenuItem(	jMenuClipRating, "Great", 
+    		  									javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
+      
+      jMenuItemClipRating_Good = addMenuItem(	jMenuClipRating, "Good", 
+    		  									javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
+      
+      /** The jMenuItem description list. */
+      jMenuItemClipRating_OK  = addMenuItem(	jMenuClipRating, "Ok", 
+    		  									javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
+      
+      /** The jMenuItem description list. */
+      jMenuItemClipRating_SOSO  = addMenuItem(	jMenuClipRating, "So So", 
+    		  									javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
+      
+      /** The jMenuItem description list. */
+      jMenuItemClipRating_Bad  = addMenuItem(	jMenuClipRating, "Bad", 
+    		  									javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK));
+
+      jMenuClipRating.setText("Clip Rating");
+
+      jMenuBarDVX.add(jMenuClipRating);
+      
+     // *********************************************************************
+
       
  	 jMenuDebug = new javax.swing.JMenu();
 	 jMenuDebug.setText("Debug");
@@ -821,7 +933,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
      });
     
      jMenuItemDebug3 = new javax.swing.JMenuItem();
-     jMenuItemDebug3.setText("Debug 3");
+     jMenuItemDebug3.setText("Fullscreen");
      jMenuDebug.add(jMenuItemDebug3);
      jMenuItemDebug3.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -861,60 +973,6 @@ private javax.swing.JMenuBar jMenuBarDVX;
 		
 	}
 
-	/**
-	 * J menu item movie informatio action performed.
-	 *
-	 * @param evt the evt
-	 */
-	private void jMenuItemMovieInformatioActionPerformed(java.awt.event.ActionEvent evt) {
-	// TODO add your handling code here:
-	}
-
-	/**
-	 * J menu item play action performed.
-	 *
-	 * @param evt the evt
-	 */
-	private void jMenuItemPlayActionPerformed(java.awt.event.ActionEvent evt) {
-	// TODO add your handling code here:
-	}
-
-	/**
-	 * J menu item set movie description action performed.
-	 *
-	 * @param evt the evt
-	 */
-	private void jMenuItemSetMovieDescriptionActionPerformed(java.awt.event.ActionEvent evt) {
-	// TODO add your handling code here:
-	}
-
-	/**
-	 * J menu item next chapter action performed.
-	 *
-	 * @param evt the evt
-	 */
-	private void jMenuItemNextChapterActionPerformed(java.awt.event.ActionEvent evt) {
-	// TODO add your handling code here:
-	}
-
-	/**
-	 * J menu item title1 action performed.
-	 *
-	 * @param evt the evt
-	 */
-	private void jMenuItemTitle1ActionPerformed(java.awt.event.ActionEvent evt) {
-	// TODO add your handling code here:
-	}
-	
-	/**
-	 * J menu item description list action performed.
-	 *
-	 * @param evt the evt
-	 */
-	private void jMenuItemDescriptionListActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-		}
-	
 	/**
 	 * Handle menu event.
 	 *
@@ -983,6 +1041,37 @@ private javax.swing.JMenuBar jMenuBarDVX;
 				System.out.println("Exception getting bookmark 3" + e);
 			}
 		}
+		
+		// ************************
+		
+		if (command.equalsIgnoreCase("Great"))
+		{
+			dvxDBSupport.rateDescription(getUser(), getLanguage(), getMovie(), "Great");
+			getDvxSpeak().speak("Great");
+		}
+		if (command.equalsIgnoreCase("Good"))
+		{
+			dvxDBSupport.rateDescription(getUser(), getLanguage(), getMovie(),"Good");
+			getDvxSpeak().speak("Good");
+		}
+		if (command.equalsIgnoreCase("Ok"))
+		{
+			dvxDBSupport.rateDescription(getUser(), getLanguage(), getMovie(), "Ok");
+			getDvxSpeak().speak("Ok");
+		}
+		if (command.equalsIgnoreCase("So So"))
+		{
+			dvxDBSupport.rateDescription(getUser(), getLanguage(), getMovie(), "So So");
+			getDvxSpeak().speak("So So");
+		}
+		if (command.equalsIgnoreCase("Bad"))
+		{
+			dvxDBSupport.rateDescription(getUser(), getLanguage(), getMovie(),"Bad");
+			getDvxSpeak().speak("Bad");
+		}
+		
+		// ************************
+		
 		if (command.equalsIgnoreCase("DVX Help"))
 		{
 			System.out.println("DVX Help" );
@@ -1000,7 +1089,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
 			System.out.println("DVD title count = " + dvd.gotoTitle(1) ) ;
 			System.out.println("gotoTitle*****************************" ) ;
 		}
-		if (command.equalsIgnoreCase("Debug 3"))
+		if (command.equalsIgnoreCase("Fullscreen"))
 		{
 //			dvd.goFullScreen(dvd.getGraphics(), 0);
 //			System.out.println("showMenu*****************************" ) ;
@@ -1016,17 +1105,52 @@ private javax.swing.JMenuBar jMenuBarDVX;
 		{
 			dvdStates.setVisible(true);
 		}
+		
 		if (command.equalsIgnoreCase("Hide States"))
 		{
 			dvdStates.setVisible(false);
 		}
-	}
+		
+		if (command.equalsIgnoreCase("Login..."))
+		{
+	        java.awt.EventQueue.invokeLater(new Runnable() {
+	
+	            public void run() {
+	            	Login login = new Login(getDvx_player());
+	            	login.setVisible(true);
+	            	
+	            }
+	        });
+		}
+
+}
+	
+	// *******************************************************************
 	
 	/**
-		String num2StringFmt(int number)
-		 * @param number to be formatted
-		 * @return String with leading 0 if < 10
+	 * Adds the menu item.
+	 *
+	 * @param menu the menu
+	 * @param text the text
+	 * @param keyStroke the key stroke
+	 * @return the j menu item
 	 */
+	JMenuItem addMenuItem(JMenu menu, String text, KeyStroke keyStroke)
+	{
+		JMenuItem menuItem = new JMenuItem();
+		
+		menuItem.setText(text);
+		menuItem.addActionListener(new java.awt.event.ActionListener() {
+	         public void actionPerformed(java.awt.event.ActionEvent evt) {
+	        	 handleMenuEvent(evt);
+	         }
+	     });
+		if (keyStroke!=null)
+			menuItem.setAccelerator(keyStroke);
+
+		menu.add(menuItem);
+		return menuItem;
+	}
 
 
 }
