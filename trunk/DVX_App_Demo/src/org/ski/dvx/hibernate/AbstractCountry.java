@@ -4,127 +4,137 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * AbstractCountry entity provides the base persistence definition of the
- * Country entity. @author MyEclipse Persistence Tools
+ * AbstractCountry entity provides the base persistence definition of the Country entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractCountry implements java.io.Serializable {
+public abstract class AbstractCountry  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer countryId;
-	private Continent continent;
-	private String countryName;
-	private String countryNameShort;
-	private Timestamp created;
-	private Timestamp modified;
-	private Set states = new HashSet(0);
-	private Set cities = new HashSet(0);
-	private Set movies = new HashSet(0);
-	private Set userDetails = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer countryId;
+     private Continent continent;
+     private String countryName;
+     private String countryNameShort;
+     private Timestamp created;
+     private Timestamp modified;
+     private Set states = new HashSet(0);
+     private Set cities = new HashSet(0);
+     private Set movies = new HashSet(0);
+     private Set userDetails = new HashSet(0);
 
-	/** default constructor */
-	public AbstractCountry() {
-	}
 
-	/** full constructor */
-	public AbstractCountry(Continent continent, String countryName,
-			String countryNameShort, Timestamp created, Timestamp modified,
-			Set states, Set cities, Set movies, Set userDetails) {
-		this.continent = continent;
-		this.countryName = countryName;
-		this.countryNameShort = countryNameShort;
-		this.created = created;
-		this.modified = modified;
-		this.states = states;
-		this.cities = cities;
-		this.movies = movies;
-		this.userDetails = userDetails;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractCountry() {
+    }
 
-	public Integer getCountryId() {
-		return this.countryId;
-	}
+    
+    /** full constructor */
+    public AbstractCountry(Continent continent, String countryName, String countryNameShort, Timestamp created, Timestamp modified, Set states, Set cities, Set movies, Set userDetails) {
+        this.continent = continent;
+        this.countryName = countryName;
+        this.countryNameShort = countryNameShort;
+        this.created = created;
+        this.modified = modified;
+        this.states = states;
+        this.cities = cities;
+        this.movies = movies;
+        this.userDetails = userDetails;
+    }
 
-	public void setCountryId(Integer countryId) {
-		this.countryId = countryId;
-	}
+   
+    // Property accessors
 
-	public Continent getContinent() {
-		return this.continent;
-	}
+    public Integer getCountryId() {
+        return this.countryId;
+    }
+    
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
 
-	public void setContinent(Continent continent) {
-		this.continent = continent;
-	}
+    public Continent getContinent() {
+        return this.continent;
+    }
+    
+    public void setContinent(Continent continent) {
+        this.continent = continent;
+    }
 
-	public String getCountryName() {
-		return this.countryName;
-	}
+    public String getCountryName() {
+        return this.countryName;
+    }
+    
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
 
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
+    public String getCountryNameShort() {
+        return this.countryNameShort;
+    }
+    
+    public void setCountryNameShort(String countryNameShort) {
+        this.countryNameShort = countryNameShort;
+    }
 
-	public String getCountryNameShort() {
-		return this.countryNameShort;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public void setCountryNameShort(String countryNameShort) {
-		this.countryNameShort = countryNameShort;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
+    public Set getStates() {
+        return this.states;
+    }
+    
+    public void setStates(Set states) {
+        this.states = states;
+    }
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
+    public Set getCities() {
+        return this.cities;
+    }
+    
+    public void setCities(Set cities) {
+        this.cities = cities;
+    }
 
-	public Timestamp getModified() {
-		return this.modified;
-	}
+    public Set getMovies() {
+        return this.movies;
+    }
+    
+    public void setMovies(Set movies) {
+        this.movies = movies;
+    }
 
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
+    public Set getUserDetails() {
+        return this.userDetails;
+    }
+    
+    public void setUserDetails(Set userDetails) {
+        this.userDetails = userDetails;
+    }
+   
 
-	public Set getStates() {
-		return this.states;
-	}
 
-	public void setStates(Set states) {
-		this.states = states;
-	}
 
-	public Set getCities() {
-		return this.cities;
-	}
 
-	public void setCities(Set cities) {
-		this.cities = cities;
-	}
 
-	public Set getMovies() {
-		return this.movies;
-	}
 
-	public void setMovies(Set movies) {
-		this.movies = movies;
-	}
 
-	public Set getUserDetails() {
-		return this.userDetails;
-	}
-
-	public void setUserDetails(Set userDetails) {
-		this.userDetails = userDetails;
-	}
 
 }

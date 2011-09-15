@@ -4,97 +4,127 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * AbstractLanguage entity provides the base persistence definition of the
- * Language entity. @author MyEclipse Persistence Tools
+ * AbstractLanguage entity provides the base persistence definition of the Language entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractLanguage implements java.io.Serializable {
+public abstract class AbstractLanguage  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer languageId;
-	private String languageName;
-	private String languageNameShort;
-	private Timestamp created;
-	private Timestamp modified;
-	private Set movieMenus = new HashSet(0);
-	private Set descriptions = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer languageId;
+     private String languageName;
+     private String languageNameShort;
+     private Timestamp created;
+     private Timestamp modified;
+     private Set movieMenus = new HashSet(0);
+     private Set descriptions = new HashSet(0);
+     private Set versions = new HashSet(0);
+     private Set ratings = new HashSet(0);
 
-	/** default constructor */
-	public AbstractLanguage() {
-	}
 
-	/** full constructor */
-	public AbstractLanguage(String languageName, String languageNameShort,
-			Timestamp created, Timestamp modified, Set movieMenus,
-			Set descriptions) {
-		this.languageName = languageName;
-		this.languageNameShort = languageNameShort;
-		this.created = created;
-		this.modified = modified;
-		this.movieMenus = movieMenus;
-		this.descriptions = descriptions;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractLanguage() {
+    }
 
-	public Integer getLanguageId() {
-		return this.languageId;
-	}
+    
+    /** full constructor */
+    public AbstractLanguage(String languageName, String languageNameShort, Timestamp created, Timestamp modified, Set movieMenus, Set descriptions, Set versions, Set ratings) {
+        this.languageName = languageName;
+        this.languageNameShort = languageNameShort;
+        this.created = created;
+        this.modified = modified;
+        this.movieMenus = movieMenus;
+        this.descriptions = descriptions;
+        this.versions = versions;
+        this.ratings = ratings;
+    }
 
-	public void setLanguageId(Integer languageId) {
-		this.languageId = languageId;
-	}
+   
+    // Property accessors
 
-	public String getLanguageName() {
-		return this.languageName;
-	}
+    public Integer getLanguageId() {
+        return this.languageId;
+    }
+    
+    public void setLanguageId(Integer languageId) {
+        this.languageId = languageId;
+    }
 
-	public void setLanguageName(String languageName) {
-		this.languageName = languageName;
-	}
+    public String getLanguageName() {
+        return this.languageName;
+    }
+    
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
+    }
 
-	public String getLanguageNameShort() {
-		return this.languageNameShort;
-	}
+    public String getLanguageNameShort() {
+        return this.languageNameShort;
+    }
+    
+    public void setLanguageNameShort(String languageNameShort) {
+        this.languageNameShort = languageNameShort;
+    }
 
-	public void setLanguageNameShort(String languageNameShort) {
-		this.languageNameShort = languageNameShort;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
+    public Set getMovieMenus() {
+        return this.movieMenus;
+    }
+    
+    public void setMovieMenus(Set movieMenus) {
+        this.movieMenus = movieMenus;
+    }
 
-	public Timestamp getModified() {
-		return this.modified;
-	}
+    public Set getDescriptions() {
+        return this.descriptions;
+    }
+    
+    public void setDescriptions(Set descriptions) {
+        this.descriptions = descriptions;
+    }
 
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
+    public Set getVersions() {
+        return this.versions;
+    }
+    
+    public void setVersions(Set versions) {
+        this.versions = versions;
+    }
 
-	public Set getMovieMenus() {
-		return this.movieMenus;
-	}
+    public Set getRatings() {
+        return this.ratings;
+    }
+    
+    public void setRatings(Set ratings) {
+        this.ratings = ratings;
+    }
+   
 
-	public void setMovieMenus(Set movieMenus) {
-		this.movieMenus = movieMenus;
-	}
 
-	public Set getDescriptions() {
-		return this.descriptions;
-	}
 
-	public void setDescriptions(Set descriptions) {
-		this.descriptions = descriptions;
-	}
+
+
+
+
 
 }

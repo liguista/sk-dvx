@@ -4,106 +4,127 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * AbstractAuthor entity provides the base persistence definition of the Author
- * entity. @author MyEclipse Persistence Tools
+ * AbstractAuthor entity provides the base persistence definition of the Author entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractAuthor implements java.io.Serializable {
+public abstract class AbstractAuthor  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer authorId;
-	private User user;
-	private Timestamp created;
-	private Timestamp modified;
-	private Set movieMenus = new HashSet(0);
-	private Set descriptions = new HashSet(0);
-	private Set paths = new HashSet(0);
-	private Set crewCasts = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer authorId;
+     private User user;
+     private Timestamp created;
+     private Timestamp modified;
+     private Set movieMenus = new HashSet(0);
+     private Set descriptions = new HashSet(0);
+     private Set versions = new HashSet(0);
+     private Set paths = new HashSet(0);
+     private Set crewCasts = new HashSet(0);
 
-	/** default constructor */
-	public AbstractAuthor() {
-	}
 
-	/** full constructor */
-	public AbstractAuthor(User user, Timestamp created, Timestamp modified,
-			Set movieMenus, Set descriptions, Set paths, Set crewCasts) {
-		this.user = user;
-		this.created = created;
-		this.modified = modified;
-		this.movieMenus = movieMenus;
-		this.descriptions = descriptions;
-		this.paths = paths;
-		this.crewCasts = crewCasts;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractAuthor() {
+    }
 
-	public Integer getAuthorId() {
-		return this.authorId;
-	}
+    
+    /** full constructor */
+    public AbstractAuthor(User user, Timestamp created, Timestamp modified, Set movieMenus, Set descriptions, Set versions, Set paths, Set crewCasts) {
+        this.user = user;
+        this.created = created;
+        this.modified = modified;
+        this.movieMenus = movieMenus;
+        this.descriptions = descriptions;
+        this.versions = versions;
+        this.paths = paths;
+        this.crewCasts = crewCasts;
+    }
 
-	public void setAuthorId(Integer authorId) {
-		this.authorId = authorId;
-	}
+   
+    // Property accessors
 
-	public User getUser() {
-		return this.user;
-	}
+    public Integer getAuthorId() {
+        return this.authorId;
+    }
+    
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public User getUser() {
+        return this.user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
 
-	public Timestamp getModified() {
-		return this.modified;
-	}
+    public Set getMovieMenus() {
+        return this.movieMenus;
+    }
+    
+    public void setMovieMenus(Set movieMenus) {
+        this.movieMenus = movieMenus;
+    }
 
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
+    public Set getDescriptions() {
+        return this.descriptions;
+    }
+    
+    public void setDescriptions(Set descriptions) {
+        this.descriptions = descriptions;
+    }
 
-	public Set getMovieMenus() {
-		return this.movieMenus;
-	}
+    public Set getVersions() {
+        return this.versions;
+    }
+    
+    public void setVersions(Set versions) {
+        this.versions = versions;
+    }
 
-	public void setMovieMenus(Set movieMenus) {
-		this.movieMenus = movieMenus;
-	}
+    public Set getPaths() {
+        return this.paths;
+    }
+    
+    public void setPaths(Set paths) {
+        this.paths = paths;
+    }
 
-	public Set getDescriptions() {
-		return this.descriptions;
-	}
+    public Set getCrewCasts() {
+        return this.crewCasts;
+    }
+    
+    public void setCrewCasts(Set crewCasts) {
+        this.crewCasts = crewCasts;
+    }
+   
 
-	public void setDescriptions(Set descriptions) {
-		this.descriptions = descriptions;
-	}
 
-	public Set getPaths() {
-		return this.paths;
-	}
 
-	public void setPaths(Set paths) {
-		this.paths = paths;
-	}
 
-	public Set getCrewCasts() {
-		return this.crewCasts;
-	}
 
-	public void setCrewCasts(Set crewCasts) {
-		this.crewCasts = crewCasts;
-	}
+
+
 
 }

@@ -2,76 +2,87 @@ package org.ski.dvx.hibernate;
 
 import java.sql.Timestamp;
 
+
 /**
- * AbstractAttribute entity provides the base persistence definition of the
- * Attribute entity. @author MyEclipse Persistence Tools
+ * AbstractAttribute entity provides the base persistence definition of the Attribute entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractAttribute implements java.io.Serializable {
+public abstract class AbstractAttribute  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer attributeId;
-	private String attibuteName;
-	private String attributeValue;
-	private Timestamp modified;
-	private Timestamp created;
+    // Fields    
 
-	// Constructors
+     private Integer attributeId;
+     private String attibuteName;
+     private String attributeValue;
+     private Timestamp modified;
+     private Timestamp created;
 
-	/** default constructor */
-	public AbstractAttribute() {
-	}
 
-	/** full constructor */
-	public AbstractAttribute(String attibuteName, String attributeValue,
-			Timestamp modified, Timestamp created) {
-		this.attibuteName = attibuteName;
-		this.attributeValue = attributeValue;
-		this.modified = modified;
-		this.created = created;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractAttribute() {
+    }
 
-	public Integer getAttributeId() {
-		return this.attributeId;
-	}
+    
+    /** full constructor */
+    public AbstractAttribute(String attibuteName, String attributeValue, Timestamp modified, Timestamp created) {
+        this.attibuteName = attibuteName;
+        this.attributeValue = attributeValue;
+        this.modified = modified;
+        this.created = created;
+    }
 
-	public void setAttributeId(Integer attributeId) {
-		this.attributeId = attributeId;
-	}
+   
+    // Property accessors
 
-	public String getAttibuteName() {
-		return this.attibuteName;
-	}
+    public Integer getAttributeId() {
+        return this.attributeId;
+    }
+    
+    public void setAttributeId(Integer attributeId) {
+        this.attributeId = attributeId;
+    }
 
-	public void setAttibuteName(String attibuteName) {
-		this.attibuteName = attibuteName;
-	}
+    public String getAttibuteName() {
+        return this.attibuteName;
+    }
+    
+    public void setAttibuteName(String attibuteName) {
+        this.attibuteName = attibuteName;
+    }
 
-	public String getAttributeValue() {
-		return this.attributeValue;
-	}
+    public String getAttributeValue() {
+        return this.attributeValue;
+    }
+    
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue;
+    }
 
-	public void setAttributeValue(String attributeValue) {
-		this.attributeValue = attributeValue;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
 
-	public Timestamp getModified() {
-		return this.modified;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+   
 
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
+
+
+
+
 
 }

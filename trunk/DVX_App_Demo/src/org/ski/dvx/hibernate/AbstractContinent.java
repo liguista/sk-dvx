@@ -4,76 +4,87 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * AbstractContinent entity provides the base persistence definition of the
- * Continent entity. @author MyEclipse Persistence Tools
+ * AbstractContinent entity provides the base persistence definition of the Continent entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractContinent implements java.io.Serializable {
+public abstract class AbstractContinent  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer continentId;
-	private String continentName;
-	private Timestamp created;
-	private Timestamp modified;
-	private Set countries = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer continentId;
+     private String continentName;
+     private Timestamp created;
+     private Timestamp modified;
+     private Set countries = new HashSet(0);
 
-	/** default constructor */
-	public AbstractContinent() {
-	}
 
-	/** full constructor */
-	public AbstractContinent(String continentName, Timestamp created,
-			Timestamp modified, Set countries) {
-		this.continentName = continentName;
-		this.created = created;
-		this.modified = modified;
-		this.countries = countries;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractContinent() {
+    }
 
-	public Integer getContinentId() {
-		return this.continentId;
-	}
+    
+    /** full constructor */
+    public AbstractContinent(String continentName, Timestamp created, Timestamp modified, Set countries) {
+        this.continentName = continentName;
+        this.created = created;
+        this.modified = modified;
+        this.countries = countries;
+    }
 
-	public void setContinentId(Integer continentId) {
-		this.continentId = continentId;
-	}
+   
+    // Property accessors
 
-	public String getContinentName() {
-		return this.continentName;
-	}
+    public Integer getContinentId() {
+        return this.continentId;
+    }
+    
+    public void setContinentId(Integer continentId) {
+        this.continentId = continentId;
+    }
 
-	public void setContinentName(String continentName) {
-		this.continentName = continentName;
-	}
+    public String getContinentName() {
+        return this.continentName;
+    }
+    
+    public void setContinentName(String continentName) {
+        this.continentName = continentName;
+    }
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
 
-	public Timestamp getModified() {
-		return this.modified;
-	}
+    public Set getCountries() {
+        return this.countries;
+    }
+    
+    public void setCountries(Set countries) {
+        this.countries = countries;
+    }
+   
 
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
 
-	public Set getCountries() {
-		return this.countries;
-	}
 
-	public void setCountries(Set countries) {
-		this.countries = countries;
-	}
+
+
+
+
 
 }

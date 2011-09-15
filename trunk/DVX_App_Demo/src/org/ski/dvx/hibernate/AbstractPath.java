@@ -4,96 +4,107 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * AbstractPath entity provides the base persistence definition of the Path
- * entity. @author MyEclipse Persistence Tools
+ * AbstractPath entity provides the base persistence definition of the Path entity. @author MyEclipse Persistence Tools
  */
 
-public abstract class AbstractPath implements java.io.Serializable {
+public abstract class AbstractPath  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer idKey;
-	private Author author;
-	private String pathPrefix;
-	private Timestamp modified;
-	private Timestamp created;
-	private Set movieMenus = new HashSet(0);
-	private Set descriptions = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer idKey;
+     private Author author;
+     private String pathPrefix;
+     private Timestamp modified;
+     private Timestamp created;
+     private Set movieMenus = new HashSet(0);
+     private Set descriptions = new HashSet(0);
 
-	/** default constructor */
-	public AbstractPath() {
-	}
 
-	/** full constructor */
-	public AbstractPath(Author author, String pathPrefix, Timestamp modified,
-			Timestamp created, Set movieMenus, Set descriptions) {
-		this.author = author;
-		this.pathPrefix = pathPrefix;
-		this.modified = modified;
-		this.created = created;
-		this.movieMenus = movieMenus;
-		this.descriptions = descriptions;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public AbstractPath() {
+    }
 
-	public Integer getIdKey() {
-		return this.idKey;
-	}
+    
+    /** full constructor */
+    public AbstractPath(Author author, String pathPrefix, Timestamp modified, Timestamp created, Set movieMenus, Set descriptions) {
+        this.author = author;
+        this.pathPrefix = pathPrefix;
+        this.modified = modified;
+        this.created = created;
+        this.movieMenus = movieMenus;
+        this.descriptions = descriptions;
+    }
 
-	public void setIdKey(Integer idKey) {
-		this.idKey = idKey;
-	}
+   
+    // Property accessors
 
-	public Author getAuthor() {
-		return this.author;
-	}
+    public Integer getIdKey() {
+        return this.idKey;
+    }
+    
+    public void setIdKey(Integer idKey) {
+        this.idKey = idKey;
+    }
 
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
+    public Author getAuthor() {
+        return this.author;
+    }
+    
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
-	public String getPathPrefix() {
-		return this.pathPrefix;
-	}
+    public String getPathPrefix() {
+        return this.pathPrefix;
+    }
+    
+    public void setPathPrefix(String pathPrefix) {
+        this.pathPrefix = pathPrefix;
+    }
 
-	public void setPathPrefix(String pathPrefix) {
-		this.pathPrefix = pathPrefix;
-	}
+    public Timestamp getModified() {
+        return this.modified;
+    }
+    
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
+    }
 
-	public Timestamp getModified() {
-		return this.modified;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
+    
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public void setModified(Timestamp modified) {
-		this.modified = modified;
-	}
+    public Set getMovieMenus() {
+        return this.movieMenus;
+    }
+    
+    public void setMovieMenus(Set movieMenus) {
+        this.movieMenus = movieMenus;
+    }
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
+    public Set getDescriptions() {
+        return this.descriptions;
+    }
+    
+    public void setDescriptions(Set descriptions) {
+        this.descriptions = descriptions;
+    }
+   
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
 
-	public Set getMovieMenus() {
-		return this.movieMenus;
-	}
 
-	public void setMovieMenus(Set movieMenus) {
-		this.movieMenus = movieMenus;
-	}
 
-	public Set getDescriptions() {
-		return this.descriptions;
-	}
 
-	public void setDescriptions(Set descriptions) {
-		this.descriptions = descriptions;
-	}
+
+
 
 }
