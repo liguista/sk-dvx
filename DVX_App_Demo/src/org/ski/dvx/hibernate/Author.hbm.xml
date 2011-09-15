@@ -33,6 +33,12 @@
             </key>
             <one-to-many class="org.ski.dvx.hibernate.Description" />
         </set>
+        <set name="versions" inverse="true">
+            <key>
+                <column name="author_fk" />
+            </key>
+            <one-to-many class="org.ski.dvx.hibernate.Version" />
+        </set>
         <set name="paths" inverse="true">
             <key>
                 <column name="author_fk" />
