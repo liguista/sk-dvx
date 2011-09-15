@@ -48,6 +48,7 @@
 		<mapping resource="org/ski/dvx/hibernate/Path.hbm.xml" />
 		<mapping
 			resource="org/ski/dvx/hibernate/TransactionLog.hbm.xml" />
+		<mapping resource="org/ski/dvx/hibernate/Version.hbm.xml" />
 
 	</session-factory>
 
