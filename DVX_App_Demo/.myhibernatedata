@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Mon Aug 15 10:59:09 PDT 2011
+#Wed Sep 14 20:40:37 PDT 2011
 sessionFactoryName=org.ski.dvx.hibernate.HibernateSessionFactory
 genBasicCompId=false
 profile=
@@ -18,8 +18,8 @@ genVersionTag=false
 sessionFactoryId=
 basePersistenceClass=
 genAnnotations=false
-reSettingsFile=
+reSettingsFile=/DVX_App_Demo/hibernate.reveng.xml
 configFile=/DVX_App_Demo/src/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=true
-baseDaoClass=org.ski.dvx.hibernate.BaseHibernateDAO
+baseDaoClass=org.ski.dvx.hibernate.base.BaseHibernateDAO

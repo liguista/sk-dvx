@@ -12,8 +12,11 @@
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
             <fileset dir="C:/Users/Greg/Workspaces/MyEclipse for Spring 9/DVX_App_Demo/bin"/>
-<!--        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo/resources/images/" prefix="resources/images/" includes="*"/> -->
         	
+        	<fileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo/images"/>
+        	
+<!--        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo/resources/images/" prefix="resources/images/" includes="*"/> -->
+      	
         	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="antlr-2.7.6.jar"/>
         	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="cgjsapi.jar"/>
             <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="cglib-2.2.jar"/>
