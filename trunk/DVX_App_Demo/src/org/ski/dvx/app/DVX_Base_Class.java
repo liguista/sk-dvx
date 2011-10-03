@@ -611,4 +611,14 @@ String movieInfo;
 			return true;
 		return false;
 	}
+	
+	int getIntTime(int hour, int minute, int second, int frame)
+	{
+		int result = hour;
+		result += (minute * 0x100);
+		result += (second * 0x10000);
+//		frame += (frame * 0x1000000);
+		return result;
+	}
+
  }
