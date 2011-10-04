@@ -30,6 +30,8 @@ package org.ski.dvx.app.dialogs;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.JOptionPane;
+
 import org.ski.dvx.app.DVX_Player;
 
 /**
@@ -83,7 +85,7 @@ public class Login extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setName("Login"); // NOI18N
@@ -187,11 +189,30 @@ private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {
 	    boolean result = dvx_player.userLogin(userName, password);
 	    if (result)
 	    {
+	    	
+	    	JOptionPane.showMessageDialog(this,
+	    		    "Login Successful.",
+	    		    "DVX Information",
+	    		    JOptionPane.INFORMATION_MESSAGE);
+	    	
+//			DVX_Alert alert = new DVX_Alert();
+			
+//			alert.setMessage("Login Successful.");
+//			alert.setVisible(true);
+
 	    	this.dispose();
 	    }
 	    else
 	    {
-	    	this.dispose();	    	
+	    	JOptionPane.showMessageDialog(this,
+	    		    "Login Failed.",
+	    		    "DVX Error",
+	    		    JOptionPane.ERROR_MESSAGE);
+
+/*			DVX_Alert alert = new DVX_Alert();
+			alert.setMessage("Login Failed.");
+			alert.setVisible(true); */
+	    	// this.dispose();	    	
 	    }
     }
 }
