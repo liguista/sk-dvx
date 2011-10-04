@@ -14,10 +14,9 @@ public abstract class AbstractMovieMenu  implements java.io.Serializable {
 
      private Integer idKey;
      private Movie movie;
-     private Language language;
      private Author author;
      private Path path;
-     private Integer languageFk;
+     private Language language;
      private Integer menuActive;
      private Integer menuNumber;
      private Integer menuItem;
@@ -36,12 +35,11 @@ public abstract class AbstractMovieMenu  implements java.io.Serializable {
 
     
     /** full constructor */
-    public AbstractMovieMenu(Movie movie, Language language, Author author, Path path, Integer languageFk, Integer menuActive, Integer menuNumber, Integer menuItem, String description, Integer menuVersion, String menuUri, Timestamp created, Timestamp modified) {
+    public AbstractMovieMenu(Movie movie, Author author, Path path, Language language, Integer menuActive, Integer menuNumber, Integer menuItem, String description, Integer menuVersion, String menuUri, Timestamp created, Timestamp modified) {
         this.movie = movie;
-        this.language = language;
         this.author = author;
         this.path = path;
-        this.languageFk = languageFk;
+        this.language = language;
         this.menuActive = menuActive;
         this.menuNumber = menuNumber;
         this.menuItem = menuItem;
@@ -71,14 +69,6 @@ public abstract class AbstractMovieMenu  implements java.io.Serializable {
         this.movie = movie;
     }
 
-    public Language getLanguage() {
-        return this.language;
-    }
-    
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public Author getAuthor() {
         return this.author;
     }
@@ -95,12 +85,12 @@ public abstract class AbstractMovieMenu  implements java.io.Serializable {
         this.path = path;
     }
 
-    public Integer getLanguageFk() {
-        return this.languageFk;
+    public Language getLanguage() {
+        return this.language;
     }
     
-    public void setLanguageFk(Integer languageFk) {
-        this.languageFk = languageFk;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public Integer getMenuActive() {
