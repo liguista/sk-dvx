@@ -983,6 +983,46 @@ private javax.swing.JMenuBar jMenuBarDVX;
 		System.out.println("Menu command = " + event.getActionCommand());
 		
 		String command =  event.getActionCommand();
+// transport commands...
+		
+		
+		if (command.equalsIgnoreCase("Quit"))
+		{
+			System.exit(0);
+		}
+
+		if (command.equalsIgnoreCase("Play"))
+		{
+			dvd.play();
+			dvxSpeak.speak("Play");
+		}
+
+		if (command.equalsIgnoreCase("Pause"))
+		{
+			dvd.pause();
+			dvxSpeak.speak("Pause");
+		}
+
+		if (command.equalsIgnoreCase("Stop"))
+		{
+			dvd.stop();
+			dvxSpeak.speak("Stop");
+		}
+		
+		if (command.equalsIgnoreCase("- 10 Second"))
+		{
+			System.out.println();
+			int now = dvd.getTime() - (10 * 1000);
+			dvd.setTimeValue(now);
+			
+		}
+		
+		if (command.equalsIgnoreCase("+ 10 Second"))
+		{
+			System.out.println();
+			int now = dvd.getTime() + (10 * 1000);
+			dvd.setTimeValue(0);	// seek to 1 minute???
+		}
 		
 		if (command.equalsIgnoreCase("Set Bookmark 1"))
 		{
