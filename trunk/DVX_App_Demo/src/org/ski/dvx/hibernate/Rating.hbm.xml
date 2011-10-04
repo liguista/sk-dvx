@@ -10,20 +10,26 @@
             <column name="rating_id" />
             <generator class="native" />
         </id>
-        <property name="ratingName" type="java.lang.String">
-            <column name="rating_name" length="65535" />
-        </property>
+        <many-to-one name="user" class="org.ski.dvx.hibernate.User" fetch="select">
+            <column name="rating_user_fk" />
+        </many-to-one>
+        <many-to-one name="movie" class="org.ski.dvx.hibernate.Movie" fetch="select">
+            <column name="rating_movie_fk" />
+        </many-to-one>
+        <many-to-one name="description" class="org.ski.dvx.hibernate.Description" fetch="select">
+            <column name="description_fk" />
+        </many-to-one>
+        <many-to-one name="language" class="org.ski.dvx.hibernate.Language" fetch="select">
+            <column name="rating_language_fk" />
+        </many-to-one>
+        <many-to-one name="version" class="org.ski.dvx.hibernate.Version" fetch="select">
+            <column name="rating_version_fk" />
+        </many-to-one>
         <property name="ratingNameShort" type="java.lang.String">
-            <column name="rating_name_short" length="65535" />
+            <column name="rating_name_short" length="6" />
         </property>
         <property name="rating" type="java.lang.Integer">
-            <column name="rating" not-null="true" />
-        </property>
-        <property name="descriptionFk" type="java.lang.Integer">
-            <column name="description_fk" />
-        </property>
-        <property name="userFk" type="java.lang.Integer">
-            <column name="user_fk" />
+            <column name="rating" />
         </property>
         <property name="created" type="java.sql.Timestamp">
             <column name="created" length="19" />

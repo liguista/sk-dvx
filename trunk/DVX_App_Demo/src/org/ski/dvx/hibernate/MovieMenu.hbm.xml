@@ -13,18 +13,15 @@
         <many-to-one name="movie" class="org.ski.dvx.hibernate.Movie" fetch="select">
             <column name="movie_id_fk" />
         </many-to-one>
-        <many-to-one name="language" class="org.ski.dvx.hibernate.Language" fetch="select">
-            <column name="author_fk" />
-        </many-to-one>
-        <many-to-one name="author" class="org.ski.dvx.hibernate.Author" update="false" insert="false" fetch="select">
+        <many-to-one name="author" class="org.ski.dvx.hibernate.Author" fetch="select">
             <column name="author_fk" />
         </many-to-one>
         <many-to-one name="path" class="org.ski.dvx.hibernate.Path" fetch="select">
             <column name="menu_path_fk" />
         </many-to-one>
-        <property name="languageFk" type="java.lang.Integer">
+        <many-to-one name="language" class="org.ski.dvx.hibernate.Language" fetch="select">
             <column name="language_fk" />
-        </property>
+        </many-to-one>
         <property name="menuActive" type="java.lang.Integer">
             <column name="menu_active" />
         </property>

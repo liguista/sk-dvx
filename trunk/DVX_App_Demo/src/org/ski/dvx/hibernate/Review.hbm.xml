@@ -16,6 +16,12 @@
         <many-to-one name="user" class="org.ski.dvx.hibernate.User" fetch="select">
             <column name="review_user_fk" />
         </many-to-one>
+        <property name="reviewLanguageFk" type="java.lang.Integer">
+            <column name="review_language_fk" />
+        </property>
+        <property name="reviewVersionFk" type="java.lang.Integer">
+            <column name="review_version_fk" />
+        </property>
         <property name="reviewSummary" type="java.lang.String">
             <column name="review_summary" length="65535" />
         </property>

@@ -2,24 +2,22 @@ package org.ski.dvx.hibernate;
 
 import java.sql.Timestamp;
 
+
 /**
  * MovieGenre entity. @author MyEclipse Persistence Tools
  */
-public class MovieGenre extends AbstractMovieGenre implements
-		java.io.Serializable {
+public class MovieGenre extends AbstractMovieGenre implements java.io.Serializable {
 
-	// Constructors
+    // Constructors
 
-	/** default constructor */
-	public MovieGenre() {
-	}
+    /** default constructor */
+    public MovieGenre() {
+    }
 
-	/** full constructor */
-	public MovieGenre(String movieGenreDescription,
-			String movieGenreDescriptionLong, Timestamp created,
-			Timestamp modified) {
-		super(movieGenreDescription, movieGenreDescriptionLong, created,
-				modified);
-	}
-
+    
+    /** full constructor */
+    public MovieGenre(String movieGenreDescription, String movieGenreDescriptionLong, Timestamp created, Timestamp modified) {
+        super(movieGenreDescription, movieGenreDescriptionLong, created, modified);        
+    }
+   
 }
