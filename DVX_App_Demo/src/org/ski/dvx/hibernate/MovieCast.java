@@ -2,25 +2,22 @@ package org.ski.dvx.hibernate;
 
 import java.sql.Timestamp;
 
+
 /**
  * MovieCast entity. @author MyEclipse Persistence Tools
  */
-public class MovieCast extends AbstractMovieCast implements
-		java.io.Serializable {
+public class MovieCast extends AbstractMovieCast implements java.io.Serializable {
 
-	// Constructors
+    // Constructors
 
-	/** default constructor */
-	public MovieCast() {
-	}
+    /** default constructor */
+    public MovieCast() {
+    }
 
-	/** full constructor */
-	public MovieCast(Movie movie, CrewCast crewCast,
-			Integer movieCastRoleOrder, String movieCastRoleName,
-			String movieCastRoleDescription, Timestamp created,
-			Timestamp modified) {
-		super(movie, crewCast, movieCastRoleOrder, movieCastRoleName,
-				movieCastRoleDescription, created, modified);
-	}
-
+    
+    /** full constructor */
+    public MovieCast(Movie movie, CrewCast crewCast, Integer movieCastRoleOrder, String movieCastRoleName, String movieCastRoleDescription, Timestamp created, Timestamp modified) {
+        super(movie, crewCast, movieCastRoleOrder, movieCastRoleName, movieCastRoleDescription, created, modified);        
+    }
+   
 }

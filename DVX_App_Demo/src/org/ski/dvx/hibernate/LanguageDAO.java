@@ -6,7 +6,7 @@ import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
-import org.ski.dvx.hibernate.base.BaseHibernateDAO;
+import org.ski.dvx.hibernate.BaseHibernateDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -24,7 +24,7 @@
         </property>
         <set name="movieMenus" inverse="true">
             <key>
-                <column name="author_fk" />
+                <column name="language_fk" />
             </key>
             <one-to-many class="org.ski.dvx.hibernate.MovieMenu" />
         </set>
