@@ -371,7 +371,10 @@ public class DVX_GUI extends DVX_Menus{
        String [] chapterList  = new String[dvd.getNumChapters()+1];
        chapterList[0] = "Chapter:";
         for (int i = 0; i < dvd.getNumChapters(); i++) 
+        {
         	chapterList[i+1] = "Chapter "+ (i + 1);
+        	appendChapter("Chapter "+ (i + 1), null);
+        }
         jComboBoxChapter.setModel(new javax.swing.DefaultComboBoxModel(chapterList));
         jComboBoxChapter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,7 +389,10 @@ public class DVX_GUI extends DVX_Menus{
         String [] titleList  = new String[dvd.getNumTitles()+1];
         titleList[0] = "Title:";
         for (int  i = 0; i < dvd.getNumTitles(); i++) 
+        {
         	titleList[i+1] = "Title "+ (i + 1);
+        	appendTitle("Title "+ (i + 1), null);
+        }
 // end added       	   
         jComboBoxTitle.setModel(new javax.swing.DefaultComboBoxModel(titleList));
         jComboBoxTitle.addActionListener(new java.awt.event.ActionListener() {
@@ -673,9 +679,7 @@ public class DVX_GUI extends DVX_Menus{
 //                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 )
         );
-
     }
-    
 
     /**
      * Slider dvd volume action performed.
