@@ -72,7 +72,7 @@ public class DVX_DB_Support {
 // ------------------------------------------------------------------------------------
 	
 	/**
- * Instantiates a new dV x_ d b_ support.
+ * Instantiates a new DVX_DB_Support.
  *
  * @param dvx_player the dvx_player
  * @param defaultAuthor the default author
@@ -213,8 +213,16 @@ public void log(Movie movie, User user, String transactionType,
 		 
 		MovieMenu movieMenu = new MovieMenu();
 		
-		System.out.println(movie.getMovieName() + " = " + menuID + " : " + menuItem);
+//		System.out.println(movie.getMovieName() + " = " + menuID + " : " + menuItem);
+		System.out.println(">>>>>>>>**************************");
 		
+		System.out.println("  Author = " + author.getAuthorId());
+		System.out.println("  Language = " + language.getLanguageId());
+		System.out.println("  Movie = " + movie.getMovieSbnNumber());
+		System.out.println("  menuID = " + menuID);
+		System.out.println("  menuItem = " + menuItem);
+
+		System.out.println(">>>>>>>>**************************");
 		movieMenu.setMenuItem(menuItem);
 		movieMenu.setMenuNumber(menuID);
 		movieMenu.setMenuActive(1);
@@ -232,11 +240,11 @@ public void log(Movie movie, User user, String transactionType,
 //		mmList = mmDao.findAll();
 		System.out.println("List size = " + mmList.size());
 		
-		for (MovieMenu mmItem : mmList)
+		for (MovieMenu movieMenuItem : mmList)
 		{
-			if (validateMenuEvent(mmItem,  author,  language,  movie))
+			if (validateMenuItem(movieMenuItem,  author,  language,  movie))
 			{
-				return mmItem;
+				return movieMenuItem;
 			}
 		}
 		
@@ -318,7 +326,7 @@ public boolean validateTimedEvent(Description description, Author author, Langua
 	 * @param movie the movie
 	 * @return true, if successful
 	 */
-	public boolean validateMenuEvent(MovieMenu menu, Author author, Language language, Movie movie)
+	public boolean validateMenuItem(MovieMenu menu, Author author, Language language, Movie movie)
 	{		
 		// validate author if not all		
 		if (author.getAuthorId()!=DVX_Constants.DVX_AUTHOR_ALL_ID)	// author all
@@ -618,7 +626,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		{
 			MovieMenu movieMenuOld = movieMenuList.get(0);
 			
-			if (validateMenuEvent(movieMenuOld, author ,  language,  movie));
+			if (validateMenuItem(movieMenuOld, author ,  language,  movie));
 			{
 				movieMenuOld.setMenuActive(0);
 				movieMenuOld.setMenuUri(movieMenuOld.getMenuUri() + movieMenuOld.getMenuVersion());	// rename old file name with suffix...
@@ -641,6 +649,8 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		movieMenu.setMenuUri(movie.getMovieSbnNumber() + 
 				DVX_Constants.HYPHEN + +
 				author.getAuthorId() + 
+				DVX_Constants.HYPHEN + + 
+				language.getLanguageId() + 
 				DVX_Constants.HYPHEN + + 
 				menuNumber + 
 				DVX_Constants.HYPHEN + + 
@@ -1077,7 +1087,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		
 		for (MovieMenu theMenu : movieMenuList)
 		{
-			if (validateMenuEvent(theMenu, movieMenu.getAuthor() ,movieMenu.getLanguage(), movieMenu.getMovie()))
+			if (validateMenuItem(theMenu, movieMenu.getAuthor() ,movieMenu.getLanguage(), movieMenu.getMovie()))
 				movieMenuDAO.delete(theMenu);
 			
 		}
