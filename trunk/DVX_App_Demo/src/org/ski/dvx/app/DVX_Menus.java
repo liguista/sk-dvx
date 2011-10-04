@@ -44,6 +44,10 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import org.ski.dvx.app.dialogs.Login;
+import org.ski.dvx.app.dialogs.MovieDescription;
+import org.ski.dvx.app.dialogs.NewUser;
+
+import de.humatic.dsj.DSDvd;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -178,6 +182,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
     /** The jMenuItem set bookmark1. */
     private javax.swing.JMenuItem jMenuItemSetBookmark1;
     
+    private javax.swing.JMenuItem jMenuItemRootMenu;
+    
     /** The jMenuItem set bookmark2. */
     private javax.swing.JMenuItem jMenuItemSetBookmark2;
     
@@ -192,6 +198,9 @@ private javax.swing.JMenuBar jMenuBarDVX;
 
     /** The jMenuItem set movie logout. */
     private javax.swing.JMenuItem jMenuItemLogout;
+
+    /** The jMenuItem add user. */
+    private javax.swing.JMenuItem jMenuItemAddUser;
 
     /** The jMenuItem shutup. */
     private javax.swing.JMenuItem jMenuItemShutup;
@@ -303,6 +312,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
  
         jMenuItemLogin = new javax.swing.JMenuItem();
         jMenuItemLogout = new javax.swing.JMenuItem();
+        jMenuItemAddUser = new javax.swing.JMenuItem();
         
         jMenuItemMovieInformation = new javax.swing.JMenuItem();
         jMenuItemSelectDescription = new javax.swing.JMenuItem();
@@ -330,6 +340,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
 //        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemShutup = new javax.swing.JMenuItem();
         jMenuTransport = new javax.swing.JMenu();
+        jMenuItemRootMenu = new javax.swing.JMenuItem();
         jMenuItemPlay = new javax.swing.JMenuItem();
         jMenuItemPause = new javax.swing.JMenuItem();
         jMenuItemStop = new javax.swing.JMenuItem();
@@ -386,6 +397,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
 
         jMenuItemLogin  = addMenuItem(	jMenuFile, "Login...",	null);
         jMenuItemLogout  = addMenuItem(	jMenuFile, "Logout...",	null);
+        jMenuItemLogout  = addMenuItem(	jMenuFile, "Add User...",	null);
 
 
      jMenuItemMovieInformation.setText("Movie Information...");
@@ -590,7 +602,16 @@ private javax.swing.JMenuBar jMenuBarDVX;
 
      
      jMenuTransport.setText("Transport");
-   
+     
+     jMenuItemRootMenu.setText("Root Menu");
+     jMenuItemRootMenu.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	 handleMenuEvent(evt);
+         }
+     });
+ 
+     jMenuTransport.add(jMenuItemRootMenu);  
+     
      jMenuItemPlay.setText("Play");
      jMenuItemPlay.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -691,8 +712,8 @@ private javax.swing.JMenuBar jMenuBarDVX;
         	 handleMenuEvent(evt);
          }
      });
-
-     jMenuBarDVX.add( jMenuDescriptions);
+// dropped for now...
+//     jMenuBarDVX.add( jMenuDescriptions);
 
      // *********************************************************************
 
@@ -715,7 +736,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
         	 handleMenuEvent(evt);
          }
      });
-
+/*
      jMenuItemChapter1.setText("Chapter 1");
      jMenuChapter.add(jMenuItemChapter1);
      jMenuItemChapter1.addActionListener(new java.awt.event.ActionListener() {
@@ -739,7 +760,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
         	 handleMenuEvent(evt);
          }
      });
-
+*/
      jMenuBarDVX.add(jMenuChapter);
 
      // *********************************************************************
@@ -776,7 +797,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
 
      jMenuBookmarks.setText("Bookmarks");
 
-     jMenuItemSetBookmark1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
+//     jMenuItemSetBookmark1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
      jMenuItemSetBookmark1.setText("Set Bookmark 1");
      jMenuBookmarks.add(jMenuItemSetBookmark1);
      jMenuItemSetBookmark1.addActionListener(new java.awt.event.ActionListener() {
@@ -785,7 +806,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
          }
      });
      
-     jMenuItemSetBookmark2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
+//     jMenuItemSetBookmark2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
      jMenuItemSetBookmark2.setText("Set Bookmark 2");
      jMenuBookmarks.add(jMenuItemSetBookmark2);
      jMenuItemSetBookmark2.addActionListener(new java.awt.event.ActionListener() {
@@ -794,7 +815,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
          }
      });
      
-     jMenuItemSetBookmark3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
+//     jMenuItemSetBookmark3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
      jMenuItemSetBookmark3.setText("Set Bookmark 3");
      jMenuBookmarks.add(jMenuItemSetBookmark3);
      jMenuItemSetBookmark3.addActionListener(new java.awt.event.ActionListener() {
@@ -985,6 +1006,10 @@ private javax.swing.JMenuBar jMenuBarDVX;
 		String command =  event.getActionCommand();
 // transport commands...
 		
+		if (command.equalsIgnoreCase("Root Menu"))
+		{
+			dvd.showMenu(DSDvd.DVD_MENU_Root);
+		}
 		
 		if (command.equalsIgnoreCase("Quit"))
 		{
@@ -1117,18 +1142,21 @@ private javax.swing.JMenuBar jMenuBarDVX;
 			System.out.println("DVX Help" );
 			
 		}
+		
 		if (command.equalsIgnoreCase("Toggle Verbose"))
 		{
 			setVerbose(!isVerbose());
 			System.out.println("Verbose set to " + isVerbose() );
 			getDvxSpeak().speak("Verbose set to " + isVerbose());
 		}
+		
 		if (command.equalsIgnoreCase("Debug 2"))
 		{
 			System.out.println("gotoTitle*****************************" ) ;
 			System.out.println("DVD title count = " + dvd.gotoTitle(1) ) ;
 			System.out.println("gotoTitle*****************************" ) ;
 		}
+		
 		if (command.equalsIgnoreCase("Fullscreen"))
 		{
 //			dvd.goFullScreen(dvd.getGraphics(), 0);
@@ -1141,6 +1169,7 @@ private javax.swing.JMenuBar jMenuBarDVX;
 			   GraphicsDevice gd = gs[0];
 			   dvd.goFullScreen(gd, 0);
 		}
+		
 		if (command.equalsIgnoreCase("Show States"))
 		{
 			dvdStates.setVisible(true);
@@ -1161,6 +1190,55 @@ private javax.swing.JMenuBar jMenuBarDVX;
 	            	
 	            }
 	        });
+		}
+
+		if (command.equalsIgnoreCase("Add User..."))
+		{
+	        java.awt.EventQueue.invokeLater(new Runnable() {
+	
+	            public void run() {
+	            	NewUser login = new NewUser(getDvx_player());
+	            	login.setVisible(true);
+	            	
+	            }
+	        });
+		}
+
+		if (command.equalsIgnoreCase("Movie Information..."))
+		{
+	        java.awt.EventQueue.invokeLater(new Runnable() {
+	
+	            public void run() {
+	            	
+	            	DVX_Player dvxPlayer = getDvx_player();
+	            	MovieDescription movieDescription = new MovieDescription(dvxPlayer);
+	            	movieDescription.setVisible(true);
+	            }
+	        });
+		}
+		
+		if (command.startsWith("Chapter"))
+		{
+			String chapter = command;
+			chapter = chapter.replace("Chapter ", "");
+			dvd.playChapter(Integer.parseInt(chapter));
+		}		
+
+		if (command.startsWith("Title"))
+		{
+			String title = command;
+			title = title.replace("Title ", "");
+			dvd.gotoTitle(Integer.parseInt(title));
+		}	
+		
+		if (command.equalsIgnoreCase("Next Chapter"))
+		{
+			dvd.chapterStep(1);
+		}
+
+		if (command.equalsIgnoreCase("Previous Chapter"))
+		{
+			dvd.chapterStep(-1);
 		}
 
 }
@@ -1192,5 +1270,14 @@ private javax.swing.JMenuBar jMenuBarDVX;
 		return menuItem;
 	}
 
+	void appendChapter ( String chapter, KeyStroke keyStroke )
+	{
+		addMenuItem ( jMenuChapter, chapter, keyStroke);
+	}
+
+	void appendTitle( String title, KeyStroke keyStroke )
+	{
+		addMenuItem( jMenuTitle, title, keyStroke );
+	}
 
 }
