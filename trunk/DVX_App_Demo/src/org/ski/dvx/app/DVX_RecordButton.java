@@ -461,6 +461,8 @@ boolean playingMode = false;
 							DVX_Constants.HYPHEN  +
 							dvx_player.getAuthor().getAuthorId() + 
 							DVX_Constants.HYPHEN  + 
+							dvx_player.getLanguage().getLanguageId() + 
+							DVX_Constants.HYPHEN  + 
 							menuPage + 
 							DVX_Constants.HYPHEN + 
 							menuId + 
