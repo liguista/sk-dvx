@@ -34,6 +34,8 @@ import javax.swing.JPanel;
 import org.apache.log4j.Logger;
 import org.ski.dvx.app.dialogs.DVDStates;
 
+import com.mysql.jdbc.Messages;
+
 import de.humatic.dsj.DSDvd;
 import de.humatic.dsj.DSFilterInfo;
 import de.humatic.dsj.DSFiltergraph;
@@ -94,6 +96,20 @@ static Logger dvxPlayerLogger;
 		
 		dvdStates = new DVDStates();
 		dvdStates.setVisible(false);
+// read these from the messages.properties files	
+		// added for Vist support etc.
+		
+		String videoCodec = DVX_Messages.getString("DVX.PLAYER.INIT.VIDEO.DECODER");
+		videoDecoders[1] = DSFilterInfo.filterInfoForName(videoCodec);
+
+		String audioCodec1 = DVX_Messages.getString("DVX.PLAYER.INIT.AUDIO.DECODER.1");
+		audioDecoders[1] = DSFilterInfo.filterInfoForName(audioCodec1);
+		
+		String audioCodec2 = DVX_Messages.getString("DVX.PLAYER.INIT.AUDIO.DECODER.2");
+		audioDecoders[2] = DSFilterInfo.filterInfoForName(audioCodec2); 
+	
+		String audioCodec3 = DVX_Messages.getString("DVX.PLAYER.INIT.AUDIO.DECODER.3");
+		audioDecoders[3] = DSFilterInfo.filterInfoForName(audioCodec3); 
 
 	}
 
