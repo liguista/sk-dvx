@@ -49,6 +49,8 @@ import org.ski.dvx.hibernate.Author;
 import org.ski.dvx.hibernate.Language;
 import org.ski.dvx.hibernate.Movie;
 
+import de.humatic.dsj.DSDvd;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class DVX_GUI.
@@ -131,7 +133,7 @@ public class DVX_GUI extends DVX_Menus{
   javax.swing.JTextField jTextChapter;
   
   /** The j text frame. */
-  javax.swing.JTextField jTextFrame;
+  javax.swing.JTextField jTextHour;
   
   /** The j text minutes. */
   javax.swing.JTextField jTextMinutes;
@@ -235,7 +237,7 @@ public class DVX_GUI extends DVX_Menus{
         labelLanguage1 = new javax.swing.JLabel();
         labelLanguage2 = new javax.swing.JLabel();
         jTextSeconds = new javax.swing.JTextField();
-        jTextFrame = new javax.swing.JTextField();
+        jTextHour = new javax.swing.JTextField();
         labelLanguage = new javax.swing.JLabel();
         jTextChapter = new javax.swing.JTextField();
         jTextMinutes = new javax.swing.JTextField();
@@ -419,9 +421,9 @@ public class DVX_GUI extends DVX_Menus{
         jTextSeconds.setToolTipText("Seconds");
         jTextSeconds.setMargin(new java.awt.Insets(2, 4, 2, 4));
 
-        jTextFrame.setText("00");
-        jTextFrame.setToolTipText("Frame");
-        jTextFrame.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        jTextHour.setText("00");
+        jTextHour.setToolTipText("Frame");
+        jTextHour.setMargin(new java.awt.Insets(2, 4, 2, 4));
 /*        jTextFrame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFrameActionPerformed(evt);
@@ -567,7 +569,7 @@ public class DVX_GUI extends DVX_Menus{
                                         .addGap(7, 7, 7)
                                         .addComponent(jTextSeconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(16, 16, 16)
-                                        .addComponent(jTextFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(41, 41, 41)))
                                 .addGroup(jPanelRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabelDVDvolume)
@@ -627,7 +629,7 @@ public class DVX_GUI extends DVX_Menus{
                         .addComponent(jLabelDVXVolume)
                         .addComponent(jTextSeconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextChapter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(labelLanguage)
                         .addComponent(labelLanguage1)))
@@ -671,6 +673,7 @@ public class DVX_GUI extends DVX_Menus{
 //                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 )
         );
+
     }
     
 
@@ -749,7 +752,6 @@ public class DVX_GUI extends DVX_Menus{
     private void jComboBoxChapterActionPerformed(java.awt.event.ActionEvent evt) {                                                   
     		int chapter = + jComboBoxChapter.getSelectedIndex();
     		dvd.chapterStep(chapter + 1);
-    		dvxSpeak.speak("Chapter " + chapter );
     		System.out.println("jComboBoxChapterActionPerformed - " + chapter);
     	}                                                  
 
@@ -824,8 +826,9 @@ public class DVX_GUI extends DVX_Menus{
 			}
 			if (menuName.equals("Time"))
 			{
-				int seconds = (dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC;
-				dvxSpeak.speak("Chapter " + chapter + ", " + seconds / 60 +" minutes " + seconds % 60 + " Seconds");
+					
+//				int seconds = (dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC;
+				dvxSpeak.speak("Chapter " + chapter + ", " +  jTextHour.getText() + " Hour " + jTextMinutes.getText() +" minutes " + jTextSeconds.getText() + " Seconds");
 			}
 			if (menuName.equals("Play"))
 			{
@@ -863,4 +866,5 @@ public class DVX_GUI extends DVX_Menus{
 			
 			}
 		}
+	
 }
