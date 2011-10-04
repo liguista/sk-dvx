@@ -39,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.net.URL;
+import java.sql.Timestamp;
 // import java.io.StringWriter;
 
 //import org.ski.dvx.hibernate.Movie;
@@ -61,375 +62,33 @@ import org.apache.log4j.PropertyConfigurator;
 import org.ski.dvx.app.dialogs.DVDStates;
 import org.ski.dvx.hibernate.Movie;
 import org.ski.dvx.hibernate.MovieMenu;
-
-// TODO: Auto-generated Javadoc
-/*import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import org.ski.dvx.hibernate.Author;
-import org.ski.dvx.hibernate.AuthorDAO;
-import org.ski.dvx.hibernate.Language;
-import org.ski.dvx.hibernate.User;*/
+import org.ski.dvx.hibernate.User;
 
 
 /**
  * The Class DVX_Player.
  */
-public class DVX_Player extends DVX_GUI {
+public class DVX_Player extends DVX_Player_Init {
+	int lastChapter = -1;
 
-//	static Logger logger_getUOPs;
-	/** The dvx player logger. */
-static Logger dvxPlayerLogger;
-
-
-	/**
-	 * Rendering mode flags. Some decoders, subtitles etc. will only work with
-	 * DirectShow renderer filters (VMR7 / 9 or EVR). See javadocs for more
-	 * details on the matter.
-	 **/
-
-	private int flags = DSFiltergraph.VMR9; // DSFiltergraph.DD7 |
-											// DSFiltergraph.YUV |
-											// DSFiltergraph.DVD_MENU_ENABLED;
-	/**
-	 * Video and Audio decoders. None of these is installed by dsj, you will
-	 * need to check what is available on your system and adjust the names here.
-	 **/
-
-	private DSFilterInfo[] videoDecoders = new DSFilterInfo[] { null,
-			// DSFilterInfo.filterInfoForName("Elecard MPEG-2 Video Decoder SD"),
-			DSFilterInfo.filterInfoForName("Microsoft DTV-DVD Video Decoder") //, 
-	// DSFilterInfo.filterInfoForName("CyberLink Video Decoder (PDVD8)")//,
-	// DSFilterInfo.filterInfoForName("CyberLink Video/SP Decoder (PDVD9)")//,
-
-	// DSFilterInfo.filterInfoForName("MainConcept (Demo) MPEG-2 Video Decoder")
-	};
-
-	/** The audio decoders. */
-	private DSFilterInfo[] audioDecoders = new DSFilterInfo[] { null,
-			DSFilterInfo.filterInfoForName("Default DirectSound Device"), 
-			DSFilterInfo.filterInfoForName("Microsoft DTV-DVD Audio Decoder"), 
-			DSFilterInfo.filterInfoForName("ffdshow audio decoder") 
-	};
-
-	/**
-	 * Instantiates a new dV x_ player.
-	 */
 	public DVX_Player() {
 		// movie = dvdSupport.getMovie("A Beautiful Mind");
 		super();
-		dvxSpeak = new DVX_Speak();
-		dvxDBSupport = new DVX_DB_Support(this , DVX_Constants.DVX_DEFAULT_AUTHOR);
-		language = dvxDBSupport.getLanguage(DVX_Constants.DVX_DEFAULT_LANGUAGE);
-//		dvxDBSupport.setDvx_speak(dvxSpeak);	
+		dvxDBSupport = new DVX_DB_Support(this );
+		setLanguage(dvxDBSupport.getLanguage(DVX_Constants.DVX_DEFAULT_LANGUAGE));
 		
-		dvxPlayerLogger = Logger.getLogger(this.getClass());
+		setUser		(dvxDBSupport.getUser	( DVX_Constants.DVX_DEFAULT_AUTHOR ));
+		setAuthor	(dvxDBSupport.getAuthor	( DVX_Constants.DVX_DEFAULT_USER ));
 		
-		dvdStates = new DVDStates();
-		dvdStates.setVisible(true);
+		setDvx_player(this);	// context for the menus... login ...
+		
 
 	}
-
-	
-	/**
-	 * Sets the playing mode.
-	 */
-	void setPlayingMode()
-	{
-		if (dvxRecordButton!=null)
-		{
-			dvxRecordButton.setMenuMode(false);
-			dvxRecordButton.setPlayingMode(true);
-		}
-	}
-
-	/**
-	 * Sets the menu mode.
-	 */
-	void setMenuMode()
-	{
-		dvxRecordButton.setMenuMode(true);
-		dvxRecordButton.setPlayingMode(false);
-	}
-
 	// *************************************************************************************************************************************
 	// 
 	// createGraph - This creates the magic !!!
 	//
 	// *************************************************************************************************************************************			
-
-	/**
-	 * Creates the graph.
-	 */
-	public void createGraph() {
-
-		System.out.println("Root path = " + this.getClass().getProtectionDomain().getCodeSource().getLocation());
-		try {
-			if (mainDVXFrame == null) {
-				mainDVXFrame = new javax.swing.JFrame(DVX_Constants.DVX_APPLICATION_NAME); 
-
-				splash = new DVX_Splash(mainDVXFrame, DVX_Constants.GLOBAL_SPLASH_IMAGE); 
-				splash.showSplashScreen();
-				System.out.println("DVX_Constants.GLOBAL_APPLICATION_ICON = " + DVX_Constants.GLOBAL_APPLICATION_ICON);
-				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(DVX_Constants.GLOBAL_APPLICATION_ICON));
-//				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
-				//				mainDVXFrame.setIconImage (Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource(DVX_Constants.GLOBAL_APPLICATION_ICON)));
-
-			}
-			/* jMenuFile.add(jMenuItemQuit);
-			jMenuBar.add(jMenuFile);
-			jMenuHelp.add(jMenuItemAbout);
-			jMenuBar.add(jMenuHelp); 
-			mainDVXFrame.setJMenuBar(jMenuBar);*/
-			mainDVXFrame.pack();
-//			dvxDBSupport.playSound(DVX_Constants.Welcome_DVX_WAV, true); 
-			dvxSpeak.speak("Welcome to DVX... The new Media player.");
-//			System.out.println(dvx_network.getHostname() + " - " + dvx_network.getIpAddress());
-//			System.out.println(dvx_network.getIpAddress());
-
-			boolean dvdOK = false;
-//			while ((!dvdOK)&&(System.in.available()==0)) {	// need to add an escape in here...
-			while (!dvdOK) {	// need to add an escape in here...
-				try {
-//					splash.setVisible(false);
-//					splash.dispose();
-
-					dvd = new DSDvd(/* path_to_ifo_directory, */0, flags,
-							videoDecoders[1], audioDecoders[1], this);
-					dvdOK = true;
-				} catch (Exception ex) {
-					//dvxDBSupport
-						//	.playSound(DVX_Constants.DVX_Waiting_WAV, true); 
-					dvxSpeak.speak("Waiting for a DVD to be inserted in the drive.");
-					System.out.println("Exception reading DVD..." + ex);
-
-					long loop = System.currentTimeMillis() + DVX_Constants.MOVIE_MOUNT_DELAY_MS;
-					while (loop > System.currentTimeMillis()) {
-						;
-					}
-//					System.out.println("Available = " + System.in.available()123fghfjghf);
-
-				}
-			}
-
-
-			mainDVXFrame.getContentPane().add(java.awt.BorderLayout.CENTER,
-					dvd.asComponent());
-
-			/**
-			 * The SwingMovieController handles keyboard events for navigation
-			 * using DSDvd.navigate(DSDvd.NAV_x).
-			 **/
-
-			mainDVXFrame.getContentPane().add(java.awt.BorderLayout.SOUTH,
-					new SwingMovieController(dvd));
-			System.out.println("Icon = " + DVX_Constants.GLOBAL_IMAGES_PATH_24_X_24 + "Record-Normal-icon.png");
-			
-
-			JPanel myPanel = new JPanel();
-			initGui(mainDVXFrame, myPanel);
-			mainDVXFrame.getContentPane().add(java.awt.BorderLayout.NORTH,
-					myPanel);
-			
-			mainDVXFrame.pack();
-
-			mainDVXFrame.setSize(1024, 768);
-
-			DSJUtils.centerFrame(mainDVXFrame, null);
-
-			mainDVXFrame.setVisible(true);
-
-			dvd.dumpGraph(false);
-
-			mainDVXFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-			dvd.asComponent().addMouseListener(
-					new java.awt.event.MouseAdapter() {
-						public void mouseClicked(java.awt.event.MouseEvent me) {
-							if (me.getButton() != 3)
-								return;
-							final javax.swing.JPopupMenu popMeUp = new javax.swing.JPopupMenu();
-							popMeUp.setLightWeightPopupEnabled(false);
-
-							final javax.swing.JMenuItem fs = popMeUp
-									.add(DVX_Messages.getString("PlayDVD.10")); 
-							fs.addActionListener(new java.awt.event.ActionListener() {
-								public void actionPerformed(
-										java.awt.event.ActionEvent event) {
-									dvd.goFullScreen(null, 0);
-								}
-							});
-
-							popMeUp.addSeparator();
-
-							String[] streams = dvd.getStreams(DSDvd.DVD_AUDIO);
-							int selected = dvd
-									.getSelectedStream(DSDvd.DVD_AUDIO);
-							for (int i = 0; i < streams.length; i++) {
-								final int ID = i;
-								final javax.swing.JMenuItem mi = popMeUp
-										.add(DVX_Messages.getString("PlayDVD.11") + streams[i]); 
-								if (i == selected)
-									mi.setBackground(java.awt.Color.lightGray);
-								mi.addActionListener(new java.awt.event.ActionListener() {
-									public void actionPerformed(
-											java.awt.event.ActionEvent event) {
-										dvd.selectStream(DSDvd.DVD_AUDIO, ID);
-									}
-								});
-							}
-							streams = dvd.getStreams(DSDvd.DVD_SUBPICTURE);
-							if (streams.length > 0) {
-								popMeUp.addSeparator();
-								selected = dvd
-										.getSelectedStream(DSDvd.DVD_SUBPICTURE);
-								for (int i = 0; i < streams.length; i++) {
-									final int ID = i;
-									final javax.swing.JMenuItem mi = popMeUp.add(DVX_Messages
-											.getString("PlayDVD.12") + streams[i]); 
-									if (i == selected)
-										mi.setBackground(java.awt.Color.lightGray);
-									mi.addActionListener(new java.awt.event.ActionListener() {
-										public void actionPerformed(
-												java.awt.event.ActionEvent event) {
-											dvd.selectStream(
-													DSDvd.DVD_SUBPICTURE, ID);
-										}
-									});
-								}
-							}
-							streams = dvd.getStreams(DSDvd.DVD_MENU_LANGUAGE);
-							if (streams.length > 0) {
-								popMeUp.addSeparator();
-								selected = dvd
-										.getSelectedStream(DSDvd.DVD_MENU_LANGUAGE);
-								for (int i = 0; i < streams.length; i++) {
-									final int ID = i;
-									final javax.swing.JMenuItem mi = popMeUp.add(DVX_Messages
-											.getString("PlayDVD.13") + streams[i]); 
-									if (i == selected)
-										mi.setBackground(java.awt.Color.lightGray);
-									mi.addActionListener(new java.awt.event.ActionListener() {
-										public void actionPerformed(
-												java.awt.event.ActionEvent event) {
-											dvd.setDefaultStream(
-													DSDvd.DVD_MENU_LANGUAGE,
-													ID, 0);
-										}
-									});
-								}
-							}
-
-							popMeUp.addSeparator();
-
-							final javax.swing.JMenuItem sb = popMeUp
-									.add(DVX_Messages.getString("PlayDVD.14")); 
-							sb.addActionListener(new java.awt.event.ActionListener() {
-								public void actionPerformed(
-										java.awt.event.ActionEvent event) {
-									try {
-										dvd.saveBookmark(null);
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							});
-
-							final javax.swing.JMenuItem rb = popMeUp
-									.add(DVX_Messages.getString("PlayDVD.15")); 
-							rb.addActionListener(new java.awt.event.ActionListener() {
-								public void actionPerformed(
-										java.awt.event.ActionEvent event) {
-									try {
-										dvd.restoreBookmark(null);
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							});
-
-							if ((flags & (DSFiltergraph.VMR9
-									| DSFiltergraph.EVR | DSFiltergraph.DVD_MENU_ENABLED)) != 0) {
-
-								popMeUp.addSeparator();
-
-								final javax.swing.JMenu bm = new javax.swing.JMenu(
-										DVX_Messages.getString("PlayDVD.16")); 
-								popMeUp.add(bm);
-								final javax.swing.JMenuItem bmd = bm
-										.add(DVX_Messages.getString("PlayDVD.17")); 
-								bmd.addActionListener(new java.awt.event.ActionListener() {
-									public void actionPerformed(
-											java.awt.event.ActionEvent event) {
-										dvd.setButtonMapping(DSDvd.BM_DISPLAY);
-									}
-								});
-								final javax.swing.JMenuItem bms = bm
-										.add(DVX_Messages.getString("PlayDVD.18")); 
-								bms.addActionListener(new java.awt.event.ActionListener() {
-									public void actionPerformed(
-											java.awt.event.ActionEvent event) {
-										dvd.setButtonMapping(DSDvd.BM_SOURCE);
-									}
-								});
-
-							}
-
-							popMeUp.show(dvd.asComponent(), me.getX(),
-									me.getY());
-
-						}
-
-					});
-			String result= dvd.toString();
-			System.out.println("dvd.toString() "  		+ result); 
-			result = dvd.getInfo();
-			System.out.println("dvd.getInfo " 			+ result); 
-			dvdStates.getjTextFieldWidth().setText("" + dvd.getWidth());
-			dvdStates.getjTextFieldHeight().setText("" + dvd.getHeight());
-			dvdStates.getjTextFieldBitDepth().setText("" + dvd.getBitDepth());
-			
-			dvdStates.getjTextFieldDSJDuration().setText("" + dvd.getDuration());
-			
-			int[] ratio = dvd.getAspectRatio();
-			dvdStates.getjTextFieldAspect().setText(ratio[0]+":"+ratio[1]);
-			result = dvd.getName();
-			System.out.println("dvd.getName "  			+ result); 
-			int i = dvd.getNumChapters();
-			System.out.println("dvd.getNumChapters " 	+ i); 
-			dvdStates.getjTextFieldChapterCount().setText(""+i);
-			i =dvd.getNumTitles();
-			System.out.println("dvd.getNumTitles "  	+ i); 
-			dvdStates.getjTextFieldTitleCount().setText(""+i);
-
-			/*
-			 * String [] streams = dvd.getStreams(0);
-			 * 
-			 * if (streams.length>0) for (int i = 0; i<streams.length; i++) {
-			 * System.out.println("Stream " + i + " = " + streams[i]); }
-			 */
-
-			// z splash.close();
-// VERY IMPORTANT!!! This makes DVD time codes work!!!
-//			mainDVXFrame.setJMenuBar(jMenuBar);
-		dvd.setDVDControlOption(DSDvd.DVD_HMSF_TimeCodeEvents, 1 );
-		
-		dvxPlayerLogger.warn(getOpsHeaders());
-
-		} catch (Exception e) {
-			System.out.println("Exception create Graph: " + e);} 
-
-	}
 
 	// String movieIDString = "";
 
@@ -478,7 +137,13 @@ static Logger dvxPlayerLogger;
 				System.out.println("\t" + DVX_Messages.getString("PlayDVD.30")); 
 			int ops = dvd.getUOPs();
 			
+			
 			dvdStates.updateState(ops);
+			
+			int dvdDomain = dvd.getCurrentDomain();
+			dvdStates.setDVDDomain(dvdDomain);
+			
+//			dvdStates.getjTextField7().setText(state);
 			
 			dvxPlayerLogger.warn("\t" + DSJUtils.getEventValue_int(pe) + "\t" + 
 										DSConstants.eventToString(DSJUtils.getEventValue_int(pe)) +  "\t" + 
@@ -652,7 +317,7 @@ static Logger dvxPlayerLogger;
 //
 // *************************************************************************************************************************************			
 			if (de.humatic.dsj.DSConstants.EC_DVD_CURRENT_TIME == DSJUtils.getEventValue_int(pe)  ) {
-				int[] ge1 = (int[]) (pe.getOldValue());
+		/*		int[] ge1 = (int[]) (pe.getOldValue());
 				if (movie!=null)
 				{
 	
@@ -679,7 +344,7 @@ static Logger dvxPlayerLogger;
 					jTextSeconds.setText("" + theTime % 60);
 					jTextFrame.setText("" + 0);
 				}
-
+*/
 			}
 // *************************************************************************************************************************************			
 //
@@ -694,7 +359,7 @@ static Logger dvxPlayerLogger;
 				int hours = ge1[1] & 0xff;
 				int minutes = (ge1[1] & 0xff00 )/0x100;
 				int remainder = ge1[1] / 0x10000;
-				int seconds = remainder & 0xff;;
+				int seconds = remainder & 0xff;
 				int frame = (remainder  & 0xff00 )/0x100;
 				
 				int  realTime = seconds + (minutes * DVX_Constants.SECONDS_PER_MINUTE) + (hours *DVX_Constants.SECONDS_PER_HOUR);
@@ -703,7 +368,7 @@ static Logger dvxPlayerLogger;
 				if (dvxDBSupport!=null)
 					if (movie!=null)
 					{
-						dvxDBSupport.checkTimeEvent(getAuthor(), language, movie, chapter,
+						dvxDBSupport.checkTimeEvent(getAuthor(), getLanguage(), getMovie(), chapter,
 //								((dvd.getTime() - baseTime) / DVX_Constants.MS_PER_SEC), 0);
 								realTime, frame);
 					}
@@ -713,7 +378,7 @@ static Logger dvxPlayerLogger;
 				jLabelHour.setText(		num2StringFmt(hours));
 				jTextMinutes.setText(	num2StringFmt(minutes));
 				jTextSeconds.setText(	num2StringFmt(seconds));
-				jTextFrame.setText(		num2StringFmt( frame));
+				jTextHour.setText(		num2StringFmt( frame));
 				
 //				System.out.println("The current time is - " + num2StringFmt(hours) + ":" + num2StringFmt(minutes) + ":" +  num2StringFmt(seconds) + ":" +  num2StringFmt(frame));
 				
@@ -731,7 +396,7 @@ static Logger dvxPlayerLogger;
 				System.out.println(DVX_Messages.getString(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")); 
 				System.out.println(DVX_Messages.getString("Chapter Start : ") + chapter); 
 				System.out.println(DVX_Messages.getString(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")); 
-				baseTime = dvd.getTime();	// resets the baseTime offset... to whatever random number the DSJ has currently
+//				baseTime = dvd.getTime();	// resets the baseTime offset... to whatever random number the DSJ has currently
 				if (dvxRecordButton!=null)
 				{
 					dvxRecordButton.setMenuMode(false);				
@@ -741,8 +406,10 @@ static Logger dvxPlayerLogger;
 					jComboBoxChapter.setSelectedIndex(chapter);
 				if (jTextChapter!=null)
 					jTextChapter.setText("" + chapter);
-				
+				if(chapter!=lastChapter)
+					dvxSpeak.speak("Chapter " + chapter );
 				setPlayingMode();
+				lastChapter = chapter;
 			}
 // *************************************************************************************************************************************			
 //
@@ -765,7 +432,7 @@ static Logger dvxPlayerLogger;
 				dvxRecordButton.setMenuId(menuID);
 				dvxRecordButton.setMenuMode(true);
 				dvxRecordButton.setPlayingMode(false);
-				MovieMenu movieMenu = dvxDBSupport.getMovieMenu(author , language, movie, menuPage, menuID);
+				MovieMenu movieMenu = dvxDBSupport.getMovieMenu(getAuthor() , getLanguage(), getMovie(), menuPage, menuID);
 				String soundFile = null;
 				if (movieMenu!=null)
 					soundFile = movieMenu.getMenuUri();
@@ -943,5 +610,34 @@ static Logger dvxPlayerLogger;
 // ******************************************************************
 //
 //
+
+	/**
+	 * @param userName
+	 * @param password
+	 */
+	public boolean userLogin(String userName, String password) {
+		// TODO Auto-generated method stub
+		
+		User user = dvxDBSupport.getUserLogin(userName, password);
+		if (user!=null)
+		{
+			// found valid user to login
+			
+			System.out.println("User login succeeded...");
+			
+			setUser(user);
+			setAuthor	(dvxDBSupport.getAuthor	( user.getUserHandle() ));
+			
+			user.setUserLastLogin(new Timestamp(System.currentTimeMillis()));
+			dvxDBSupport.updateUser(user);
+			return true;
+		}
+		else
+		{
+			System.out.println("User login failed...");
+
+		}
+		return false;
+	}
 
 }
