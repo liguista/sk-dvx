@@ -100,7 +100,7 @@ public class DVX_PlaySound {
 		}
 	}
 	
-	static void  playWav(String filePath, boolean wait) {
+	public static void  playWav(String filePath, boolean wait) {
 		// specify the sound to play
 		// (assuming the sound can be played by the audio system)
 		

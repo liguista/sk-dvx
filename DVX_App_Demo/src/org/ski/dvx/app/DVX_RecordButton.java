@@ -60,6 +60,12 @@ public class DVX_RecordButton extends JButton{
 //	public Author author;
 //	public Language language;
 	
+	boolean recordMovieDescriptionFlag = false;
+	
+	DVX_FTP dvxFTP;
+	
+	
+	
 	/** The dvx_player. */
 	DVX_GUI dvx_player; 
 	
@@ -81,7 +87,7 @@ public class DVX_RecordButton extends JButton{
 //	DVX_DB_Support dvx_db_support = null; 
 
 	/** The playing mode. */
-boolean playingMode = false;
+	boolean playingMode = false;
 	
 	/** The menu mode. */
 	boolean menuMode = false;
@@ -91,6 +97,9 @@ boolean playingMode = false;
 	
 	/** The mouse listener. */
 	MyMouseListener mouseListener;
+	
+	float duckingVol = 0.80f;
+	float savedVol = 1.0f;
 	
 	/**
 	 * Gets the frame offset.
@@ -304,6 +313,9 @@ boolean playingMode = false;
 //			if (keyPressed=='r')
 				System.out.println("Key Recording ended.");
 			rs.stopRecording();
+			dvxFTP.run();
+			
+			dvx_player.getDvd().setVolume(savedVol);
 			
 			isKeyRecording= false;
 		}
@@ -394,6 +406,12 @@ boolean playingMode = false;
 		 */
 		void dispatchStartRecord()
 		{
+			if (recordMovieDescriptionFlag )
+			{
+				startRecordMovieNameClip();
+				return;
+			}
+
 			if(waitingForFirstMenu)
 			{
 				startRecordMovieNameClip();
@@ -419,8 +437,11 @@ boolean playingMode = false;
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			System.out.println("MyMouseListener - mouseReleased" + e.toString());
+			
 			rs.stopRecording();
-		}
+			dvxFTP.run();
+			dvx_player.getDvd().setVolume(savedVol);
+			}
 
 		/* (non-Javadoc)
 		 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
@@ -548,9 +569,15 @@ boolean playingMode = false;
 	 */
 	void startRecording(String filePath)
 	{
+		dvxFTP = new DVX_FTP(new File(filePath));
+		savedVol = dvx_player.getDvd().getVolume();
+		dvx_player.getDvd().setVolume(duckingVol);
+
 		outputFile = new File(filePath);
+		
+		
 		System.out.println("Recording to : " + filePath);
-								
+										
 		AudioFormat	audioFormat = new AudioFormat(
 				DVX_Constants.AUDIO_CHANNELS_ENCODING,
 				DVX_Constants.AUDIO_SAMPLE_RATE, 
@@ -605,10 +632,28 @@ boolean playingMode = false;
 	 * @param label the label
 	 * @param icon the icon
 	 */
-	DVX_RecordButton(DVX_GUI dvx_player, String label,ImageIcon icon)
+	DVX_RecordButton(DVX_GUI dvx_player, String label, ImageIcon icon)
 //	RecordButton(String label)
 	{
 		super(label, icon);
+		this.dvx_player =  dvx_player;
+//		super(label);
+		mouseListener = new MyMouseListener();
+		this.addMouseListener( mouseListener);
+		// this.setLabel(label);
+		this.addKeyListener(new MyKeyListener());
+		
+//		dvx_db_support = new DVX_DB_Support();
+		String duckingVal = DVX_Messages.getString("DVXRecordButton.Ducking");
+		duckingVol = Float.valueOf(duckingVal).floatValue();;
+
+	}
+
+	public DVX_RecordButton(DVX_GUI dvx_player, String label)
+//	RecordButton(String label)
+	{
+		super(label);
+		recordMovieDescriptionFlag = true;
 		this.dvx_player =  dvx_player;
 //		super(label);
 		mouseListener = new MyMouseListener();
