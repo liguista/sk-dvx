@@ -328,11 +328,40 @@ public boolean validateTimedEvent(Description description, Author author, Langua
 	 */
 	public boolean validateMenuItem(MovieMenu menu, Author author, Language language, Movie movie)
 	{		
+		int a = menu.getMovie().getMovieId();
+		int b = movie.getMovieId();
+		
+		// validate the movie matches...
+		if (a!=b)
+		{
+			return false;
+		}
+		
+		if (menu==null)
+		{
+			System.err.println("Menu was null...");
+			return false;
+		}
+		if (author==null)
+		{
+			System.err.println("Author was null...");
+			return false;
+		}
+		if (language==null)
+		{
+			System.err.println("Language was null...");
+			return false;
+		}
+		if (movie==null)
+		{
+			System.err.println("Movie was null...");
+			return false;
+		}
 		// validate author if not all		
 		if (author.getAuthorId()!=DVX_Constants.DVX_AUTHOR_ALL_ID)	// author all
 		{
-			int a = menu.getAuthor().getAuthorId();
-			int b = author.getAuthorId();
+			a = menu.getAuthor().getAuthorId();
+			b = author.getAuthorId();
 			if (a!=b)
 			{
 				return false;
@@ -342,21 +371,14 @@ public boolean validateTimedEvent(Description description, Author author, Langua
 		// validate language if not all		
 		if (language.getLanguageId()!=DVX_Constants.DVX_LANGUAGE_ALL_ID)	// author all
 		{
-			int a = menu.getLanguage().getLanguageId();
-			int b = language.getLanguageId();
+			a = menu.getLanguage().getLanguageId();
+			b = language.getLanguageId();
 			if (a!=b)
 			{
 				return false;
 			}
 		}
-		int a = menu.getMovie().getMovieId();
-		int b = movie.getMovieId();
-		
-		// validate the movie matches...
-		if (a!=b)
-		{
-			return false;
-		}
+
 
 		return true;
 	}
@@ -489,16 +511,16 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 	 * @param userName the user name
 	 * @return the insert user
 	 */
-	public User getInsertUser(String userName)
+	public User getInsertUser(String userHandle)
 	{
 		User user = new User();
 		
 		int userType = DVX_Constants.USER_TYPE_USER;
 		
-		if (userName=="All")
+		if (userHandle=="All")
 			userType = DVX_Constants.USER_TYPE_ALL;
 		
-		user.setUserHandle(userName);
+		user.setUserHandle(userHandle);
 		user.setUserActive(true);
 		user.setUserType(userType);	// this messed up the all user... 
 		
@@ -518,7 +540,7 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 			tx.commit();
 		}
 
-		return getInsertUser(userName);
+		return getInsertUser(userHandle);
 	}
 	
 	// ------------------------------------------------------------------------------------
@@ -1135,11 +1157,11 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 	 * @param password
 	 * @return
 	 */
-	public User getUserLogin(String userName, String password) {
+	public User getUserLogin(String userHandle, String password) {
 		// TODO Auto-generated method stub
 		User user = new User();
 
-		user.setUserHandle(userName);
+		user.setUserEmail(userHandle);
 		user.setUserPassword(password);
 		user.setUserActive(true);
 		UserDAO userDao = new UserDAO();
@@ -1162,6 +1184,41 @@ public boolean checkTimeEvent(Author author, Language language, Movie movie, int
 		userDao.merge(user);
 		tx.commit();
 
+	}
+
+	/**
+	 * @param user
+	 */
+	public User addUser(User user) {
+		// TODO Auto-generated method stub
+//		User user = new User();
+		
+//		int userType = DVX_Constants.USER_TYPE_USER;
+		
+//		if (userHandle=="All")
+//			userType = DVX_Constants.USER_TYPE_ALL;
+		
+		user.setUserActive(true);
+		user.setUserType( DVX_Constants.USER_TYPE_USER);	// this messed up the all user... 
+		
+		UserDAO userDao = new UserDAO();
+		
+		@SuppressWarnings("unchecked")
+		List<User> users = userDao.findByExample(user);
+		
+		if (users.size()>0)
+		{
+//			return users.get(0);
+			return null;
+		}
+		else
+		{
+			Transaction tx = userDao.getSession().beginTransaction();
+			userDao.save(user);
+			tx.commit();
+		}
+
+		return getInsertUser(user.getUserHandle());		
 	}
 
 }
