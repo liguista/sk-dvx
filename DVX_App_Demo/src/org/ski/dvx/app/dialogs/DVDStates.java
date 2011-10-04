@@ -41,6 +41,8 @@ import javax.print.DocFlavor.URL;
 
 import org.ski.dvx.app.DVX_Constants;
 
+import de.humatic.dsj.DSDvd;
+
 // TODO: Auto-generated Javadoc
 /*
  * To change this template, choose Tools | Templates
@@ -226,9 +228,9 @@ public class DVDStates extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Movie Name");
 
-        jTextFieldMovieID.setText("jTextField1");
+        jTextFieldMovieID.setText("                                ");
 
-        jTextFieldMovieName.setText("jTextField2");
+        jTextFieldMovieName.setText("                                ");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("# Chapters");
@@ -236,9 +238,9 @@ public class DVDStates extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("# Titles");
 
-        jTextFieldChapterCount.setText("jTextField3");
+        jTextFieldChapterCount.setText("                                ");
 
-        jTextFieldTitleCount.setText("jTextField4");
+        jTextFieldTitleCount.setText("                                ");
 
         jLabelWidth.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelWidth.setText("Width");
@@ -252,13 +254,13 @@ public class DVDStates extends javax.swing.JFrame {
         jLabelBitDepth.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelBitDepth.setText("Bit Depth");
 
-        jTextFieldWidth.setText("jTextField1");
+        jTextFieldWidth.setText("                                ");
 
-        jTextFieldHeight.setText("jTextField2");
+        jTextFieldHeight.setText("                                ");
 
-        jTextFieldAspect.setText("jTextField3");
+        jTextFieldAspect.setText("                                ");
 
-        jTextFieldBitDepth.setText("jTextField4");
+        jTextFieldBitDepth.setText("                                ");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("DSJ Duration");
@@ -267,18 +269,18 @@ public class DVDStates extends javax.swing.JFrame {
         jLabel10.setText("DSJ Name");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("DVD Domain");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("jLabel12");
+        jLabel12.setText("Debug");
 
-        jTextFieldDSJDuration.setText("jTextField5");
+        jTextFieldDSJDuration.setText("                                ");
 
-        jTextFieldDSJName.setText("jTextField6");
+        jTextFieldDSJName.setText("                                ");
 
-        jTextField7.setText("jTextField7");
+        jTextField7.setText("                                ");
 
-        jTextField8.setText("jTextField8");
+        jTextField8.setText("                                ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -971,4 +973,44 @@ public void updateState(int state)
     /** The j text field width. */
     private javax.swing.JTextField jTextFieldWidth;
     // End of variables declaration
+
+	/**
+	 * @param dvdDomain
+	 * @return
+	 */
+	public void setDVDDomain(int dvdDomain) 
+	{
+		String state = "";
+		switch (dvdDomain)
+		{
+			case DSDvd.DVD_DOMAIN_FirstPlay:
+			{
+				state = "First Play";
+				break;
+			}
+			case DSDvd.DVD_DOMAIN_Stop:
+			{
+				state = "Stop";
+				break;
+			}
+			case DSDvd.DVD_DOMAIN_Title:
+			{
+				state = "Title";
+				break;
+			}
+			case DSDvd.DVD_DOMAIN_VideoManagerMenu:
+			{
+				state = "Video Manager Menu";
+				break;
+			}
+			case DSDvd.DVD_DOMAIN_VideoTitleSetMenu:
+			{
+				state = "Video Title Set Menu";
+				break;
+			}
+		}
+		
+		getjTextField7().setText(state);
+
+	}
 }
