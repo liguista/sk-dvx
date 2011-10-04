@@ -33,10 +33,6 @@ public abstract class AbstractRating  implements java.io.Serializable {
     public AbstractRating() {
     }
 
-	/** minimal constructor */
-    public AbstractRating(Integer rating) {
-        this.rating = rating;
-    }
     
     /** full constructor */
     public AbstractRating(User user, Movie movie, Description description, Language language, Version version, String ratingNameShort, Integer rating, Timestamp created, Timestamp modified, Set movies) {
