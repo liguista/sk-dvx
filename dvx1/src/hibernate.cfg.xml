@@ -10,11 +10,9 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<property name="connection.url">
-			jdbc:mysql://dvx.dyndns.info/sk_dvx
-		</property>
-		<property name="connection.username">sk_dvx</property>
-		<property name="connection.password">sk_dvx</property>
+		<property name="connection.url">jdbc:mysql://DVX/sk_dvx</property>
+		<property name="connection.username">dvx_user</property>
+		<property name="connection.password">dvx_user</property>
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
