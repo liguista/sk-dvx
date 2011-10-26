@@ -1,6 +1,7 @@
 package org.ski.dvx.ws.moviedescriptionlist;
 
 import java.net.MalformedURLException;
+
 import java.net.URL;
 import java.util.logging.Logger;
 import javax.xml.namespace.QName;
@@ -24,12 +25,12 @@ import javax.xml.ws.WebServiceClient;
  * 
  */
 
-
 @WebServiceClient(name = "MovieDescriptionListService", targetNamespace = "http://ws.dvx.ski.org/", wsdlLocation = "http://jeff-pc:8080/dvx1/MovieDescriptionListPort?wsdl")
 public class MovieDescriptionListService extends Service {
 
-	private final static String SERVER_BASE = "http://dvx.ski.org:8080/";
+//	private final static String SERVER_BASE = "http://dvx.ski.org:8080/";
 //	private final static String SERVER_BASE = "http://jeff-pc:8080/";
+	private final static String DVX_WEB_SERVICE_ENDPOINT = DVX_Constants.DVX_WEB_SERVICE_ENDPOINT;
 
 	private final static URL MOVIEDESCRIPTIONLISTSERVICE_WSDL_LOCATION;
 	private final static Logger logger = Logger
@@ -37,15 +38,16 @@ public class MovieDescriptionListService extends Service {
 					.getName());
 
 	static {
+		
 		URL url = null;
 		try {
 			URL baseUrl;
 			baseUrl = org.ski.dvx.ws.moviedescriptionlist.MovieDescriptionListService.class
 					.getResource(".");
 			url = new URL(baseUrl,
-					SERVER_BASE + "dvx1/MovieDescriptionListPort?wsdl");
+					DVX_WEB_SERVICE_ENDPOINT + "MovieDescriptionListPort?wsdl");
 		} catch (MalformedURLException e) {
-			logger.warning("Failed to create URL for the wsdl Location: '"+ SERVER_BASE + "dvx1/MovieDescriptionListPort?wsdl', retrying as a local file");
+			logger.warning("Failed to create URL for the wsdl Location: '"+ DVX_WEB_SERVICE_ENDPOINT + "MovieDescriptionListPort?wsdl', retrying as a local file");
 			logger.warning(e.getMessage());
 		}
 		MOVIEDESCRIPTIONLISTSERVICE_WSDL_LOCATION = url;
