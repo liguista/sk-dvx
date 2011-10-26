@@ -1,6 +1,7 @@
 package org.ski.dvx.ws.listuser;
 
 import java.net.MalformedURLException;
+
 import java.net.URL;
 import java.util.logging.Logger;
 import javax.xml.namespace.QName;
