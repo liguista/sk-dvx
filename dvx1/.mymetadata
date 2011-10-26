@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="dvx1"
+  id="myeclipse.1319068698425"
+  context-root="/dvx1"
+  j2ee-spec="5.0"
+  archive="dvx1.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

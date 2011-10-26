@@ -1,0 +1,15 @@
+<?xml version = "1.0"?>
+<endpoints version="2.0"
+	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+	<endpoint name="UserListPort"
+		implementation="org.ski.dvx.ws.UserListDelegate"
+		url-pattern="/UserListPort">
+	</endpoint>
+	<endpoint name="MovieDescriptionListPort"
+		implementation="org.ski.dvx.ws.MovieDescriptionListDelegate"
+		url-pattern="/MovieDescriptionListPort">
+	</endpoint>
+	<endpoint name="MovieListPort"
+		implementation="org.ski.dvx.ws.MovieListDelegate"
+		url-pattern="/MovieListPort">
+	</endpoint></endpoints>
