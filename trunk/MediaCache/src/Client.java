@@ -16,6 +16,7 @@ public class Client {
 	/**
 	 * @param args
 	 */
+	
 	void doIt()
 	{
 		UserListService hs = new UserListService();
