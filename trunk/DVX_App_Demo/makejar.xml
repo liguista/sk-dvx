@@ -2,8 +2,13 @@
 <project default="create_run_jar" name="Create Runnable Jar for Project DVX_App_Demo with Jar-in-Jar Loader">
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
+	<property name="base.dir"     value="."/>
+	<property name="lib.dir"     value="${base.dir}/lib"/>
+	<property name="image.dir"     value="${base.dir}/images"/>
+	<property name="bin.dir"     value="${base.dir}/bin"/>
+	
     <target name="create_run_jar">
-        <jar destfile="C:/Users/Greg/Workspaces/MyEclipse for Spring 9/DVX_App.jar">
+        <jar destfile="${base.dir}/DVX_App.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="org.ski.dvx.app.DVX_Player"/>
@@ -11,31 +16,39 @@
                 <attribute name="Rsrc-Class-Path" value="./ antlr-2.7.6.jar cgjsapi.jar cglib-2.2.jar commons-collections-3.1.jar dom4j-1.6.1.jar dsj.jar ehcache-1.2.3.jar ejb3-persistence.jar hibernate-annotations.jar hibernate-commons-annotations.jar hibernate-entitymanager.jar hibernate-validator.jar hibernate3.jar javassist-3.9.0.GA.jar jta-1.1.jar log4j-1.2.14.jar mysql-connector-java-5.1.17-bin.jar slf4j-api-1.5.8.jar slf4j-log4j12-1.5.8.jar"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
-            <fileset dir="C:/Users/Greg/Workspaces/MyEclipse for Spring 9/DVX_App_Demo/bin"/>
+            <fileset dir="${bin.dir}"/>
         	
-        	<fileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo/images"/>
+        	<fileset dir="${image.dir}"/>
         	
 <!--        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo/resources/images/" prefix="resources/images/" includes="*"/> -->
       	
-        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="antlr-2.7.6.jar"/>
-        	<zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="cgjsapi.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="cglib-2.2.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="commons-collections-3.1.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="dom4j-1.6.1.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="dsj.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="ehcache-1.2.3.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="ejb3-persistence.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="hibernate-annotations.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="hibernate-commons-annotations.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="hibernate-entitymanager.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="hibernate-validator.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="hibernate3.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="javassist-3.9.0.GA.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="jta-1.1.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="log4j-1.2.14.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="mysql-connector-java-5.1.17-bin.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="slf4j-api-1.5.8.jar"/>
-            <zipfileset dir="C:\Users\Greg\Workspaces\MyEclipse for Spring 9\DVX_App_Demo\lib" includes="slf4j-log4j12-1.5.8.jar"/>
+        	<zipfileset dir="${lib.dir}" includes="ant-googlecode-0.0.2.jar"/>
+        	<zipfileset dir="${lib.dir}" includes="ant.jar"/>
+        	<zipfileset dir="${lib.dir}" includes="antlr-2.7.6.jar"/>
+        	<zipfileset dir="${lib.dir}" includes="cgjsapi.jar"/>
+            <zipfileset dir="${lib.dir}" includes="cglib-2.2.jar"/>
+            <zipfileset dir="${lib.dir}" includes="commons-collections-3.1.jar"/>
+            <zipfileset dir="${lib.dir}" includes="commons-logging-1.1.1.jar"/>
+            <zipfileset dir="${lib.dir}" includes="commons-net-3.0.1.jar"/>
+            <zipfileset dir="${lib.dir}" includes="dom4j-1.6.1.jar"/>
+            <zipfileset dir="${lib.dir}" includes="dsj.jar"/>
+            <zipfileset dir="${lib.dir}" includes="ehcache-1.2.3.jar"/>
+            <zipfileset dir="${lib.dir}" includes="ejb3-persistence.jar"/>
+            <zipfileset dir="${lib.dir}" includes="hibernate-annotations.jar"/>
+            <zipfileset dir="${lib.dir}" includes="hibernate-commons-annotations.jar"/>
+            <zipfileset dir="${lib.dir}" includes="hibernate-entitymanager.jar"/>
+            <zipfileset dir="${lib.dir}" includes="hibernate-validator.jar"/>
+            <zipfileset dir="${lib.dir}" includes="hibernate3.jar"/>
+            <zipfileset dir="${lib.dir}" includes="httpclient-4.1.2.jar"/>
+            <zipfileset dir="${lib.dir}" includes="httpcore-4.1.2.jar"/>
+            <zipfileset dir="${lib.dir}" includes="javassist-3.9.0.GA.jar"/>
+            <zipfileset dir="${lib.dir}" includes="jl1.0.1.jar"/>
+            <zipfileset dir="${lib.dir}" includes="jta-1.1.jar"/>
+            <zipfileset dir="${lib.dir}" includes="log4j-1.2.14.jar"/>
+            <zipfileset dir="${lib.dir}" includes="mysql-connector-java-5.1.17-bin.jar"/>
+            <zipfileset dir="${lib.dir}" includes="sardine.jar"/>
+            <zipfileset dir="${lib.dir}" includes="slf4j-api-1.5.8.jar"/>
+            <zipfileset dir="${lib.dir}" includes="slf4j-log4j12-1.5.8.jar"/>
         </jar>
     </target>
 </project>
