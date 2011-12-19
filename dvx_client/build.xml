@@ -1,0 +1,33 @@
+	<project default="hello">
+	  <target name="hello">
+	    <echo message="Hello, World"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/attribute"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/audio_track_info"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/author"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/city"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/continent"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/country"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/crew_cast"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/description"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/geocode"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/language"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/movie_cast"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/movie_chapter"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/movie_genre"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/movie_menu"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/movie_trailer"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/movie"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/path"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/poster"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/rating"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/review"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/state"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/status"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/transaction_log"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/user_detail"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/user_profile"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/user"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/version"/>
+	  	<mkdir dir="./src/org/ski/dvx/client/hibernate/zip_code"/>
+	  </target>
+	</project>
