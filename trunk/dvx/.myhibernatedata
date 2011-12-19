@@ -1,0 +1,25 @@
+#MyEclipse Hibernate Properties
+#Fri Dec 16 15:51:05 PST 2011
+sessionFactoryName=org.ski.dvx.server.hibernate.HibernateSessionFactory
+genBasicCompId=false
+profile=
+daoSFId=
+version=3.3
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=native
+libInstallFolder=/src/main/webapp/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=
+configFile=/dvx/src/main/java/org/ski/dvx/server/hibernate/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true
+baseDaoClass=org.ski.dvx.server.hibernate.attribute.BaseHibernateDAO
