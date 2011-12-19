@@ -1,0 +1,119 @@
+<?xml version = "1.0"?>
+<endpoints version="2.0"
+	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+	<endpoint name="AttributeDAOPort"
+		implementation="org.ski.dvx.server.hibernate.attribute.AttributeDAODelegate"
+		url-pattern="/AttributeDAOPort">
+	</endpoint>
+	<endpoint name="AudioTrackInfoDAOPort"
+		implementation="org.ski.dvx.server.hibernate.audio_track_info.AudioTrackInfoDAODelegate"
+		url-pattern="/AudioTrackInfoDAOPort">
+	</endpoint>
+	<endpoint name="AuthorDAOPort"
+		implementation="org.ski.dvx.server.hibernate.author.AuthorDAODelegate"
+		url-pattern="/AuthorDAOPort">
+	</endpoint>
+	<endpoint name="CityDAOPort"
+		implementation="org.ski.dvx.server.hibernate.city.CityDAODelegate"
+		url-pattern="/CityDAOPort">
+	</endpoint>
+	<endpoint name="ContinentDAOPort"
+		implementation="org.ski.dvx.server.hibernate.continent.ContinentDAODelegate"
+		url-pattern="/ContinentDAOPort">
+	</endpoint>
+	<endpoint name="CountryDAOPort"
+		implementation="org.ski.dvx.server.hibernate.country.CountryDAODelegate"
+		url-pattern="/CountryDAOPort">
+	</endpoint>
+	<endpoint name="CrewCastDAOPort"
+		implementation="org.ski.dvx.server.hibernate.crew_cast.CrewCastDAODelegate"
+		url-pattern="/CrewCastDAOPort">
+	</endpoint>
+	<endpoint name="DescriptionDAOPort"
+		implementation="org.ski.dvx.server.hibernate.description.DescriptionDAODelegate"
+		url-pattern="/DescriptionDAOPort">
+	</endpoint>
+	<endpoint name="GeocodeDAOPort"
+		implementation="org.ski.dvx.server.hibernate.geocode.GeocodeDAODelegate"
+		url-pattern="/GeocodeDAOPort">
+	</endpoint>
+	<endpoint name="LanguageDAOPort"
+		implementation="org.ski.dvx.server.hibernate.language.LanguageDAODelegate"
+		url-pattern="/LanguageDAOPort">
+	</endpoint>
+	<endpoint name="MovieCastDAOPort"
+		implementation="org.ski.dvx.server.hibernate.movie_cast.MovieCastDAODelegate"
+		url-pattern="/MovieCastDAOPort">
+	</endpoint>
+	<endpoint name="MovieDAOPort"
+		implementation="org.ski.dvx.server.hibernate.movie.MovieDAODelegate"
+		url-pattern="/MovieDAOPort">
+	</endpoint>
+	<endpoint name="MovieChapterDAOPort"
+		implementation="org.ski.dvx.server.hibernate.movie_chapter.MovieChapterDAODelegate"
+		url-pattern="/MovieChapterDAOPort">
+	</endpoint>
+	<endpoint name="MovieGenreDAOPort"
+		implementation="org.ski.dvx.server.hibernate.movie_genre.MovieGenreDAODelegate"
+		url-pattern="/MovieGenreDAOPort">
+	</endpoint>
+	<endpoint name="MovieTrailerDAOPort"
+		implementation="org.ski.dvx.server.hibernate.movie_trailer.MovieTrailerDAODelegate"
+		url-pattern="/MovieTrailerDAOPort">
+	</endpoint>
+	<endpoint name="PathDAOPort"
+		implementation="org.ski.dvx.server.hibernate.path.PathDAODelegate"
+		url-pattern="/PathDAOPort">
+	</endpoint>
+	<endpoint name="PosterDAOPort"
+		implementation="org.ski.dvx.server.hibernate.poster.PosterDAODelegate"
+		url-pattern="/PosterDAOPort">
+	</endpoint>
+	<endpoint name="RatingDAOPort"
+		implementation="org.ski.dvx.server.hibernate.rating.RatingDAODelegate"
+		url-pattern="/RatingDAOPort">
+	</endpoint>
+	<endpoint name="ReviewDAOPort"
+		implementation="org.ski.dvx.server.hibernate.review.ReviewDAODelegate"
+		url-pattern="/ReviewDAOPort">
+	</endpoint>
+	<endpoint name="StateDAOPort"
+		implementation="org.ski.dvx.server.hibernate.state.StateDAODelegate"
+		url-pattern="/StateDAOPort">
+	</endpoint>
+	<endpoint name="StatusDAOPort"
+		implementation="org.ski.dvx.server.hibernate.status.StatusDAODelegate"
+		url-pattern="/StatusDAOPort">
+	</endpoint>
+	<endpoint name="TransactionLogDAOPort"
+		implementation="org.ski.dvx.server.hibernate.transaction_log.TransactionLogDAODelegate"
+		url-pattern="/TransactionLogDAOPort">
+	</endpoint>
+	<endpoint name="UserDAOPort"
+		implementation="org.ski.dvx.server.hibernate.user.UserDAODelegate"
+		url-pattern="/UserDAOPort">
+	</endpoint>
+	<endpoint name="UserDetailDAOPort"
+		implementation="org.ski.dvx.server.hibernate.user_detail.UserDetailDAODelegate"
+		url-pattern="/UserDetailDAOPort">
+	</endpoint>
+	<endpoint name="UserProfileDAOPort"
+		implementation="org.ski.dvx.server.hibernate.user_profile.UserProfileDAODelegate"
+		url-pattern="/UserProfileDAOPort">
+	</endpoint>
+	<endpoint name="VersionDAOPort"
+		implementation="org.ski.dvx.server.hibernate.version.VersionDAODelegate"
+		url-pattern="/VersionDAOPort">
+	</endpoint>
+	<endpoint name="ZipCodeDAOPort"
+		implementation="org.ski.dvx.server.hibernate.zip_code.ZipCodeDAODelegate"
+		url-pattern="/ZipCodeDAOPort">
+	</endpoint>
+	<endpoint name="MovieMenuDAOPort"
+		implementation="org.ski.dvx.server.hibernate.movie_menu.MovieMenuDAODelegate"
+		url-pattern="/MovieMenuDAOPort">
+	</endpoint>
+	<endpoint name="DVXTransactionPort"
+		implementation="org.ski.dvx.server.hibernate.DVXTransactionDelegate"
+		url-pattern="/DVXTransactionPort">
+	</endpoint></endpoints>
