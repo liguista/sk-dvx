@@ -1,0 +1,33 @@
+	<project default="hello">
+	  <target name="hello">
+	    <echo message="Hello, World"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/attribute"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/audio_track_info"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/author"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/city"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/continent"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/country"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/crew_cast"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/description"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/geocode"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/language"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/movie_cast"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/movie_chapter"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/movie_genre"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/movie_menu"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/movie_trailer"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/movie"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/path"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/poster"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/rating"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/review"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/state"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/status"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/transaction_log"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/user_detail"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/user_profile"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/user"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/version"/>
+	  	<mkdir dir="./src/main/java/org/ski/dvx/server/hibernate/zip_code"/>
+	  </target>
+	</project>
